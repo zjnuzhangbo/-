@@ -7,7 +7,7 @@ import CategoryFilter from '../components/product/CategoryFilter';
 import ProductGrid from '../components/product/ProductGrid';
 
 export default function HomePage() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const lang = i18n.language as 'zh' | 'en' | 'ru';
   const { products, load: loadProducts } = useProductStore();
   const { categories, load: loadCategories } = useCategoryStore();
