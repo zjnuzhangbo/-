@@ -15,58 +15,82 @@ export default function ProductCard({ product, categoryName }: Props) {
   const navigate = useNavigate();
   const addItem = useCartStore((s) => s.addItem);
   const [expanded, setExpanded] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const lang = i18n.language as 'zh' | 'en' | 'ru';
 
   const hasVariants = product.variants.length > 0;
 
-  const handleAddToCart = (variantId: string) => {
+  const handleAddToCart = (e: React.MouseEvent, variantId: string) => {
+    e.stopPropagation();
     addItem(product.id, variantId);
     toast(t('common.success'), 'success');
   };
 
   return (
-    <div className="bg-white rounded-card border border-gray-100 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+    <div className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1 transition-all duration-500 ease-out">
       <div
-        className="aspect-square bg-gray-50 cursor-pointer overflow-hidden"
+        className="relative aspect-[4/3] bg-gray-50 cursor-pointer overflow-hidden"
         onClick={() => navigate(`/product/${product.id}`)}
       >
         {product.images[0] ? (
-          <img src={product.images[0]} alt={product.name[lang]} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+          <>
+            <div className={`absolute inset-0 bg-gray-100 transition-opacity duration-500 ${imgLoaded ? 'opacity-0' : 'opacity-100'}`} />
+            <img
+              src={product.images[0]}
+              alt={product.name[lang]}
+              className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+              onLoad={() => setImgLoaded(true)}
+            />
+          </>
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-300 text-4xl">📦</div>
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-5xl opacity-30">📦</span>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+        {hasVariants && (
+          <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-primary text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm">
+            {product.variants.length} {t('home.variants')}
+          </span>
         )}
       </div>
+
       <div className="p-4">
-        <span className="text-xs text-primary font-medium">{categoryName}</span>
+        <span className="text-[11px] text-primary/70 font-medium tracking-wide uppercase">{categoryName}</span>
         <h3
-          className="text-sm font-semibold text-gray-800 mt-0.5 cursor-pointer hover:text-primary transition-colors"
+          className="text-[15px] font-semibold text-gray-800 mt-1 cursor-pointer hover:text-primary transition-colors line-clamp-1"
           onClick={() => navigate(`/product/${product.id}`)}
         >
           {product.name[lang]}
         </h3>
+
         {hasVariants && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="text-xs text-primary mt-1.5 font-medium hover:underline flex items-center gap-1"
+            className="text-xs text-primary mt-2 font-medium hover:underline flex items-center gap-1 transition-colors"
           >
-            {product.variants.length} {t('home.variants')}
-            <span className={`transition-transform ${expanded ? 'rotate-180' : ''}`}>▼</span>
+            {t('home.addToCart')}
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className={`transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}>
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
           </button>
         )}
+
         {expanded && hasVariants && (
-          <div className="mt-2 space-y-1.5 max-h-40 overflow-y-auto">
+          <div className="mt-3 space-y-1.5 animate-in">
             {product.variants.map((v) => (
-              <div key={v.id} className="flex items-center justify-between text-xs bg-gray-50 rounded-lg px-3 py-2">
-                <div>
-                  <span className="font-medium text-gray-700">{v.model}</span>
-                  <span className="text-gray-400 ml-2">{v.size} / {v.weight}</span>
+              <div key={v.id} className="flex items-center justify-between text-xs bg-gray-50/80 rounded-xl px-3 py-2.5 hover:bg-gray-100/80 transition-colors">
+                <div className="min-w-0">
+                  <span className="font-semibold text-gray-700">{v.model}</span>
+                  <span className="text-gray-400 ml-2 hidden sm:inline">{v.size} / {v.weight}</span>
                 </div>
                 <button
-                  onClick={() => handleAddToCart(v.id)}
+                  onClick={(e) => handleAddToCart(e, v.id)}
                   disabled={v.stock <= 0}
-                  className="px-3 py-1 bg-primary text-white rounded-md text-[10px] font-medium hover:bg-primary-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  className="flex-shrink-0 ml-2 px-3.5 py-1.5 bg-primary text-white rounded-full text-[11px] font-semibold hover:bg-primary-600 hover:shadow-md hover:shadow-primary/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 active:scale-95"
                 >
-                  {t('home.addToCart')}
+                  +
                 </button>
               </div>
             ))}
