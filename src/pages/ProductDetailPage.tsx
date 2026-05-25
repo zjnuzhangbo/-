@@ -58,14 +58,9 @@ export default function ProductDetailPage() {
                     <span className="font-medium text-sm">{v.model}</span>
                     <span className="text-gray-400 text-xs ml-3">{v.size} / {v.weight}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className={`text-xs ${v.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
-                      {v.stock > 0 ? `${t('product.inStock')} (${v.stock})` : t('product.outOfStock')}
-                    </span>
-                    <Button size="sm" onClick={() => handleAdd(v.id)} disabled={v.stock <= 0}>
+                    <Button size="sm" onClick={() => handleAdd(v.id)}>
                       {t('product.addToCart')}
                     </Button>
-                  </div>
                 </div>
               ))}
             </div>

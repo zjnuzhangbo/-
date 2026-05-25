@@ -17,7 +17,7 @@ interface Props {
 }
 
 function emptyVariant(): Variant {
-  return { id: uid(), model: '', size: '', weight: '', stock: 0 };
+  return { id: uid(), model: '', size: '', weight: '' };
 }
 
 const keywordMap: Record<string, string[]> = {
@@ -215,12 +215,11 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
           </div>
           <div className="space-y-3">
             {variants.map((v, i) => (
-              <div key={i} className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-50 rounded-lg p-3 relative">
+              <div key={i} className="grid grid-cols-2 sm:grid-cols-3 gap-2 bg-gray-50 rounded-lg p-3 relative">
                 <Input placeholder={t('admin.model')} value={v.model} onChange={(e) => updateVariant(i, 'model', e.target.value)} />
                 <Input placeholder={t('admin.size')} value={v.size} onChange={(e) => updateVariant(i, 'size', e.target.value)} />
-                <Input placeholder={t('admin.weight')} value={v.weight} onChange={(e) => updateVariant(i, 'weight', e.target.value)} />
                 <div className="flex items-center gap-1">
-                  <Input type="number" placeholder={t('admin.stock')} value={v.stock || ''} onChange={(e) => updateVariant(i, 'stock', parseInt(e.target.value) || 0)} />
+                  <Input placeholder={t('admin.weight')} value={v.weight} onChange={(e) => updateVariant(i, 'weight', e.target.value)} />
                   {variants.length > 1 && (
                     <button type="button" onClick={() => setVariants((prev) => prev.filter((_, j) => j !== i))} className="text-red-400 hover:text-red-600 text-lg">&times;</button>
                   )}

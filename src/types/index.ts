@@ -9,7 +9,6 @@ export interface Variant {
   model: string;
   size: string;
   weight: string;
-  stock: number;
   image?: string;
 }
 
