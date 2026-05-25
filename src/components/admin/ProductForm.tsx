@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Product, Variant } from '../../types';
 import { useCategoryStore } from '../../stores/useCategoryStore';
@@ -19,10 +19,41 @@ function emptyVariant(): Variant {
   return { id: uid(), model: '', size: '', weight: '', stock: 0 };
 }
 
+const keywordMap: Record<string, string[]> = {
+  '车轮': ['车轮', '轮胎', '轮毂', '辐条', '轮轴', '内胎', '外胎', '车圈', '轮圈'],
+  '刹车': ['刹车', '制动', '刹车片', '刹车线', '刹车鼓', '刹车盘', '刹把'],
+  '传动': ['链条', '飞轮', '牙盘', '中轴', '脚踏', '传动', '链轮', '曲柄'],
+  '座椅': ['座椅', '座垫', '靠背', '座管', '坐垫', '靠垫'],
+  '灯具': ['灯', '喇叭', '电瓶', '转向灯', '大灯', '尾灯', '前灯', '电气'],
+  '轴承': ['轴承', '轴套', '垫圈', '滚珠'],
+  '螺丝': ['螺丝', '螺栓', '螺母', '垫片', '卡簧', '紧固', '螺钉'],
+  '减震': ['减震', '悬挂', '弹簧', '减震器', '前叉', '避震'],
+  '车架': ['车架', '车斗', '大梁', '挡泥板', '车把', '车筐'],
+  '其他': ['把手', '后视镜', '牌照架', '工具箱', '反光镜', '里程表'],
+};
+
+function detectCategory(name: string, categories: { id: string; nameZh: string }[]): string {
+  if (!name.trim()) return '';
+  for (const [catKey, keywords] of Object.entries(keywordMap)) {
+    for (const kw of keywords) {
+      if (name.includes(kw)) {
+        const match = categories.find((c) => c.nameZh.includes(catKey));
+        if (match) return match.id;
+      }
+    }
+  }
+  return '';
+}
+
 export default function ProductForm({ open, onClose, onSave, initial }: Props) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'zh' | 'en' | 'ru';
   const categories = useCategoryStore((s) => s.categories);
+
+  const catOptions = useMemo(
+    () => categories.map((c) => ({ id: c.id, nameZh: c.name.zh })),
+    [categories],
+  );
 
   const [nameZh, setNameZh] = useState('');
   const [nameEn, setNameEn] = useState('');
@@ -33,6 +64,7 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
   const [categoryId, setCategoryId] = useState('');
   const [images, setImages] = useState<string[]>([]);
   const [variants, setVariants] = useState<Variant[]>([emptyVariant()]);
+  const [autoCategory, setAutoCategory] = useState('');
 
   useEffect(() => {
     if (initial) {
@@ -45,14 +77,25 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
       setCategoryId(initial.categoryId);
       setImages(initial.images);
       setVariants(initial.variants.length > 0 ? initial.variants : [emptyVariant()]);
+      setAutoCategory('');
     } else {
       setNameZh(''); setNameEn(''); setNameRu('');
       setDescZh(''); setDescEn(''); setDescRu('');
       setCategoryId('');
       setImages([]);
       setVariants([emptyVariant()]);
+      setAutoCategory('');
     }
   }, [initial, open]);
+
+  useEffect(() => {
+    if (initial) return;
+    const detected = detectCategory(nameZh, catOptions);
+    if (detected && detected !== categoryId) {
+      setCategoryId(detected);
+      setAutoCategory(detected);
+    }
+  }, [nameZh]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,16 +130,24 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
           <Input label="Описание (RU)" value={descRu} onChange={(e) => setDescRu(e.target.value)} />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.category')}</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('admin.category')}
+            {autoCategory && (
+              <span className="ml-2 text-accent text-xs font-normal">— 已自动识别</span>
+            )}
+          </label>
           <select
             value={categoryId}
-            onChange={(e) => setCategoryId(e.target.value)}
-            className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            onChange={(e) => { setCategoryId(e.target.value); setAutoCategory(''); }}
+            className={`w-full px-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 ${autoCategory ? 'border-accent bg-accent/5' : 'border-gray-200'}`}
           >
             {categories.map((c) => (
               <option key={c.id} value={c.id}>{c.icon} {c.name[lang]}</option>
             ))}
           </select>
+          {autoCategory && (
+            <p className="text-xs text-accent mt-1">根据产品名称自动匹配，可手动修改</p>
+          )}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.images')}</label>
