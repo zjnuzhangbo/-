@@ -7,6 +7,7 @@ import Input from '../ui/Input';
 import Button from '../ui/Button';
 import ImageUploader from '../ui/ImageUploader';
 import { uid } from '../../utils/seedData';
+import { translateZh } from '../../utils/translate';
 
 interface Props {
   open: boolean;
@@ -65,6 +66,8 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
   const [images, setImages] = useState<string[]>([]);
   const [variants, setVariants] = useState<Variant[]>([emptyVariant()]);
   const [autoCategory, setAutoCategory] = useState('');
+  const [autoName, setAutoName] = useState(false);
+  const [autoDesc, setAutoDesc] = useState(false);
 
   useEffect(() => {
     if (initial) {
@@ -78,6 +81,8 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
       setImages(initial.images);
       setVariants(initial.variants.length > 0 ? initial.variants : [emptyVariant()]);
       setAutoCategory('');
+      setAutoName(false);
+      setAutoDesc(false);
     } else {
       setNameZh(''); setNameEn(''); setNameRu('');
       setDescZh(''); setDescEn(''); setDescRu('');
@@ -85,6 +90,8 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
       setImages([]);
       setVariants([emptyVariant()]);
       setAutoCategory('');
+      setAutoName(false);
+      setAutoDesc(false);
     }
   }, [initial, open]);
 
@@ -95,7 +102,23 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
       setCategoryId(detected);
       setAutoCategory(detected);
     }
+    const { en, ru } = translateZh(nameZh);
+    if (en || ru) {
+      setNameEn(en);
+      setNameRu(ru);
+      setAutoName(true);
+    }
   }, [nameZh]);
+
+  useEffect(() => {
+    if (initial) return;
+    const { en, ru } = translateZh(descZh);
+    if (en || ru) {
+      setDescEn(en);
+      setDescRu(ru);
+      setAutoDesc(true);
+    }
+  }, [descZh]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,15 +142,45 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
   return (
     <Modal open={open} onClose={onClose} title={initial ? t('admin.editProduct') : t('admin.addProduct')}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Input label="名称 (中文)" value={nameZh} onChange={(e) => setNameZh(e.target.value)} required />
-          <Input label="Name (EN)" value={nameEn} onChange={(e) => setNameEn(e.target.value)} />
-          <Input label="Название (RU)" value={nameRu} onChange={(e) => setNameRu(e.target.value)} />
+        <div>
+          {autoName && (
+            <p className="text-xs text-accent mb-1">已根据中文自动翻译英文和俄文，可手动修改</p>
+          )}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Input label="名称 (中文)" value={nameZh} onChange={(e) => setNameZh(e.target.value)} required />
+            <Input
+              label={`Name (EN)${autoName ? ' · 自动' : ''}`}
+              value={nameEn}
+              onChange={(e) => { setNameEn(e.target.value); setAutoName(false); }}
+              className={autoName ? 'border-accent/40 bg-accent/[0.02]' : ''}
+            />
+            <Input
+              label={`Название (RU)${autoName ? ' · 自动' : ''}`}
+              value={nameRu}
+              onChange={(e) => { setNameRu(e.target.value); setAutoName(false); }}
+              className={autoName ? 'border-accent/40 bg-accent/[0.02]' : ''}
+            />
+          </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Input label="描述 (中文)" value={descZh} onChange={(e) => setDescZh(e.target.value)} />
-          <Input label="Description (EN)" value={descEn} onChange={(e) => setDescEn(e.target.value)} />
-          <Input label="Описание (RU)" value={descRu} onChange={(e) => setDescRu(e.target.value)} />
+        <div>
+          {autoDesc && (
+            <p className="text-xs text-accent mb-1">已根据中文自动翻译英文和俄文，可手动修改</p>
+          )}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Input label="描述 (中文)" value={descZh} onChange={(e) => setDescZh(e.target.value)} />
+            <Input
+              label={`Description (EN)${autoDesc ? ' · 自动' : ''}`}
+              value={descEn}
+              onChange={(e) => { setDescEn(e.target.value); setAutoDesc(false); }}
+              className={autoDesc ? 'border-accent/40 bg-accent/[0.02]' : ''}
+            />
+            <Input
+              label={`Описание (RU)${autoDesc ? ' · 自动' : ''}`}
+              value={descRu}
+              onChange={(e) => { setDescRu(e.target.value); setAutoDesc(false); }}
+              className={autoDesc ? 'border-accent/40 bg-accent/[0.02]' : ''}
+            />
+          </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
