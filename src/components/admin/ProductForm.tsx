@@ -76,12 +76,12 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
   return (
     <Modal open={open} onClose={onClose} title={initial ? t('admin.editProduct') : t('admin.addProduct')}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <Input label="名称 (中文)" value={nameZh} onChange={(e) => setNameZh(e.target.value)} required />
           <Input label="Name (EN)" value={nameEn} onChange={(e) => setNameEn(e.target.value)} />
           <Input label="Название (RU)" value={nameRu} onChange={(e) => setNameRu(e.target.value)} />
         </div>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <Input label="描述 (中文)" value={descZh} onChange={(e) => setDescZh(e.target.value)} />
           <Input label="Description (EN)" value={descEn} onChange={(e) => setDescEn(e.target.value)} />
           <Input label="Описание (RU)" value={descRu} onChange={(e) => setDescRu(e.target.value)} />
@@ -111,7 +111,7 @@ export default function ProductForm({ open, onClose, onSave, initial }: Props) {
           </div>
           <div className="space-y-3">
             {variants.map((v, i) => (
-              <div key={i} className="grid grid-cols-4 gap-2 bg-gray-50 rounded-lg p-3 relative">
+              <div key={i} className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-50 rounded-lg p-3 relative">
                 <Input placeholder={t('admin.model')} value={v.model} onChange={(e) => updateVariant(i, 'model', e.target.value)} />
                 <Input placeholder={t('admin.size')} value={v.size} onChange={(e) => updateVariant(i, 'size', e.target.value)} />
                 <Input placeholder={t('admin.weight')} value={v.weight} onChange={(e) => updateVariant(i, 'weight', e.target.value)} />

@@ -45,7 +45,7 @@ export default function CompanyEditor() {
     <div>
       <h3 className="text-lg font-semibold mb-4">{t('admin.company')}</h3>
       <div className="space-y-4 max-w-xl">
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <Input label={`${t('admin.companyName')} (中文)`} value={nameZh} onChange={(e) => setNameZh(e.target.value)} />
           <Input label="Company Name (EN)" value={nameEn} onChange={(e) => setNameEn(e.target.value)} />
           <Input label="Название (RU)" value={nameRu} onChange={(e) => setNameRu(e.target.value)} />
@@ -55,7 +55,7 @@ export default function CompanyEditor() {
           <label className="block text-sm font-medium text-gray-700 mb-1">{t('admin.wechatQR')}</label>
           <ImageUploader images={wechatQR ? [wechatQR] : []} onChange={(imgs) => setWechatQR(imgs[0] || '')} />
         </div>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <Input label={`${t('admin.address')} (中文)`} value={addrZh} onChange={(e) => setAddrZh(e.target.value)} />
           <Input label="Address (EN)" value={addrEn} onChange={(e) => setAddrEn(e.target.value)} />
           <Input label="Адрес (RU)" value={addrRu} onChange={(e) => setAddrRu(e.target.value)} />

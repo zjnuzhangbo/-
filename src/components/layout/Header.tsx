@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCartStore } from '../../stores/useCartStore';
@@ -14,6 +15,7 @@ export default function Header() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const totalCount = useCartStore((s) => s.totalCount);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const switchLang = (lang: Language) => {
     i18n.changeLanguage(lang);
@@ -31,12 +33,16 @@ export default function Header() {
     { to: '/admin', label: t('nav.admin') },
   ];
 
+  const closeMobile = () => setMobileOpen(false);
+
   return (
     <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-primary tracking-tight">
+        <Link to="/" className="text-xl font-bold text-primary tracking-tight flex-shrink-0">
           TricycleParts
         </Link>
+
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
@@ -52,13 +58,15 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
-          <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Language switcher - hide on very small screens */}
+          <div className="hidden sm:flex rounded-lg border border-gray-200 overflow-hidden">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => switchLang(lang.code)}
-                className={`px-2.5 py-1 text-xs font-medium transition-colors ${
+                className={`px-2 py-1 text-xs font-medium transition-colors ${
                   currentLang === lang.code ? 'bg-primary text-white' : 'bg-white text-gray-500 hover:bg-gray-50'
                 }`}
               >
@@ -66,6 +74,7 @@ export default function Header() {
               </button>
             ))}
           </div>
+
           {browserSupportsSpeechRecognition && (
             <button
               onClick={listening ? stopListening : startListening}
@@ -85,6 +94,7 @@ export default function Header() {
               )}
             </button>
           )}
+
           <Link to="/order" className="relative p-2 text-gray-600 hover:text-primary transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
@@ -96,8 +106,60 @@ export default function Header() {
               </span>
             )}
           </Link>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2 text-gray-600 hover:text-primary transition-colors"
+          >
+            {mobileOpen ? (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-gray-100 bg-white animate-in">
+          <nav className="px-4 py-3 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={closeMobile}
+                className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  location.pathname === link.to
+                    ? 'bg-primary-50 text-primary'
+                    : 'text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          {/* Mobile language switcher */}
+          <div className="px-4 pb-4 flex gap-2">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => switchLang(lang.code)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  currentLang === lang.code ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600'
+                }`}
+              >
+                {lang.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
