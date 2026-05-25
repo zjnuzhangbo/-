@@ -53,6 +53,7 @@ export interface Invoice {
   totalAmount: number;
   createdAt: string;
   exportedAs?: 'excel' | 'word';
+  status: 'pending' | 'priced';
 }
 
 export interface Company {

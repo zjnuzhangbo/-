@@ -4,9 +4,6 @@ import { useCartStore } from '../stores/useCartStore';
 import { useProductStore } from '../stores/useProductStore';
 import { useInvoiceStore } from '../stores/useInvoiceStore';
 import CartItemList from '../components/cart/CartItemList';
-import PriceTable from '../components/invoice/PriceTable';
-import ExportButtons from '../components/invoice/ExportButtons';
-import TotalBar from '../components/invoice/TotalBar';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { uid } from '../utils/seedData';
@@ -17,97 +14,77 @@ export default function OrderPage() {
   const { items, clearCart } = useCartStore();
   const products = useProductStore((s) => s.products);
   const createInvoice = useInvoiceStore((s) => s.create);
-
-  const [step, setStep] = useState<1 | 2>(1);
   const [customerName, setCustomerName] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   const invoiceItems = useMemo(() => {
     return items.map((ci) => {
       const product = products.find((p) => p.id === ci.productId);
       const variant = product?.variants.find((v) => v.id === ci.variantId);
+      if (!product || !variant) return null;
+      const spec = `${variant.size} / ${variant.weight}`;
       return {
-        cartItem: ci,
-        product,
-        variant,
-      };
-    }).filter((x) => x.product && x.variant);
+        productId: ci.productId,
+        variantId: ci.variantId,
+        productName: product.name.zh,
+        model: variant.model,
+        spec,
+        quantity: ci.quantity,
+        unitPrice: 0,
+        subtotal: 0,
+      } as InvoiceItem;
+    }).filter(Boolean) as InvoiceItem[];
   }, [items, products]);
 
-  const [prices, setPrices] = useState<Record<string, number>>({});
-
-  const invoiceData: InvoiceItem[] = useMemo(() => {
-    return invoiceItems.map(({ cartItem, product, variant }) => {
-      const unitPrice = prices[`${cartItem.productId}-${cartItem.variantId}`] || 0;
-      const spec = `${variant!.size} / ${variant!.weight}`;
-      return {
-        productId: cartItem.productId,
-        variantId: cartItem.variantId,
-        productName: product!.name.zh,
-        model: variant!.model,
-        spec,
-        quantity: cartItem.quantity,
-        unitPrice,
-        subtotal: unitPrice * cartItem.quantity,
-      };
-    });
-  }, [invoiceItems, prices]);
-
-  const totalAmount = invoiceData.reduce((sum, item) => sum + item.subtotal, 0);
-
-  const handleCreateInvoice = () => {
+  const handleSubmit = () => {
     const invoice: Invoice = {
       id: uid(),
       customerName: customerName || 'Unnamed',
-      items: invoiceData,
-      totalAmount,
+      items: invoiceItems,
+      totalAmount: 0,
       createdAt: new Date().toISOString(),
+      status: 'pending',
     };
     createInvoice(invoice);
     clearCart();
+    setSubmitted(true);
   };
+
+  if (submitted) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span className="text-2xl">&#10003;</span>
+        </div>
+        <h2 className="text-xl font-bold text-green-700 mb-2">{t('order.submitted')}</h2>
+        <p className="text-gray-500">{t('order.submittedDesc')}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="flex items-center gap-4 mb-8">
-        <div className={`flex items-center gap-2 ${step === 1 ? 'text-primary' : 'text-gray-400'}`}>
-          <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold bg-current text-white">1</span>
-          <span className="text-sm font-medium">{t('cart.title')}</span>
-        </div>
-        <div className="flex-1 h-0.5 bg-gray-200" />
-        <div className={`flex items-center gap-2 ${step === 2 ? 'text-primary' : 'text-gray-400'}`}>
-          <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold bg-current text-white">2</span>
-          <span className="text-sm font-medium">{t('invoice.title')}</span>
-        </div>
-      </div>
+      <h1 className="text-2xl font-bold text-gray-900 mb-6">{t('cart.title')}</h1>
 
-      {step === 1 && (
+      {items.length === 0 ? (
+        <p className="text-gray-400 text-center py-16">{t('cart.empty')}</p>
+      ) : (
         <>
           <CartItemList />
-          {items.length > 0 && (
-            <div className="mt-6 flex justify-end">
-              <Button onClick={() => setStep(2)}>{t('cart.next')}</Button>
-            </div>
-          )}
-        </>
-      )}
-
-      {step === 2 && (
-        <div className="space-y-6">
-          <Input
-            label={t('invoice.customerName')}
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-            placeholder={t('invoice.customerName')}
-          />
-          <PriceTable items={invoiceData} prices={prices} onPriceChange={(key, val) => setPrices((prev) => ({ ...prev, [key]: val }))} />
-          <TotalBar total={totalAmount} />
-          <div className="flex justify-between">
-            <Button variant="ghost" onClick={() => setStep(1)}>{t('invoice.back')}</Button>
-            <div className="flex gap-2">
-              <ExportButtons invoiceData={invoiceData} totalAmount={totalAmount} customerName={customerName} onExport={handleCreateInvoice} />
+          <div className="mt-8 max-w-md">
+            <Input
+              label={t('invoice.customerName')}
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              placeholder={t('invoice.customerName')}
+            />
+            <div className="mt-4">
+              <Button onClick={handleSubmit} className="w-full">
+                {t('order.submit')}
+              </Button>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

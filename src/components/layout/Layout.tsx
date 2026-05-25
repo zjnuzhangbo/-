@@ -27,6 +27,8 @@ export default function Layout() {
     loadInvoices();
     loadCompany();
 
+    const cleanupRealtime = useInvoiceStore.getState().initRealtime();
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT') {
         useAuthStore.setState({ isLoggedIn: false, userEmail: null });
@@ -35,7 +37,10 @@ export default function Layout() {
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      cleanupRealtime();
+    };
   }, []);
 
   return (
