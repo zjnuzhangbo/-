@@ -1,30 +1,60 @@
 import { create } from 'zustand';
+import { supabase } from '../lib/supabase';
 
 interface AuthState {
   isLoggedIn: boolean;
-  login: (password: string) => boolean;
-  logout: () => void;
-  changePassword: (newPassword: string) => void;
+  isLoading: boolean;
+  userEmail: string | null;
+  loadSession: () => void;
+  login: (email: string, password: string) => Promise<boolean>;
+  logout: () => Promise<void>;
+  changePassword: (newPassword: string) => Promise<void>;
 }
 
-const PASSWORD_KEY = 'tricycle_admin_password';
-
 export const useAuthStore = create<AuthState>((set) => ({
-  isLoggedIn: sessionStorage.getItem('tricycle_admin_session') === 'true',
-  login: (password) => {
-    const stored = localStorage.getItem(PASSWORD_KEY) || '123456789';
-    if (password === stored) {
-      sessionStorage.setItem('tricycle_admin_session', 'true');
-      set({ isLoggedIn: true });
+  isLoggedIn: false,
+  isLoading: true,
+  userEmail: null,
+
+  loadSession: () => {
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        set({
+          isLoggedIn: true,
+          isLoading: false,
+          userEmail: session.user.email || null,
+        });
+      } else {
+        set({ isLoading: false });
+      }
+    })();
+  },
+
+  login: async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (!error && data.user) {
+      set({ isLoggedIn: true, userEmail: data.user.email || null });
       return true;
     }
     return false;
   },
-  logout: () => {
-    sessionStorage.removeItem('tricycle_admin_session');
-    set({ isLoggedIn: false });
+
+  logout: async () => {
+    await supabase.auth.signOut();
+    set({ isLoggedIn: false, userEmail: null });
   },
-  changePassword: (newPassword) => {
-    localStorage.setItem(PASSWORD_KEY, newPassword);
+
+  changePassword: async (newPassword) => {
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+    if (error) {
+      console.error('Failed to change password:', error);
+      throw error;
+    }
   },
 }));

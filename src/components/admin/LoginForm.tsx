@@ -8,15 +8,26 @@ import { toast } from '../ui/Toast';
 export default function LoginForm() {
   const { t } = useTranslation();
   const login = useAuthStore((s) => s.login);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(password)) {
-      toast(t('common.success'), 'success');
-    } else {
+    setSubmitting(true);
+    setError('');
+    try {
+      const ok = await login(email, password);
+      if (ok) {
+        toast(t('common.success'), 'success');
+      } else {
+        setError(t('admin.wrongPassword'));
+      }
+    } catch {
       setError(t('admin.wrongPassword'));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -26,13 +37,23 @@ export default function LoginForm() {
         <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">{t('admin.login')}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
+            type="email"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); setError(''); }}
+            placeholder="Email"
+            autoComplete="email"
+          />
+          <Input
             type="password"
             value={password}
             onChange={(e) => { setPassword(e.target.value); setError(''); }}
             placeholder={t('admin.password')}
             error={error}
+            autoComplete="current-password"
           />
-          <Button type="submit" className="w-full">{t('admin.loginBtn')}</Button>
+          <Button type="submit" className="w-full" disabled={submitting}>
+            {submitting ? '...' : t('admin.loginBtn')}
+          </Button>
         </form>
       </div>
     </div>
