@@ -2,7 +2,7 @@
   "nav": { "home": "首页", "order": "下单", "orders": "历史订单", "admin": "管理" },
   "home": { "search": "搜索产品...", "all": "全部", "addToCart": "加入购物车", "variants": "个型号" },
   "product": { "detail": "产品详情", "model": "型号", "size": "尺寸", "weight": "重量", "stock": "库存", "inStock": "有货", "outOfStock": "缺货", "addToCart": "加入购物车" },
-  "cart": { "title": "购物车", "empty": "购物车是空的", "next": "下一步", "qty": "数量", "remove": "删除" },
+  "cart": { "title": "购物车", "empty": "购物车是空的", "next": "下一步", "qty": "数量", "remove": "删除", "contactForPricing": "请联系客服获取报价" },
   "invoice": { "title": "生成货单", "customerName": "客户名称", "unitPrice": "单价", "subtotal": "小计", "total": "总金额", "exportExcel": "导出 Excel", "exportWord": "导出 Word", "back": "上一步", "pending": "待定价", "priced": "已定价" },
     "order": { "submit": "提交订单", "submitted": "订单已提交！", "submittedDesc": "您的订单已收到，管理员会尽快审核并定价。" },
   "orders": { "title": "历史订单", "empty": "暂无订单" },

@@ -2,7 +2,7 @@
   "nav": { "home": "Home", "order": "Order", "orders": "History", "admin": "Admin" },
   "home": { "search": "Search products...", "all": "All", "addToCart": "Add to Cart", "variants": "variants" },
   "product": { "detail": "Product Detail", "model": "Model", "size": "Size", "weight": "Weight", "stock": "Stock", "inStock": "In Stock", "outOfStock": "Out of Stock", "addToCart": "Add to Cart" },
-  "cart": { "title": "Shopping Cart", "empty": "Your cart is empty", "next": "Next", "qty": "Qty", "remove": "Remove" },
+  "cart": { "title": "Shopping Cart", "empty": "Your cart is empty", "next": "Next", "qty": "Qty", "remove": "Remove", "contactForPricing": "Contact customer service for pricing" },
   "invoice": { "title": "Generate Invoice", "customerName": "Customer Name", "unitPrice": "Unit Price", "subtotal": "Subtotal", "total": "Total", "exportExcel": "Export Excel", "exportWord": "Export Word", "back": "Back", "pending": "Pending", "priced": "Priced" },
     "order": { "submit": "Submit Order", "submitted": "Order Submitted!", "submittedDesc": "Your order has been received. The admin will review and price it shortly." },
   "orders": { "title": "Order History", "empty": "No orders yet" },

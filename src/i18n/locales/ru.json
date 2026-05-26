@@ -2,7 +2,7 @@
   "nav": { "home": "Главная", "order": "Заказ", "orders": "История", "admin": "Админ" },
   "home": { "search": "Поиск товаров...", "all": "Все", "addToCart": "В корзину", "variants": "вариантов" },
   "product": { "detail": "Детали", "model": "Модель", "size": "Размер", "weight": "Вес", "stock": "Наличие", "inStock": "В наличии", "outOfStock": "Нет в наличии", "addToCart": "В корзину" },
-  "cart": { "title": "Корзина", "empty": "Корзина пуста", "next": "Далее", "qty": "Кол-во", "remove": "Удалить" },
+  "cart": { "title": "Корзина", "empty": "Корзина пуста", "next": "Далее", "qty": "Кол-во", "remove": "Удалить", "contactForPricing": "Свяжитесь с нами для получения цен" },
   "invoice": { "title": "Счет", "customerName": "Имя клиента", "unitPrice": "Цена", "subtotal": "Сумма", "total": "Итого", "exportExcel": "Excel", "exportWord": "Word", "back": "Назад", "pending": "Ожидает", "priced": "Оценен" },
     "order": { "submit": "Отправить", "submitted": "Заказ отправлен!", "submittedDesc": "Ваш заказ получен. Администратор рассмотрит и установит цены." },
   "orders": { "title": "История заказов", "empty": "Заказов пока нет" },
