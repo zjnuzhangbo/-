@@ -30,8 +30,6 @@ export default function Header() {
   const navLinks = [
     { to: '/', label: t('nav.home') },
     { to: '/order', label: t('nav.order') },
-    { to: '/orders', label: t('nav.orders') },
-    { to: '/admin', label: t('nav.admin') },
   ];
 
   const closeMobile = () => setMobileOpen(false);
