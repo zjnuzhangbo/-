@@ -1,10 +1,10 @@
-import { useCompanyStore } from '../../stores/useCompanyStore';
 import { useTranslation } from 'react-i18next';
+import { defaultCompany } from '../../utils/seedData';
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
-  const company = useCompanyStore((s) => s.company);
   const lang = i18n.language as 'zh' | 'en' | 'ru';
+  const company = defaultCompany;
 
   return (
     <footer className="border-t border-gray-100/80 bg-white/40 backdrop-blur-sm mt-auto">
@@ -20,16 +20,14 @@ export default function Footer() {
             )}
           </div>
 
-          <div className="flex items-center gap-8">
-            {company.wechatQR && (
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto rounded-2xl border border-gray-100 overflow-hidden shadow-sm bg-white p-1">
-                  <img src={company.wechatQR} alt="WeChat QR" className="w-full h-full object-contain rounded-xl" />
-                </div>
-                <p className="text-[10px] text-gray-400 mt-1.5 font-medium uppercase tracking-wider">WeChat</p>
+          {company.wechatQR && (
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto rounded-2xl border border-gray-100 overflow-hidden shadow-sm bg-white p-1">
+                <img src={company.wechatQR} alt="WeChat QR" className="w-full h-full object-contain rounded-xl" />
               </div>
-            )}
-          </div>
+              <p className="text-[10px] text-gray-400 mt-1.5 font-medium uppercase tracking-wider">WeChat</p>
+            </div>
+          )}
 
           <p className="text-xs text-gray-400 text-center md:text-right">
             &copy; {new Date().getFullYear()} {company.name[lang]}
