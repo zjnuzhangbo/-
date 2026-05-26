@@ -1,13 +1,9 @@
 {
-  "nav": { "home": "Главная", "order": "Заказ", "orders": "История", "admin": "Админ" },
-  "home": { "search": "Поиск товаров...", "all": "Все", "addToCart": "В корзину", "variants": "вариантов" },
+  "nav": { "home": "Главная", "order": "Корзина" },
+  "home": { "search": "Поиск...", "all": "Все", "addToCart": "В корзину", "variants": "вариантов" },
   "product": { "detail": "Детали", "model": "Модель", "size": "Размер", "weight": "Вес", "stock": "Наличие", "inStock": "В наличии", "outOfStock": "Нет в наличии", "addToCart": "В корзину" },
-  "cart": { "title": "Корзина", "empty": "Корзина пуста", "next": "Далее", "qty": "Кол-во", "remove": "Удалить", "contactForPricing": "Свяжитесь с нами для получения цен" },
-  "invoice": { "title": "Счет", "customerName": "Имя клиента", "unitPrice": "Цена", "subtotal": "Сумма", "total": "Итого", "exportExcel": "Excel", "exportWord": "Word", "back": "Назад", "pending": "Ожидает", "priced": "Оценен" },
-    "order": { "submit": "Отправить", "submitted": "Заказ отправлен!", "submittedDesc": "Ваш заказ получен. Администратор рассмотрит и установит цены." },
-  "orders": { "title": "История заказов", "empty": "Заказов пока нет" },
-  "admin": { "title": "Панель админа", "login": "Вход", "password": "Введите пароль", "loginBtn": "Войти", "logout": "Выйти", "wrongPassword": "Неверный пароль", "products": "Товары", "categories": "Категории", "company": "Компания", "history": "Заказы", "addProduct": "Добавить товар", "editProduct": "Изменить", "deleteProduct": "Удалить", "addCategory": "Добавить категорию", "editCategory": "Изменить", "deleteCategory": "Удалить", "save": "Сохранить", "cancel": "Отмена", "name": "Название", "description": "Описание", "category": "Категория", "images": "Изображения", "variants": "Варианты", "model": "Модель", "size": "Размер", "weight": "Вес", "stock": "Наличие", "addVariant": "Добавить", "removeVariant": "Удалить", "companyName": "Компания", "phone": "Телефон", "wechatQR": "WeChat QR", "address": "Адрес" },
-  "voice": { "listening": "Слушаю...", "notSupported": "Не поддерживается", "clickToStart": "Голосовой поиск" },
+  "cart": { "title": "Корзина", "empty": "Корзина пуста", "qty": "Кол-во", "remove": "Удалить", "contactForPricing": "Свяжитесь с нами для получения цен" },
+  "voice": { "listening": "Слушаю...", "notSupported": "Браузер не поддерживает распознавание речи", "clickToStart": "Нажмите для голоса" },
   "footer": { "rights": "Все права защищены" },
-  "common": { "save": "Сохранить", "cancel": "Отмена", "delete": "Удалить", "edit": "Изменить", "confirm": "ОК", "close": "Закрыть", "loading": "Загрузка...", "success": "Успешно", "error": "Ошибка" }
+  "common": { "save": "Сохранить", "cancel": "Отмена", "delete": "Удалить", "edit": "Изменить", "confirm": "Подтвердить", "close": "Закрыть", "loading": "Загрузка...", "success": "Успешно", "error": "Ошибка" }
 }
