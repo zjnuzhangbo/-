@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '../../shared/components/ui/Toast';
@@ -25,6 +25,12 @@ export default function OrderPage() {
   });
   const [pickerOpen, setPickerOpen] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  // Sync cart to localStorage whenever items change
+  useEffect(() => {
+    localStorage.setItem('tricycle_cart', JSON.stringify(items));
+  }, [items]);
 
   const updateQuantity = (idx: number, delta: number) => {
     setItems(prev => prev.map((item, i) =>
@@ -66,9 +72,31 @@ export default function OrderPage() {
     });
 
     localStorage.removeItem('tricycle_cart');
-    toast(t('order.submitSuccess'));
-    navigate('/history');
+    setSubmitted(true);
   };
+
+  if (submitted) {
+    return (
+      <div className="flex-1 flex items-center justify-center p-6">
+        <div className="text-center max-w-md">
+          <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
+            <span className="text-4xl">✓</span>
+          </div>
+          <h2 className="font-display text-2xl text-slate-800 mb-2">{t('order.submitSuccess')}</h2>
+          <p className="text-sm text-slate-500 mb-2">订单号将在后台核算后显示价格</p>
+          <p className="text-xs text-slate-400 mb-8">您可以前往历史订单查看和管理已提交的订单</p>
+          <div className="flex gap-3 justify-center">
+            <button onClick={() => navigate('/')} className="px-5 py-2.5 border border-slate-200 text-slate-600 text-sm font-semibold rounded-md hover:bg-slate-50 transition-colors">
+              返回首页
+            </button>
+            <button onClick={() => navigate('/history')} className="px-5 py-2.5 bg-primary-600 text-white text-sm font-semibold rounded-md hover:bg-primary-700 transition-colors">
+              查看历史订单
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 flex-1">

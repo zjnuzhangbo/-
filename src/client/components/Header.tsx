@@ -1,12 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+const langs = [
+  { code: 'zh', label: '中文' },
+  { code: 'en', label: 'EN' },
+  { code: 'ru', label: 'RU' },
+];
+
 interface HeaderProps {
   cartCount?: number;
 }
 
 export default function Header({ cartCount = 0 }: HeaderProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
 
   const linkClass = (path: string) =>
@@ -20,7 +26,22 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
         <Link to="/" className="font-display text-xl text-slate-800 no-underline">
           TricycleParts
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-4">
+          {/* Language switcher */}
+          <div className="flex items-center gap-0.5 mr-1">
+            {langs.map(l => (
+              <button
+                key={l.code}
+                onClick={() => i18n.changeLanguage(l.code)}
+                className={`px-1.5 py-0.5 text-[10px] font-semibold rounded transition-colors
+                  ${i18n.language === l.code
+                    ? 'bg-primary-600 text-white'
+                    : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'}`}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
           <Link to="/" className={linkClass('/')}>{t('nav.home')}</Link>
           <Link to="/history" className={linkClass('/history')}>{t('nav.history')}</Link>
           <Link to="/order" className="relative">
