@@ -1,7 +1,18 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Read(//c/Program Files \\(x86\\)/Google/Chrome/Application/**)",
+      "Read(//c/Users/31777/AppData/Local/ms-playwright/**)",
+      "Read(//c/Users/31777/.claude/**)",
+      "Bash(git -C \"C:/Users/31777/Desktop/网站\" add src/stores/useProductStore.ts)",
+      "Bash(git -C \"C:/Users/31777/Desktop/网站\" commit -m \"refactor: replace Supabase in useProductStore with localStorage\")",
+      "Bash(git *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP status: %{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl -s http://localhost:5173/src/main.tsx)",
+      "Bash(npm uninstall *)",
+      "Bash(C:\\\\Users\\\\31777\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\f2cbfbefebbf\\\\scripts\\\\start-server.sh *)",
+      "Bash(bash *)"
     ]
   }
 }

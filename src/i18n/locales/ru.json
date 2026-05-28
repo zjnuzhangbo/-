@@ -1,9 +1,0 @@
-{
-  "nav": { "home": "Главная", "order": "Корзина" },
-  "home": { "search": "Поиск...", "all": "Все", "addToCart": "В корзину", "variants": "вариантов" },
-  "product": { "detail": "Детали", "model": "Модель", "size": "Размер", "weight": "Вес", "stock": "Наличие", "inStock": "В наличии", "outOfStock": "Нет в наличии", "addToCart": "В корзину" },
-  "cart": { "title": "Корзина", "empty": "Корзина пуста", "qty": "Кол-во", "remove": "Удалить", "contactForPricing": "Свяжитесь с нами для получения цен" },
-  "voice": { "listening": "Слушаю...", "notSupported": "Браузер не поддерживает распознавание речи", "clickToStart": "Нажмите для голоса" },
-  "footer": { "rights": "Все права защищены" },
-  "common": { "save": "Сохранить", "cancel": "Отмена", "delete": "Удалить", "edit": "Изменить", "confirm": "Подтвердить", "close": "Закрыть", "loading": "Загрузка...", "success": "Успешно", "error": "Ошибка" }
-}

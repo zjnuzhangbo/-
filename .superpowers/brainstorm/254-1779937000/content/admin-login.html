@@ -1,0 +1,40 @@
+<h2>页面4 — 管理员登录</h2>
+<p class="subtitle">独立入口 admin.html，账号密码登录后进入后台管理</p>
+
+<div class="mockup">
+  <div class="mockup-header">admin.html — 登录页</div>
+  <div class="mockup-body" style="font-family:'DM Sans',system-ui,sans-serif;background:#f8fafc;min-height:420px;display:flex;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#fff;border-radius:18px;border:1px solid #e2e8f0;padding:40px;width:100%;max-width:400px;box-shadow:0 4px 24px rgba(0,0,0,.04);">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;color:#1e293b;font-weight:700;margin-bottom:4px;">TricycleParts</div>
+        <div style="font-size:12px;color:#94a3b8;">后台管理系统</div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#64748b;margin-bottom:4px;font-weight:600;">管理员账号</div>
+        <input placeholder="请输入账号" style="width:100%;padding:12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;box-sizing:border-box;outline:none;" />
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <div style="font-size:11px;color:#64748b;margin-bottom:4px;font-weight:600;">密码</div>
+        <input type="password" placeholder="请输入密码" style="width:100%;padding:12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;box-sizing:border-box;outline:none;" />
+      </div>
+
+      <button style="width:100%;padding:13px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;">登 录</button>
+
+      <div style="text-align:center;margin-top:24px;font-size:10px;color:#cbd5e1;border-top:1px solid #f1f5f9;padding-top:16px;">
+        仅限授权管理员使用
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>登录逻辑</h3>
+  <ul style="font-size:13px;color:#475569;">
+    <li><strong>初期方案：</strong>前端硬编码管理员账号密码（如 admin / 123456），后续替换为后端 API 验证</li>
+    <li><strong>登录状态：</strong>登录成功后 localStorage 存 token，后台页面检查 token 是否存在</li>
+    <li><strong>安全性：</strong>初期仅做基础防护，后端接入后改为 JWT + 密码哈希</li>
+    <li><strong>退出登录：</strong>后台页面右上角提供退出按钮，清除 token 返回登录页</li>
+  </ul>
+</div>

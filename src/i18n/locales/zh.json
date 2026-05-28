@@ -1,9 +1,0 @@
-{
-  "nav": { "home": "首页", "order": "购物车" },
-  "home": { "search": "搜索产品...", "all": "全部", "addToCart": "加入购物车", "variants": "个型号" },
-  "product": { "detail": "产品详情", "model": "型号", "size": "尺寸", "weight": "重量", "stock": "库存", "inStock": "有货", "outOfStock": "缺货", "addToCart": "加入购物车" },
-  "cart": { "title": "购物车", "empty": "购物车是空的", "qty": "数量", "remove": "删除", "contactForPricing": "请联系客服获取报价" },
-  "voice": { "listening": "正在聆听...", "notSupported": "浏览器不支持语音识别", "clickToStart": "点击开始语音" },
-  "footer": { "rights": "版权所有" },
-  "common": { "save": "保存", "cancel": "取消", "delete": "删除", "edit": "编辑", "confirm": "确认", "close": "关闭", "loading": "加载中...", "success": "操作成功", "error": "操作失败" }
-}

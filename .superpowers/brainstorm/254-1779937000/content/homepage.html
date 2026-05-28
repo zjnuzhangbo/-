@@ -1,0 +1,113 @@
+<h2>页面1 — 首页 / 商品列表</h2>
+<p class="subtitle">客户进入后看到商品，可按分类筛选，点击订购进入下单页</p>
+
+<div class="mockup">
+  <div class="mockup-header">客户端首页 — HomePage</div>
+  <div class="mockup-body" style="font-family:'DM Sans',system-ui,sans-serif;background:#f8fafc;min-height:500px;padding:0;">
+    <!-- Header -->
+    <div style="background:#fff;border-bottom:1px solid #e2e8f0;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-family:'DM Serif Display',Georgia,serif;font-size:22px;color:#1e293b;font-weight:700;">TricycleParts</div>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <a href="#" style="font-size:13px;color:#64748b;text-decoration:none;font-weight:500;">首页</a>
+        <a href="#" style="font-size:13px;color:#2563eb;text-decoration:none;font-weight:600;border-bottom:2px solid #2563eb;padding-bottom:4px;">历史订单</a>
+        <div style="position:relative;">
+          <span style="font-size:18px;">🛒</span>
+          <span style="position:absolute;top:-4px;right:-6px;background:#dc2626;color:#fff;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;">2</span>
+        </div>
+      </div>
+    </div>
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,#1e293b 0%,#334155 100%);padding:40px 24px;text-align:center;">
+      <div style="font-family:'DM Serif Display',Georgia,serif;font-size:28px;color:#fff;margin-bottom:6px;">三轮车配件选购</div>
+      <div style="font-size:14px;color:#94a3b8;">选择配件型号，快速下单</div>
+    </div>
+    <!-- Search + Filter -->
+    <div style="padding:20px 24px;">
+      <div style="max-width:600px;margin:0 auto;">
+        <input placeholder="搜索配件名称..." style="width:100%;padding:12px 16px;border:1.5px solid #e2e8f0;border-radius:12px;font-size:14px;background:#fff;outline:none;box-sizing:border-box;" />
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap;">
+        <span style="background:#2563eb;color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;">全部</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 16px;border-radius:20px;font-size:12px;">车架/车斗</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 16px;border-radius:20px;font-size:12px;">车轮/轮胎</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 16px;border-radius:20px;font-size:12px;">刹车系统</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 16px;border-radius:20px;font-size:12px;">传动系统</span>
+        <span style="background:#f1f5f9;color:#475569;padding:6px 16px;border-radius:20px;font-size:12px;">更多...</span>
+      </div>
+    </div>
+    <!-- Product Grid -->
+    <div style="padding:8px 24px 32px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;max-width:1100px;margin:0 auto;">
+      <!-- Card 1 -->
+      <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;transition:all .2s;">
+        <div style="height:140px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;font-size:40px;">🔧</div>
+        <div style="padding:14px;">
+          <div style="font-size:10px;color:#2563eb;font-weight:600;margin-bottom:4px;">车架/车斗</div>
+          <div style="font-weight:700;font-size:14px;color:#1e293b;margin-bottom:4px;">前叉总成</div>
+          <div style="font-size:11px;color:#94a3b8;">32mm · 2.4kg</div>
+          <button style="margin-top:10px;width:100%;padding:8px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">订购</button>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;">
+        <div style="height:140px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;font-size:40px;">🛞</div>
+        <div style="padding:14px;">
+          <div style="font-size:10px;color:#2563eb;font-weight:600;margin-bottom:4px;">车轮/轮胎</div>
+          <div style="font-weight:700;font-size:14px;color:#1e293b;margin-bottom:4px;">后轮毂总成</div>
+          <div style="font-size:11px;color:#94a3b8;">16寸 · 3.1kg</div>
+          <button style="margin-top:10px;width:100%;padding:8px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">订购</button>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;">
+        <div style="height:140px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;font-size:40px;">🛑</div>
+        <div style="padding:14px;">
+          <div style="font-size:10px;color:#2563eb;font-weight:600;margin-bottom:4px;">刹车系统</div>
+          <div style="font-weight:700;font-size:14px;color:#1e293b;margin-bottom:4px;">刹车蹄总成</div>
+          <div style="font-size:11px;color:#94a3b8;">130mm · 0.8kg</div>
+          <button style="margin-top:10px;width:100%;padding:8px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">订购</button>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;">
+        <div style="height:140px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;font-size:40px;">⛓️</div>
+        <div style="padding:14px;">
+          <div style="font-size:10px;color:#2563eb;font-weight:600;margin-bottom:4px;">传动系统</div>
+          <div style="font-weight:700;font-size:14px;color:#1e293b;margin-bottom:4px;">差速器总成</div>
+          <div style="font-size:11px;color:#94a3b8;">18齿 · 4.2kg</div>
+          <button style="margin-top:10px;width:100%;padding:8px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">订购</button>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;">
+        <div style="height:140px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;font-size:40px;">🪑</div>
+        <div style="padding:14px;">
+          <div style="font-size:10px;color:#2563eb;font-weight:600;margin-bottom:4px;">座椅/靠背</div>
+          <div style="font-weight:700;font-size:14px;color:#1e293b;margin-bottom:4px;">驾驶座椅</div>
+          <div style="font-size:11px;color:#94a3b8;">标准 · 5.0kg</div>
+          <button style="margin-top:10px;width:100%;padding:8px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">订购</button>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div style="background:#fff;border-top:1px solid #e2e8f0;padding:16px 24px;text-align:center;font-size:11px;color:#94a3b8;">TricycleParts © 2026 · 三轮车配件批发</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>交互流程</h3>
+  <div style="display:flex;gap:12px;align-items:center;font-size:13px;color:#475569;flex-wrap:wrap;">
+    <span style="background:#2563eb;color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;">搜索配件</span>
+    <span>→</span>
+    <span style="background:#f1f5f9;padding:6px 14px;border-radius:20px;font-size:12px;">分类筛选</span>
+    <span>→</span>
+    <span style="background:#f1f5f9;padding:6px 14px;border-radius:20px;font-size:12px;">点击订购</span>
+    <span>→</span>
+    <span style="background:#f1f5f9;padding:6px 14px;border-radius:20px;font-size:12px;">跳转下单页</span>
+  </div>
+  <ul style="margin-top:12px;font-size:13px;color:#64748b;">
+    <li>点击"订购"按钮 → 商品加入选择列表，跳转到下单页</li>
+    <li>顶部导航：首页 | 历史订单 | 购物车图标（显示数量）</li>
+    <li>分类标签水平滚动，支持多选</li>
+    <li>不显示任何价格信息</li>
+  </ul>
+</div>

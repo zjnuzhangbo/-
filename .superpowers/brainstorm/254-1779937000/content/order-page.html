@@ -1,0 +1,145 @@
+<h2>页面2 — 下单页 / 订单提交</h2>
+<p class="subtitle">核心页面：收货信息 + 商品选择 + 数量 + 提交</p>
+
+<div style="display:flex;gap:16px;flex-wrap:wrap;">
+  <!-- Mobile view -->
+  <div class="mockup" style="flex:1;min-width:340px;">
+    <div class="mockup-header">移动端下单页</div>
+    <div class="mockup-body" style="font-family:'DM Sans',system-ui,sans-serif;background:#f8fafc;font-size:13px;padding:16px;">
+      <div style="font-size:10px;color:#64748b;margin-bottom:6px;">← 返回首页</div>
+      <div style="font-family:'DM Serif Display',Georgia,serif;font-size:20px;color:#1e293b;font-weight:700;margin-bottom:16px;">提交订单</div>
+
+      <!-- Shipping Info -->
+      <div style="background:#fff;border-radius:12px;padding:16px;border:1px solid #e2e8f0;margin-bottom:12px;">
+        <div style="font-size:12px;font-weight:700;color:#1e293b;margin-bottom:12px;">收货信息</div>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:10px;color:#64748b;margin-bottom:4px;">收货人姓名</div>
+          <input placeholder="请输入姓名" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;box-sizing:border-box;outline:none;" />
+        </div>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:10px;color:#64748b;margin-bottom:4px;">联系电话</div>
+          <input placeholder="请输入手机号" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;box-sizing:border-box;outline:none;" />
+        </div>
+        <div>
+          <div style="font-size:10px;color:#64748b;margin-bottom:4px;">详细收货地址</div>
+          <textarea placeholder="省/市/区/街道/门牌号" rows="2" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;resize:none;box-sizing:border-box;outline:none;font-family:inherit;"></textarea>
+        </div>
+      </div>
+
+      <!-- Selected Products -->
+      <div style="background:#fff;border-radius:12px;padding:16px;border:1px solid #e2e8f0;margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div style="font-size:12px;font-weight:700;color:#1e293b;">选购商品</div>
+          <button style="background:none;border:none;color:#2563eb;font-size:11px;font-weight:600;cursor:pointer;">+ 添加商品</button>
+        </div>
+        <!-- Item 1 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9;">
+          <div>
+            <div style="font-weight:600;color:#1e293b;">前叉总成</div>
+            <div style="font-size:10px;color:#94a3b8;">32mm · 2.4kg</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;display:flex;align-items:center;justify-content:center;">−</button>
+            <span style="font-weight:600;width:20px;text-align:center;">2</span>
+            <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+            <span style="color:#dc2626;font-size:10px;cursor:pointer;margin-left:4px;">✕</span>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;">
+          <div>
+            <div style="font-weight:600;color:#1e293b;">刹车蹄总成</div>
+            <div style="font-size:10px;color:#94a3b8;">130mm · 0.8kg</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;">−</button>
+            <span style="font-weight:600;width:20px;text-align:center;">1</span>
+            <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;">+</button>
+            <span style="color:#dc2626;font-size:10px;cursor:pointer;margin-left:4px;">✕</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button style="width:100%;padding:14px;background:#2563eb;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;">提交订单</button>
+      <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:8px;">提交后请等待后台核算价格</div>
+    </div>
+  </div>
+
+  <!-- Desktop view -->
+  <div class="mockup" style="flex:1;min-width:500px;">
+    <div class="mockup-header">桌面端下单页</div>
+    <div class="mockup-body" style="font-family:'DM Sans',system-ui,sans-serif;background:#f8fafc;font-size:13px;padding:24px;">
+      <div style="display:flex;gap:24px;">
+        <!-- Left: Shipping Form -->
+        <div style="flex:1;">
+          <div style="font-size:10px;color:#64748b;margin-bottom:6px;">← 返回首页</div>
+          <div style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;color:#1e293b;font-weight:700;margin-bottom:20px;">提交订单</div>
+          <div style="background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;">
+            <div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:16px;">收货信息</div>
+            <div style="display:flex;gap:12px;">
+              <div style="flex:1;margin-bottom:14px;">
+                <div style="font-size:11px;color:#64748b;margin-bottom:4px;">收货人姓名</div>
+                <input placeholder="请输入姓名" style="width:100%;padding:11px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;box-sizing:border-box;outline:none;" />
+              </div>
+              <div style="flex:1;margin-bottom:14px;">
+                <div style="font-size:11px;color:#64748b;margin-bottom:4px;">联系电话</div>
+                <input placeholder="请输入手机号" style="width:100%;padding:11px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;box-sizing:border-box;outline:none;" />
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;color:#64748b;margin-bottom:4px;">详细收货地址</div>
+              <textarea placeholder="省/市/区/街道/门牌号" rows="2" style="width:100%;padding:11px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;resize:none;box-sizing:border-box;outline:none;font-family:inherit;"></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- Right: Products + Submit -->
+        <div style="flex:1;">
+          <div style="background:#fff;border-radius:14px;padding:20px;border:1px solid #e2e8f0;margin-bottom:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <div style="font-size:14px;font-weight:700;color:#1e293b;">选购商品</div>
+              <button style="background:none;border:none;color:#2563eb;font-size:12px;font-weight:600;cursor:pointer;">+ 添加商品</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f1f5f9;">
+              <div>
+                <div style="font-weight:600;color:#1e293b;">前叉总成</div>
+                <div style="font-size:10px;color:#94a3b8;">车架/车斗 · 32mm · 2.4kg</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;">−</button>
+                <span style="font-weight:600;width:20px;text-align:center;">2</span>
+                <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;">+</button>
+                <span style="color:#dc2626;font-size:11px;cursor:pointer;margin-left:4px;">删除</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f1f5f9;">
+              <div>
+                <div style="font-weight:600;color:#1e293b;">刹车蹄总成</div>
+                <div style="font-size:10px;color:#94a3b8;">刹车系统 · 130mm · 0.8kg</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;">−</button>
+                <span style="font-weight:600;width:20px;text-align:center;">1</span>
+                <button style="width:24px;height:24px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;font-size:14px;color:#64748b;cursor:pointer;">+</button>
+                <span style="color:#dc2626;font-size:11px;cursor:pointer;margin-left:4px;">删除</span>
+              </div>
+            </div>
+          </div>
+          <button style="width:100%;padding:14px;background:#2563eb;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;">提交订单</button>
+          <div style="text-align:center;font-size:10px;color:#94a3b8;margin-top:8px;">提交后请等待后台核算价格</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>交互细节</h3>
+  <ul style="font-size:13px;color:#475569;">
+    <li><strong>收货信息：</strong>姓名、电话、地址三个必填字段，提交时校验非空</li>
+    <li><strong>商品选择区：</strong>显示从首页加入的商品，每行可调整数量（+/−）或删除</li>
+    <li><strong>"+ 添加商品"：</strong>点击弹出商品搜索弹窗/跳回首页，方便继续选品</li>
+    <li><strong>提交按钮：</strong>校验通过后提交 → Toast提示"订单提交成功，请等待后台核算价格" → 跳转历史订单页</li>
+    <li><strong>不显示价格：</strong>整个页面不出现任何金额</li>
+  </ul>
+</div>

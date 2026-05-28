@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "docx": "^9.7.1",
+    "file-saver": "^2.0.5",
     "i18next": "^26.2.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-i18next": "^17.0.8",
     "react-router-dom": "^7.15.1",
-    "react-speech-recognition": "^4.0.1",
+    "xlsx": "^0.18.5",
     "zustand": "^5.0.13"
   },
   "devDependencies": {

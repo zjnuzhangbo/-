@@ -1,9 +1,0 @@
-{
-  "nav": { "home": "Home", "order": "Cart" },
-  "home": { "search": "Search products...", "all": "All", "addToCart": "Add to Cart", "variants": "variants" },
-  "product": { "detail": "Product Detail", "model": "Model", "size": "Size", "weight": "Weight", "stock": "Stock", "inStock": "In Stock", "outOfStock": "Out of Stock", "addToCart": "Add to Cart" },
-  "cart": { "title": "Cart", "empty": "Cart is empty", "qty": "Qty", "remove": "Remove", "contactForPricing": "Contact customer service for pricing" },
-  "voice": { "listening": "Listening...", "notSupported": "Browser does not support speech recognition", "clickToStart": "Click to start voice" },
-  "footer": { "rights": "All Rights Reserved" },
-  "common": { "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit", "confirm": "Confirm", "close": "Close", "loading": "Loading...", "success": "Success", "error": "Error" }
-}

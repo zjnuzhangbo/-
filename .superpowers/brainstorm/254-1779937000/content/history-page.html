@@ -1,0 +1,146 @@
+<h2>页面3 — 历史订单</h2>
+<p class="subtitle">客户查看已提交货单，可修改数量或删除订单</p>
+
+<div class="mockup">
+  <div class="mockup-header">客户端 — 历史订单页</div>
+  <div class="mockup-body" style="font-family:'DM Sans',system-ui,sans-serif;background:#f8fafc;font-size:13px;padding:24px;max-width:800px;margin:0 auto;">
+    <div style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;color:#1e293b;font-weight:700;margin-bottom:4px;">历史订单</div>
+    <div style="font-size:12px;color:#94a3b8;margin-bottom:20px;">共 3 条订单记录</div>
+
+    <!-- Empty state hint -->
+    <div style="background:#f1f5f9;border-radius:10px;padding:12px 16px;font-size:11px;color:#64748b;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+      <span>💡</span> 修改数量或删除后数据实时更新，后台会同步看到最新内容
+    </div>
+
+    <!-- Order 1 -->
+    <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;margin-bottom:12px;overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #f1f5f9;">
+        <div>
+          <div style="font-weight:700;color:#1e293b;">订单 #20260528001</div>
+          <div style="font-size:10px;color:#94a3b8;margin-top:2px;">2026-05-28 14:30</div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <span style="background:#fef3c7;color:#92400e;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">待核算</span>
+        </div>
+      </div>
+      <div style="padding:16px 20px;">
+        <!-- Items -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
+          <div>
+            <span style="font-weight:600;color:#1e293b;">前叉总成</span>
+            <span style="font-size:10px;color:#94a3b8;margin-left:8px;">32mm · 2.4kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-size:10px;color:#94a3b8;">×</span>
+            <input value="2" style="width:40px;padding:4px;text-align:center;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;font-weight:600;" />
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
+          <div>
+            <span style="font-weight:600;color:#1e293b;">刹车蹄总成</span>
+            <span style="font-size:10px;color:#94a3b8;margin-left:8px;">130mm · 0.8kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-size:10px;color:#94a3b8;">×</span>
+            <input value="1" style="width:40px;padding:4px;text-align:center;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;font-weight:600;" />
+          </div>
+        </div>
+        <!-- Shipping info -->
+        <div style="background:#f8fafc;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:11px;color:#64748b;display:flex;gap:16px;">
+          <span>📦 张三</span>
+          <span>📞 138-0000-0000</span>
+          <span>📍 浙江省金华市婺城区...</span>
+        </div>
+      </div>
+      <div style="padding:12px 20px;border-top:1px solid #f1f5f9;display:flex;gap:8px;justify-content:flex-end;">
+        <button style="padding:8px 16px;background:#fff;color:#2563eb;border:1.5px solid #2563eb;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">保存修改</button>
+        <button style="padding:8px 16px;background:#fff;color:#dc2626;border:1.5px solid #dc2626;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">删除订单</button>
+      </div>
+    </div>
+
+    <!-- Order 2 -->
+    <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;margin-bottom:12px;overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #f1f5f9;">
+        <div>
+          <div style="font-weight:700;color:#1e293b;">订单 #20260527015</div>
+          <div style="font-size:10px;color:#94a3b8;margin-top:2px;">2026-05-27 09:15</div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <span style="background:#dcfce7;color:#166534;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">已核算</span>
+        </div>
+      </div>
+      <div style="padding:16px 20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
+          <div>
+            <span style="font-weight:600;color:#1e293b;">后轮毂总成</span>
+            <span style="font-size:10px;color:#94a3b8;margin-left:8px;">16寸 · 3.1kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-size:10px;color:#94a3b8;">×</span>
+            <span style="font-weight:600;">3</span>
+          </div>
+        </div>
+        <div style="background:#f8fafc;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:11px;color:#64748b;display:flex;gap:16px;">
+          <span>📦 李四</span>
+          <span>📞 139-0000-0000</span>
+          <span>📍 浙江省杭州市...</span>
+        </div>
+      </div>
+      <div style="padding:12px 20px;border-top:1px solid #f1f5f9;display:flex;gap:8px;justify-content:flex-end;">
+        <div style="background:#fef3c7;border-radius:8px;padding:6px 12px;font-size:10px;color:#92400e;display:flex;align-items:center;gap:4px;">
+          🔒 已核算订单不可修改
+        </div>
+      </div>
+    </div>
+
+    <!-- Order 3 (deletable, pending) -->
+    <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;margin-bottom:12px;overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #f1f5f9;">
+        <div>
+          <div style="font-weight:700;color:#1e293b;">订单 #20260526003</div>
+          <div style="font-size:10px;color:#94a3b8;margin-top:2px;">2026-05-26 16:42</div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <span style="background:#fef3c7;color:#92400e;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">待核算</span>
+        </div>
+      </div>
+      <div style="padding:16px 20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
+          <div>
+            <span style="font-weight:600;color:#1e293b;">差速器总成</span>
+            <span style="font-size:10px;color:#94a3b8;margin-left:8px;">18齿 · 4.2kg</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-size:10px;color:#94a3b8;">×</span>
+            <input value="5" style="width:40px;padding:4px;text-align:center;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;font-weight:600;" />
+          </div>
+        </div>
+        <div style="background:#f8fafc;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:11px;color:#64748b;display:flex;gap:16px;">
+          <span>📦 王五</span>
+          <span>📞 137-0000-0000</span>
+          <span>📍 浙江省温州市...</span>
+        </div>
+      </div>
+      <div style="padding:12px 20px;border-top:1px solid #f1f5f9;display:flex;gap:8px;justify-content:flex-end;">
+        <button style="padding:8px 16px;background:#fff;color:#2563eb;border:1.5px solid #2563eb;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">保存修改</button>
+        <button style="padding:8px 16px;background:#fff;color:#dc2626;border:1.5px solid #dc2626;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">删除订单</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>交互规则</h3>
+  <div class="pros-cons">
+    <div class="pros"><h4>可操作</h4><ul>
+      <li>"待核算"订单：可修改数量、可删除整单</li>
+      <li>修改数量后点"保存修改"即时生效</li>
+      <li>删除前弹出确认对话框</li>
+    </ul></div>
+    <div class="cons"><h4>限制</h4><ul>
+      <li>"已核算"订单：锁定，不可修改/删除</li>
+      <li>超过24小时的待核算订单自动锁定</li>
+      <li>不能修改收货信息（需联系客服）</li>
+    </ul></div>
+  </div>
+</div>
