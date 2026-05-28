@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { productService, categoryService } from '../../shared/services';
 import type { Product, Category, LocalizedString } from '../../shared/types';
@@ -7,6 +7,15 @@ import ConfirmDialog from '../../shared/components/ui/ConfirmDialog';
 import { useToast } from '../../shared/components/ui/Toast';
 
 const emptyName: LocalizedString = { zh: '', en: '', ru: '' };
+
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
 export default function ProductManager() {
   const { t } = useTranslation();
@@ -20,7 +29,13 @@ export default function ProductManager() {
   const [showForm, setShowForm] = useState(false);
   const [newCatName, setNewCatName] = useState('');
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [imageInputs, setImageInputs] = useState<string[]>(['']);
+
+  const [form, setForm] = useState({
+    nameZh: '', nameEn: '', nameRu: '',
+    categoryId: '', model: '', size: '', weight: '',
+  });
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     productService.getAll().then(setProducts);
@@ -28,59 +43,13 @@ export default function ProductManager() {
   }, []);
 
   const resetForm = () => {
-    setEditing(null);
-    setImageInputs(['']);
-  };
-
-  const openNew = () => {
-    resetForm();
-    setShowForm(true);
-  };
-
-  const openEdit = (p: Product) => {
-    setEditing(p);
-    setImageInputs(p.images.length > 0 ? p.images : ['']);
-    setShowForm(true);
-  };
-
-  const addImageField = () => setImageInputs(prev => [...prev, '']);
-  const removeImageField = (idx: number) => setImageInputs(prev => prev.filter((_, i) => i !== idx));
-  const updateImageField = (idx: number, value: string) => setImageInputs(prev => prev.map((v, i) => i === idx ? value : v));
-
-  const save = async () => {
-    if (!editing) {
-      // Creating new product — use simple form state from refs
-    }
-    const images = imageInputs.filter(url => url.trim());
-    const data: Partial<Product> = {
-      images,
-    };
-
-    if (editing) {
-      await productService.update(editing.id, data);
-    } else {
-      // We need full form for new products — read from DOM
-      // Actually let's keep the form state for name/category/specs
-      await saveFull(data);
-      return;
-    }
-    setShowForm(false);
-    resetForm();
-    productService.getAll().then(setProducts);
-    toast('商品已更新');
-  };
-
-  // Separate function for full create/update using form refs
-  const [form, setForm] = useState({
-    nameZh: '', nameEn: '', nameRu: '',
-    categoryId: '', model: '', size: '', weight: '',
-  });
-
-  const openNewFull = () => {
     setForm({ nameZh: '', nameEn: '', nameRu: '', categoryId: '', model: '', size: '', weight: '' });
-    resetForm();
-    setShowForm(true);
+    setImagePreview('');
+    setEditing(null);
+    if (fileRef.current) fileRef.current.value = '';
   };
+
+  const openNewFull = () => { resetForm(); setShowForm(true); };
 
   const openEditFull = (p: Product) => {
     setForm({
@@ -88,12 +57,28 @@ export default function ProductManager() {
       categoryId: p.categoryId, model: p.variants[0]?.model || '', size: p.variants[0]?.size || '', weight: p.variants[0]?.weight || '',
     });
     setEditing(p);
-    setImageInputs(p.images.length > 0 ? p.images : ['']);
+    setImagePreview(p.images[0] || '');
     setShowForm(true);
   };
 
-  const saveFull = async (extra?: Partial<Product>) => {
-    const images = imageInputs.filter(url => url.trim());
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const base64 = await fileToBase64(file);
+      setImagePreview(base64);
+    } catch {
+      toast('图片读取失败', 'error');
+    }
+  };
+
+  const removeImage = () => {
+    setImagePreview('');
+    if (fileRef.current) fileRef.current.value = '';
+  };
+
+  const saveFull = async () => {
+    const images = imagePreview ? [imagePreview] : [];
     const variantId = editing?.variants[0]?.id || crypto.randomUUID();
     const data: Product = {
       id: editing?.id || crypto.randomUUID(),
@@ -104,7 +89,6 @@ export default function ProductManager() {
       variants: [{ id: variantId, model: form.model, size: form.size, weight: form.weight }],
       active: editing?.active ?? true,
       createdAt: editing?.createdAt || new Date().toISOString(),
-      ...extra,
     };
     if (editing) {
       await productService.update(editing.id, data);
@@ -254,32 +238,33 @@ export default function ProductManager() {
             </select>
           </div>
 
-          {/* Image management */}
+          {/* Image upload via FileReader */}
           <div>
-            <div className="flex items-center justify-between mb-1">
-              <label className="text-xs text-slate-500">商品图片</label>
-              <button type="button" onClick={addImageField} className="text-xs text-primary-600 font-semibold hover:text-primary-700">+ 添加图片</button>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              {imageInputs.map((url, idx) => (
-                <div key={idx} className="flex gap-1.5 items-center">
-                  <input
-                    className="input-field flex-1"
-                    placeholder={`图片URL #${idx + 1}`}
-                    value={url}
-                    onChange={e => updateImageField(idx, e.target.value)}
-                  />
-                  {url && (
-                    <div className="w-8 h-8 rounded-md overflow-hidden bg-slate-100 shrink-0">
-                      <img src={url} alt="" className="w-full h-full object-cover" onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                    </div>
-                  )}
-                  {imageInputs.length > 1 && (
-                    <button onClick={() => removeImageField(idx)} className="text-red-400 hover:text-red-600 text-sm shrink-0">&times;</button>
-                  )}
-                </div>
-              ))}
-            </div>
+            <label className="text-xs text-slate-500 mb-1 block">商品实物图</label>
+            {imagePreview ? (
+              <div className="relative inline-block">
+                <img src={imagePreview} alt="预览" className="w-32 h-32 object-cover rounded-lg border border-slate-200" />
+                <button
+                  onClick={removeImage}
+                  className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center hover:bg-red-600"
+                >
+                  &times;
+                </button>
+              </div>
+            ) : (
+              <label className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-primary-400 transition-colors">
+                <span className="text-2xl text-slate-300">+</span>
+                <span className="text-[10px] text-slate-400 mt-1">上传图片</span>
+                <input
+                  ref={fileRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </label>
+            )}
+            <p className="text-[10px] text-slate-400 mt-1">支持 JPG/PNG，图片以 base64 存储在本地</p>
           </div>
 
           <div className="grid grid-cols-3 gap-2">
@@ -289,7 +274,7 @@ export default function ProductManager() {
           </div>
           <div className="flex justify-end gap-2 mt-3">
             <button onClick={() => setShowForm(false)} className="px-4 py-2 text-xs font-semibold text-slate-500 border border-slate-200 rounded-md hover:bg-slate-50">取消</button>
-            <button onClick={() => saveFull()} className="px-4 py-2 text-xs font-semibold text-white bg-primary-600 rounded-md hover:bg-primary-700">保存</button>
+            <button onClick={saveFull} className="px-4 py-2 text-xs font-semibold text-white bg-primary-600 rounded-md hover:bg-primary-700">保存</button>
           </div>
         </div>
       </Modal>
