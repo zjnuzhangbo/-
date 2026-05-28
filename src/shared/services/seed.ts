@@ -96,30 +96,31 @@ const products: Product[] = [
 ];
 
 const SEED_VERSION_KEY = 'tricycle_seed_version';
-const CURRENT_SEED_VERSION = 2;
+const CURRENT_SEED_VERSION = 3;
 
 export async function seedIfEmpty() {
   const seedVersion = localStorage.getItem(SEED_VERSION_KEY);
-  const needsReseed = seedVersion !== String(CURRENT_SEED_VERSION);
+  const isFirstRun = !seedVersion;
+  const isVersionUpgrade = seedVersion && seedVersion !== String(CURRENT_SEED_VERSION);
 
-  if (needsReseed) {
-    // Clear old data and re-seed
+  // First run: seed data
+  if (isFirstRun) {
+    for (const c of categories) { await categoryService.create(c); }
+    for (const p of products) { await productService.create(p); }
+    localStorage.setItem(SEED_VERSION_KEY, String(CURRENT_SEED_VERSION));
+    return;
+  }
+
+  // Version upgrade: clear old, re-seed with new data
+  if (isVersionUpgrade) {
     const existingProds = await productService.getAll();
     for (const p of existingProds) { await productService.remove(p.id); }
     const existingCats = await categoryService.getAll();
     for (const c of existingCats) { await categoryService.remove(c.id); }
-  }
-
-  const cats = await categoryService.getAll();
-  if (cats.length === 0) {
     for (const c of categories) { await categoryService.create(c); }
-  }
-  const prods = await productService.getAll();
-  if (prods.length === 0) {
     for (const p of products) { await productService.create(p); }
-  }
-
-  if (needsReseed) {
     localStorage.setItem(SEED_VERSION_KEY, String(CURRENT_SEED_VERSION));
   }
+
+  // Already seeded: do nothing, respect user's manual changes
 }
