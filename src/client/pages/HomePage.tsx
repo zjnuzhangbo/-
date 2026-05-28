@@ -11,6 +11,7 @@ export default function HomePage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
+  const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
 
   useEffect(() => {
     productService.getAll().then(setProducts);
@@ -35,7 +36,8 @@ export default function HomePage() {
 
   const addToOrder = (product: Product) => {
     const existing = JSON.parse(localStorage.getItem('tricycle_cart') || '[]');
-    const variant = product.variants[0];
+    const variantId = selectedVariants[product.id] || product.variants[0]?.id || '';
+    const variant = product.variants.find(v => v.id === variantId) || product.variants[0];
     existing.push({
       productId: product.id,
       variantId: variant?.id || '',
@@ -89,30 +91,52 @@ export default function HomePage() {
           </div>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
-            {filtered.map(product => (
-              <div key={product.id} className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-36 bg-slate-100 flex items-center justify-center text-3xl">
-                  {product.images[0] ? <img src={product.images[0]} alt={product.name.zh} className="w-full h-full object-cover" /> : '🔧'}
+            {filtered.map(product => {
+              const hasVariants = product.variants.length > 0;
+              const hasMultipleVariants = product.variants.length > 1;
+              const currentVariant = selectedVariants[product.id] || product.variants[0]?.id || '';
+
+              return (
+                <div key={product.id} className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+                  <div className="h-36 bg-slate-100 flex items-center justify-center text-3xl">
+                    {product.images[0] ? <img src={product.images[0]} alt={product.name.zh} className="w-full h-full object-cover" /> : '🔧'}
+                  </div>
+                  <div className="p-3">
+                    <span className="text-xs text-primary-600 font-semibold bg-primary-50 px-2 py-0.5 rounded-pill">
+                      {categories.find(c => c.id === product.categoryId)?.name.zh || ''}
+                    </span>
+                    <h3 className="font-semibold text-slate-800 mt-2 text-sm">{product.name.zh}</h3>
+
+                    {hasMultipleVariants ? (
+                      <div className="mt-2">
+                        <select
+                          className="w-full px-2 py-1.5 border border-slate-200 rounded-md text-xs outline-none focus:border-primary-400"
+                          value={currentVariant}
+                          onChange={e => setSelectedVariants(prev => ({ ...prev, [product.id]: e.target.value }))}
+                        >
+                          {product.variants.map(v => (
+                            <option key={v.id} value={v.id}>
+                              {v.model} — {v.size} · {v.weight}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ) : hasVariants ? (
+                      <p className="text-xs text-slate-400 mt-1">
+                        {product.variants[0].model} — {product.variants[0].size} · {product.variants[0].weight}
+                      </p>
+                    ) : null}
+
+                    <button
+                      onClick={() => addToOrder(product)}
+                      className="mt-3 w-full py-2 bg-primary-600 text-white text-xs font-semibold rounded-md hover:bg-primary-700 transition-colors"
+                    >
+                      {t('home.orderBtn')}
+                    </button>
+                  </div>
                 </div>
-                <div className="p-3">
-                  <span className="text-xs text-primary-600 font-semibold bg-primary-50 px-2 py-0.5 rounded-pill">
-                    {categories.find(c => c.id === product.categoryId)?.name.zh || ''}
-                  </span>
-                  <h3 className="font-semibold text-slate-800 mt-2 text-sm">{product.name.zh}</h3>
-                  {product.variants[0] && (
-                    <p className="text-xs text-slate-400 mt-1">
-                      {product.variants[0].size} · {product.variants[0].weight}
-                    </p>
-                  )}
-                  <button
-                    onClick={() => addToOrder(product)}
-                    className="mt-3 w-full py-2 bg-primary-600 text-white text-xs font-semibold rounded-md hover:bg-primary-700 transition-colors"
-                  >
-                    {t('home.orderBtn')}
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
