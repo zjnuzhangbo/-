@@ -145,20 +145,22 @@ export default function ProductManager() {
     }
     setShowForm(false);
     resetForm();
-    productService.getAll().then(setProducts);
+    const fresh = await productService.getAll();
+    setProducts(fresh);
     toast(editing ? '商品已更新' : '商品已添加');
   };
 
   const toggleActive = async (p: Product) => {
     await productService.update(p.id, { active: !p.active });
-    setProducts(prev => prev.map(x => x.id === p.id ? { ...x, active: !x.active } : x));
+    const fresh = await productService.getAll();
+    setProducts(fresh);
   };
 
-  const removeProduct = async () => {
-    if (!deleteId) return;
-    await productService.remove(deleteId);
-    setProducts(prev => prev.filter(p => p.id !== deleteId));
+  const removeProduct = async (id: string) => {
+    await productService.remove(id);
     setDeleteId(null);
+    const fresh = await productService.getAll();
+    setProducts(fresh);
     toast('商品已删除');
   };
 
@@ -175,12 +177,14 @@ export default function ProductManager() {
       sortOrder: categories.length,
     });
     setNewCatName('');
-    categoryService.getAll().then(setCategories);
+    const fresh = await categoryService.getAll();
+    setCategories(fresh);
   };
 
   const removeCategory = async (id: string) => {
     await categoryService.remove(id);
-    setCategories(prev => prev.filter(c => c.id !== id));
+    const fresh = await categoryService.getAll();
+    setCategories(fresh);
   };
 
   const filtered = products.filter(p => {
@@ -359,7 +363,7 @@ export default function ProductManager() {
       <ConfirmDialog
         open={deleteId !== null}
         onClose={() => setDeleteId(null)}
-        onConfirm={removeProduct}
+        onConfirm={() => deleteId && removeProduct(deleteId)}
         title="删除商品"
         message="确定要永久删除此商品吗？此操作不可撤销。"
       />
