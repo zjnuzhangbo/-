@@ -83,7 +83,7 @@ export default function ProductPickerModal({ open, onClose, onAdd }: ProductPick
                     ? 'bg-primary-600 text-white border-primary-600'
                     : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300'}`}
               >
-                {cat.icon} {localName(cat.name, lang)}
+                {localName(cat.name, lang)}
               </button>
             ))}
           </div>

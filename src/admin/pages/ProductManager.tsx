@@ -161,10 +161,14 @@ export default function ProductManager() {
 
   const addCategory = async () => {
     if (!newCatName.trim()) return;
+    const [en, ru] = await Promise.all([
+      translateText(newCatName, 'en'),
+      translateText(newCatName, 'ru'),
+    ]);
     await categoryService.create({
       id: crypto.randomUUID(),
-      name: { zh: newCatName, en: newCatName, ru: newCatName },
-      icon: '📦',
+      name: { zh: newCatName, en: en || newCatName, ru: ru || newCatName },
+      icon: '',
       sortOrder: categories.length,
     });
     setNewCatName('');
@@ -257,7 +261,7 @@ export default function ProductManager() {
         <div className="flex flex-wrap gap-2 mb-3">
           {categories.map(c => (
             <span key={c.id} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-pill text-xs font-medium text-slate-600">
-              {c.icon} {c.name.zh}
+              {c.name.zh}
               <button onClick={() => removeCategory(c.id)} className="text-slate-400 hover:text-red-500 ml-0.5">&times;</button>
             </span>
           ))}
