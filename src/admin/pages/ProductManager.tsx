@@ -96,8 +96,8 @@ export default function ProductManager() {
     setForm(prev => ({
       ...prev,
       nameZh: value,
-      nameEn: prev.nameEn || value,
-      nameRu: prev.nameRu || value,
+      nameEn: value,
+      nameRu: value,
     }));
   };
 

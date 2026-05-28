@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modal from '../../shared/components/ui/Modal';
 import { productService, categoryService } from '../../shared/services';
+import { localName } from '../../shared/utils';
 import type { Product, Category } from '../../shared/types';
 
 interface CartItem {
@@ -20,12 +21,14 @@ interface ProductPickerModalProps {
 }
 
 export default function ProductPickerModal({ open, onClose, onAdd }: ProductPickerModalProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
+
+  const lang = i18n.language;
 
   useEffect(() => {
     productService.getAll().then(p => setProducts(p.filter(x => x.active)));
@@ -41,7 +44,7 @@ export default function ProductPickerModal({ open, onClose, onAdd }: ProductPick
   };
 
   const filtered = products.filter(p => {
-    if (search && !p.name.zh.toLowerCase().includes(search.toLowerCase())) return false;
+    if (search && !localName(p.name, lang).toLowerCase().includes(search.toLowerCase())) return false;
     if (selectedCategories.size > 0 && !selectedCategories.has(p.categoryId)) return false;
     return true;
   });
@@ -52,7 +55,7 @@ export default function ProductPickerModal({ open, onClose, onAdd }: ProductPick
     onAdd({
       productId: product.id,
       variantId: v?.id || '',
-      productName: product.name.zh,
+      productName: localName(product.name, lang),
       model: v?.model || '',
       spec: v ? `${v.size} · ${v.weight}` : '',
       quantity: 1,
@@ -80,7 +83,7 @@ export default function ProductPickerModal({ open, onClose, onAdd }: ProductPick
                     ? 'bg-primary-600 text-white border-primary-600'
                     : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300'}`}
               >
-                {cat.icon} {cat.name.zh}
+                {cat.icon} {localName(cat.name, lang)}
               </button>
             ))}
           </div>
@@ -95,16 +98,15 @@ export default function ProductPickerModal({ open, onClose, onAdd }: ProductPick
           <div className="grid grid-cols-[repeat(auto-fill,minmax(170px,180px))] gap-2.5 max-h-[55vh] overflow-auto pr-1">
             {filtered.map(product => {
               const hasMultipleVariants = product.variants.length > 1;
+              const catName = localName(categories.find(c => c.id === product.categoryId)?.name || { zh: '', en: '', ru: '' }, lang);
               return (
                 <div key={product.id} className="bg-white rounded-lg border border-slate-200 overflow-hidden hover:shadow-sm transition-shadow">
                   <div className="h-24 bg-slate-100 flex items-center justify-center text-xl">
-                    {product.images[0] ? <img src={product.images[0]} alt={product.name.zh} className="w-full h-full object-cover" /> : '🔧'}
+                    {product.images[0] ? <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover" /> : '🔧'}
                   </div>
                   <div className="p-2">
-                    <span className="text-[10px] text-primary-600 font-semibold bg-primary-50 px-1.5 py-0.5 rounded-pill">
-                      {categories.find(c => c.id === product.categoryId)?.name.zh || ''}
-                    </span>
-                    <h4 className="font-semibold text-slate-800 mt-1 text-[11px] leading-tight">{product.name.zh}</h4>
+                    <span className="text-[10px] text-primary-600 font-semibold bg-primary-50 px-1.5 py-0.5 rounded-pill">{catName}</span>
+                    <h4 className="font-semibold text-slate-800 mt-1 text-[11px] leading-tight">{localName(product.name, lang)}</h4>
 
                     {hasMultipleVariants ? (
                       <select

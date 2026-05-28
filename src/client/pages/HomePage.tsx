@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { productService, categoryService } from '../../shared/services';
+import { localName } from '../../shared/utils';
 import type { Product, Category } from '../../shared/types';
 
 export default function HomePage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -27,9 +28,11 @@ export default function HomePage() {
     });
   };
 
+  const lang = i18n.language;
+
   const filtered = products.filter(p => {
     if (!p.active) return false;
-    if (search && !p.name.zh.toLowerCase().includes(search.toLowerCase())) return false;
+    if (search && !localName(p.name, lang).toLowerCase().includes(search.toLowerCase())) return false;
     if (selectedCategories.size > 0 && !selectedCategories.has(p.categoryId)) return false;
     return true;
   });
@@ -60,7 +63,7 @@ export default function HomePage() {
       existing.push({
         productId: product.id,
         variantId: variant?.id || '',
-        productName: product.name.zh,
+        productName: localName(product.name, lang),
         model: variant?.model || '',
         spec: variant ? `${variant.size} · ${variant.weight}` : '',
         quantity: 1,
@@ -77,7 +80,7 @@ export default function HomePage() {
     existing.push({
       productId: product.id,
       variantId: variant?.id || '',
-      productName: product.name.zh,
+      productName: localName(product.name, lang),
       model: variant?.model || '',
       spec: variant ? `${variant.size} · ${variant.weight}` : '',
       quantity: 1,
@@ -103,7 +106,6 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Category filter + select all */}
         <div className="flex items-center gap-2 mb-4 flex-wrap">
           {categories.length > 0 && (
             <div className="flex gap-2 overflow-x-auto flex-1">
@@ -116,7 +118,7 @@ export default function HomePage() {
                       ? 'bg-primary-600 text-white border-primary-600'
                       : 'bg-white text-slate-600 border-slate-200 hover:border-primary-300'}`}
                 >
-                  {cat.icon} {cat.name.zh}
+                  {cat.icon} {localName(cat.name, lang)}
                 </button>
               ))}
             </div>
@@ -139,6 +141,7 @@ export default function HomePage() {
               const hasMultipleVariants = product.variants.length > 1;
               const currentVariant = selectedVariants[product.id] || product.variants[0]?.id || '';
               const isChecked = checked.has(product.id);
+              const catName = localName(categories.find(c => c.id === product.categoryId)?.name || { zh: '', en: '', ru: '' }, lang);
 
               return (
                 <div
@@ -148,7 +151,7 @@ export default function HomePage() {
                   onClick={() => toggleCheck(product.id)}
                 >
                   <div className="h-32 bg-slate-100 flex items-center justify-center text-2xl relative">
-                    {product.images[0] ? <img src={product.images[0]} alt={product.name.zh} className="w-full h-full object-cover" /> : '🔧'}
+                    {product.images[0] ? <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover" /> : '🔧'}
                     <div className={`absolute top-2 right-2 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors
                       ${isChecked ? 'bg-primary-600 border-primary-600' : 'bg-white/80 border-slate-300'}`}>
                       {isChecked && <span className="text-white text-xs">✓</span>}
@@ -156,9 +159,9 @@ export default function HomePage() {
                   </div>
                   <div className="p-2.5">
                     <span className="text-[10px] text-primary-600 font-semibold bg-primary-50 px-1.5 py-0.5 rounded-pill">
-                      {categories.find(c => c.id === product.categoryId)?.name.zh || ''}
+                      {catName}
                     </span>
-                    <h3 className="font-semibold text-slate-800 mt-1.5 text-xs leading-tight">{product.name.zh}</h3>
+                    <h3 className="font-semibold text-slate-800 mt-1.5 text-xs leading-tight">{localName(product.name, lang)}</h3>
 
                     {hasMultipleVariants ? (
                       <select
@@ -191,7 +194,6 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* Floating bottom bar for multi-select */}
       {checked.size > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-primary-200 shadow-lg z-30 px-4 py-3">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
