@@ -8,6 +8,18 @@ import { useToast } from '../../shared/components/ui/Toast';
 
 const emptyName: LocalizedString = { zh: '', en: '', ru: '' };
 
+async function translateText(text: string, targetLang: string): Promise<string> {
+  if (!text.trim()) return '';
+  const langPair = targetLang === 'en' ? 'zh|en' : 'zh|ru';
+  try {
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langPair}`);
+    const data = await res.json();
+    return data?.responseData?.translatedText || text;
+  } catch {
+    return text;
+  }
+}
+
 function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -92,13 +104,15 @@ export default function ProductManager() {
     setVariants(prev => prev.filter((_, i) => i !== idx));
   };
 
-  const handleZhNameChange = (value: string) => {
-    setForm(prev => ({
-      ...prev,
-      nameZh: value,
-      nameEn: value,
-      nameRu: value,
-    }));
+  const handleZhNameChange = async (value: string) => {
+    setForm(prev => ({ ...prev, nameZh: value, nameEn: '', nameRu: '' }));
+    if (value.trim()) {
+      const [en, ru] = await Promise.all([
+        translateText(value, 'en'),
+        translateText(value, 'ru'),
+      ]);
+      setForm(prev => ({ ...prev, nameEn: en, nameRu: ru }));
+    }
   };
 
   const saveFull = async () => {
