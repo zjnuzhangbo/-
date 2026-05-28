@@ -14,9 +14,9 @@ async function translateText(text: string, targetLang: string): Promise<string> 
   try {
     const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langPair}`);
     const data = await res.json();
-    return data?.responseData?.translatedText || text;
+    return data?.responseData?.translatedText || '';
   } catch {
-    return text;
+    return '';
   }
 }
 
@@ -49,6 +49,7 @@ export default function ProductManager() {
   const [variants, setVariants] = useState<Variant[]>([{ id: '', model: '', size: '', weight: '' }]);
   const [imagePreview, setImagePreview] = useState<string>('');
   const fileRef = useRef<HTMLInputElement>(null);
+  const translateSeq = useRef(0);
 
   useEffect(() => {
     productService.getAll().then(setProducts);
@@ -106,13 +107,15 @@ export default function ProductManager() {
 
   const handleZhNameChange = async (value: string) => {
     setForm(prev => ({ ...prev, nameZh: value, nameEn: '', nameRu: '' }));
-    if (value.trim()) {
-      const [en, ru] = await Promise.all([
-        translateText(value, 'en'),
-        translateText(value, 'ru'),
-      ]);
-      setForm(prev => ({ ...prev, nameEn: en, nameRu: ru }));
-    }
+    if (!value.trim()) return;
+    const seq = ++translateSeq.current;
+    const [en, ru] = await Promise.all([
+      translateText(value, 'en'),
+      translateText(value, 'ru'),
+    ]);
+    // Discard stale responses
+    if (seq !== translateSeq.current) return;
+    setForm(prev => ({ ...prev, nameEn: en, nameRu: ru }));
   };
 
   const saveFull = async () => {
