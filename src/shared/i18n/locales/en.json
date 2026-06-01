@@ -10,7 +10,11 @@
     "productName": "Product",
     "spec": "Spec",
     "category": "Category",
-    "quickOrder": "Quick Order"
+    "quickOrder": "Quick Order",
+    "gridView": "▦ Grid",
+    "tableView": "☰ List",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All"
   },
   "order": {
     "title": "Submit Order",

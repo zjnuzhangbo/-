@@ -10,7 +10,11 @@
     "productName": "产品名称",
     "spec": "型号/规格",
     "category": "分类",
-    "quickOrder": "立即订购"
+    "quickOrder": "立即订购",
+    "gridView": "▦ 卡片",
+    "tableView": "☰ 列表",
+    "selectAll": "全选",
+    "deselectAll": "取消全选"
   },
   "order": {
     "title": "提交订单",

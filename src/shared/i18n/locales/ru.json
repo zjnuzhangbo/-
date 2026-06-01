@@ -10,7 +10,11 @@
     "productName": "Товар",
     "spec": "Характеристики",
     "category": "Категория",
-    "quickOrder": "Заказать"
+    "quickOrder": "Заказать",
+    "gridView": "▦ Сетка",
+    "tableView": "☰ Список",
+    "selectAll": "Выбрать все",
+    "deselectAll": "Снять выбор"
   },
   "order": {
     "title": "Оформление заказа",

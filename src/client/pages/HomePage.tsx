@@ -151,13 +151,13 @@ export default function HomePage() {
               onClick={() => setViewMode('grid')}
               className={`px-3 py-1.5 text-xs font-semibold transition-colors ${viewMode === 'grid' ? 'bg-primary-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
             >
-              ▦ 卡片
+              {t('home.gridView')}
             </button>
             <button
               onClick={() => setViewMode('table')}
               className={`px-3 py-1.5 text-xs font-semibold transition-colors ${viewMode === 'table' ? 'bg-primary-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
             >
-              ☰ 列表
+              {t('home.tableView')}
             </button>
           </div>
           {categories.length > 0 && (
@@ -178,7 +178,7 @@ export default function HomePage() {
           )}
           {filtered.length > 0 && (
             <button onClick={selectAll} className="shrink-0 text-xs text-primary-600 font-semibold hover:text-primary-700">
-              {checked.size === filtered.length ? '取消全选' : '全选'}
+              {checked.size === filtered.length ? t('home.deselectAll') : t('home.selectAll')}
             </button>
           )}
         </div>
@@ -324,7 +324,7 @@ export default function HomePage() {
                       onClick={e => { e.stopPropagation(); quickOrder(product); }}
                       className="mt-2 w-full py-1.5 bg-primary-600 text-white text-[11px] font-semibold rounded-md hover:bg-primary-700 transition-colors"
                     >
-                      立即订购
+                      {t('home.quickOrder')}
                     </button>
                   </div>
                 </div>
