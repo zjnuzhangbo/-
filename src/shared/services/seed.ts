@@ -103,23 +103,23 @@ export async function seedIfEmpty() {
   const isFirstRun = !seedVersion;
   const isVersionUpgrade = seedVersion && seedVersion !== String(CURRENT_SEED_VERSION);
 
-  // First run: seed data
+  // First run: seed data — set version FIRST to prevent StrictMode double-fire
   if (isFirstRun) {
+    localStorage.setItem(SEED_VERSION_KEY, String(CURRENT_SEED_VERSION));
     for (const c of categories) { await categoryService.create(c); }
     for (const p of products) { await productService.create(p); }
-    localStorage.setItem(SEED_VERSION_KEY, String(CURRENT_SEED_VERSION));
     return;
   }
 
   // Version upgrade: clear old, re-seed with new data
   if (isVersionUpgrade) {
+    localStorage.setItem(SEED_VERSION_KEY, String(CURRENT_SEED_VERSION));
     const existingProds = await productService.getAll();
     for (const p of existingProds) { await productService.remove(p.id); }
     const existingCats = await categoryService.getAll();
     for (const c of existingCats) { await categoryService.remove(c.id); }
     for (const c of categories) { await categoryService.create(c); }
     for (const p of products) { await productService.create(p); }
-    localStorage.setItem(SEED_VERSION_KEY, String(CURRENT_SEED_VERSION));
   }
 
   // Already seeded: do nothing, respect user's manual changes
