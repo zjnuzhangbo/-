@@ -160,7 +160,13 @@ export default function HomePage() {
                   onClick={() => toggleCheck(product.id)}
                 >
                   <div className="h-32 bg-slate-100 flex items-center justify-center text-2xl relative">
-                    {product.images[0] ? <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover" /> : '🔧'}
+                    {product.images[0] ? (
+    <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover" />
+  ) : (
+    <span className="text-slate-400 font-semibold text-sm select-none">
+      {localName(product.name, lang).slice(0, 2)}
+    </span>
+  )}
                     <div className={`absolute top-2 right-2 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors
                       ${isChecked ? 'bg-primary-600 border-primary-600' : 'bg-white/80 border-slate-300'}`}>
                       {isChecked && <span className="text-white text-xs">✓</span>}
