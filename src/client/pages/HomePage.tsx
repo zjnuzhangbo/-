@@ -32,7 +32,16 @@ export default function HomePage() {
 
   const filtered = products.filter(p => {
     if (!p.active) return false;
-    if (search && !localName(p.name, lang).toLowerCase().includes(search.toLowerCase())) return false;
+    if (search) {
+      const q = search.toLowerCase();
+      const nameMatch = localName(p.name, lang).toLowerCase().includes(q);
+      const variantMatch = p.variants.some(v =>
+        v.model.toLowerCase().includes(q) ||
+        v.size.toLowerCase().includes(q) ||
+        v.weight.toLowerCase().includes(q)
+      );
+      if (!nameMatch && !variantMatch) return false;
+    }
     if (selectedCategories.size > 0 && !selectedCategories.has(p.categoryId)) return false;
     return true;
   });
