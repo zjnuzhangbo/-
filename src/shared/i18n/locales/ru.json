@@ -6,7 +6,11 @@
     "search": "Поиск запчастей...",
     "allCategories": "Все категории",
     "orderBtn": "Заказать",
-    "noProducts": "Нет товаров"
+    "noProducts": "Нет товаров",
+    "productName": "Товар",
+    "spec": "Характеристики",
+    "category": "Категория",
+    "quickOrder": "Заказать"
   },
   "order": {
     "title": "Оформление заказа",

@@ -6,7 +6,11 @@
     "search": "搜索配件名称...",
     "allCategories": "全部分类",
     "orderBtn": "订购",
-    "noProducts": "暂无商品"
+    "noProducts": "暂无商品",
+    "productName": "产品名称",
+    "spec": "型号/规格",
+    "category": "分类",
+    "quickOrder": "立即订购"
   },
   "order": {
     "title": "提交订单",

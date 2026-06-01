@@ -6,7 +6,11 @@
     "search": "Search parts...",
     "allCategories": "All Categories",
     "orderBtn": "Order",
-    "noProducts": "No products available"
+    "noProducts": "No products available",
+    "productName": "Product",
+    "spec": "Spec",
+    "category": "Category",
+    "quickOrder": "Quick Order"
   },
   "order": {
     "title": "Submit Order",
