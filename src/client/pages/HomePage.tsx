@@ -6,12 +6,25 @@ import { localName } from '../../shared/utils';
 import type { Product, Category } from '../../shared/types';
 
 export default function HomePage() {
+  const FILTER_CACHE_KEY = 'tricycle_home_filters';
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [search, setSearch] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
+  const [search, setSearch] = useState(() => {
+    try {
+      const cached = sessionStorage.getItem(FILTER_CACHE_KEY);
+      if (cached) return JSON.parse(cached).search || '';
+    } catch { /* ignore */ }
+    return '';
+  });
+  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(() => {
+    try {
+      const cached = sessionStorage.getItem(FILTER_CACHE_KEY);
+      if (cached) return new Set<string>(JSON.parse(cached).categories || []);
+    } catch { /* ignore */ }
+    return new Set();
+  });
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
 
@@ -19,6 +32,15 @@ export default function HomePage() {
     productService.getAll().then(setProducts);
     categoryService.getAll().then(setCategories);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      sessionStorage.setItem(FILTER_CACHE_KEY, JSON.stringify({
+        search,
+        categories: [...selectedCategories],
+      }));
+    };
+  }, [search, selectedCategories]);
 
   const toggleCategory = (id: string) => {
     setSelectedCategories(prev => {
