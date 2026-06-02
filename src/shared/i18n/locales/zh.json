@@ -20,6 +20,20 @@
     "selectAll": "全选",
     "deselectAll": "取消全选"
   },
+  "auth": {
+    "title": "登录",
+    "emailLabel": "邮箱地址",
+    "emailPlaceholder": "请输入邮箱",
+    "sendCode": "发送验证码",
+    "codeSent": "验证码已发送，请检查邮箱",
+    "codeLabel": "验证码",
+    "codePlaceholder": "请输入6位验证码",
+    "verify": "验证登录",
+    "sending": "发送中...",
+    "logout": "退出登录",
+    "loggedInAs": "已登录: {{email}}",
+    "required": "登录后才能下单"
+  },
   "order": {
     "title": "提交订单",
     "back": "← 返回首页",

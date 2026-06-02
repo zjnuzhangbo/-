@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { supabase } from '../../shared/services/supabase/client';
 
 const langs = [
   { code: 'zh', label: '中文' },
@@ -14,6 +16,17 @@ interface HeaderProps {
 export default function Header({ cartCount = 0 }: HeaderProps) {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+  const [user, setUser] = useState<{ email?: string } | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
+    });
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => data.subscription.unsubscribe();
+  }, []);
 
   const linkClass = (path: string) =>
     `text-sm font-medium transition-colors ${
@@ -27,7 +40,6 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           {t('app.name')}
         </Link>
         <nav className="flex items-center gap-4">
-          {/* Language switcher */}
           <div className="flex items-center gap-0.5 mr-1">
             {langs.map(l => (
               <button
@@ -44,6 +56,14 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           </div>
           <Link to="/" className={linkClass('/')}>{t('nav.home')}</Link>
           <Link to="/history" className={linkClass('/history')}>{t('nav.history')}</Link>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-slate-400 hidden sm:inline">{t('auth.loggedInAs', { email: user.email })}</span>
+              <button onClick={() => supabase.auth.signOut()} className="text-xs text-slate-400 hover:text-red-500">{t('auth.logout')}</button>
+            </div>
+          ) : (
+            <Link to="/login" className="text-sm font-medium text-primary-600 hover:text-primary-700">登录</Link>
+          )}
           <Link to="/order" className="relative">
             <span className="text-lg">🛒</span>
             {cartCount > 0 && (

@@ -20,6 +20,20 @@
     "selectAll": "Выбрать все",
     "deselectAll": "Снять выбор"
   },
+  "auth": {
+    "title": "Вход",
+    "emailLabel": "Эл. почта",
+    "emailPlaceholder": "Введите email",
+    "sendCode": "Отправить код",
+    "codeSent": "Код отправлен! Проверьте почту.",
+    "codeLabel": "Код подтверждения",
+    "codePlaceholder": "Введите 6-значный код",
+    "verify": "Подтвердить и войти",
+    "sending": "Отправка...",
+    "logout": "Выйти",
+    "loggedInAs": "Вход: {{email}}",
+    "required": "Войдите для оформления заказа"
+  },
   "order": {
     "title": "Оформление заказа",
     "back": "← На главную",

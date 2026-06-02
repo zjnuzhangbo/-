@@ -20,6 +20,20 @@
     "selectAll": "Select All",
     "deselectAll": "Deselect All"
   },
+  "auth": {
+    "title": "Sign In",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "sendCode": "Send Code",
+    "codeSent": "Code sent! Check your inbox.",
+    "codeLabel": "Verification Code",
+    "codePlaceholder": "Enter 6-digit code",
+    "verify": "Verify & Sign In",
+    "sending": "Sending...",
+    "logout": "Sign Out",
+    "loggedInAs": "Signed in: {{email}}",
+    "required": "Sign in to place orders"
+  },
   "order": {
     "title": "Submit Order",
     "back": "← Back to Home",
