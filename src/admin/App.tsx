@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastProvider } from '../shared/components/ui/Toast';
 import '../shared/i18n';
 import { authService } from '../shared/services';
+import { hasAdminToken } from '../shared/services/supabase/adminApi';
 import { seedIfEmpty } from '../shared/services/seed';
 import AdminLayout from './components/AdminLayout';
 import LoginPage from './pages/LoginPage';
@@ -10,12 +11,16 @@ import ProductManager from './pages/ProductManager';
 import OrderManager from './pages/OrderManager';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  if (!authService.isLoggedIn()) return <Navigate to="/login" replace />;
+  if (!authService.isLoggedIn() && !hasAdminToken()) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }
 
 export default function App() {
-  useEffect(() => { seedIfEmpty(); }, []);
+  useEffect(() => {
+    if (!import.meta.env.VITE_SUPABASE_URL) {
+      import('../../shared/services/seed').then(m => m.seedIfEmpty());
+    }
+  }, []);
 
   return (
     <ToastProvider>

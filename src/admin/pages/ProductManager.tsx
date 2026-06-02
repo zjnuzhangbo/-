@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { productService, categoryService } from '../../shared/services';
+import { adminProductService as productService, adminCategoryService as categoryService } from '../../shared/services/supabase/adminService';
+import { adminUploadImage } from '../../shared/services/supabase/adminApi';
 import type { Product, Category, Variant, LocalizedString } from '../../shared/types';
 import Modal from '../../shared/components/ui/Modal';
 import ConfirmDialog from '../../shared/components/ui/ConfirmDialog';

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { authService } from '../../shared/services';
+import { adminLogin, hasAdminToken } from '../../shared/services/supabase/adminApi';
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -10,8 +11,22 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    if (authService.isLoggedIn() || hasAdminToken()) navigate('/orders', { replace: true });
+  }, []);
+
   const handleLogin = async () => {
     setError('');
+    // Try Supabase admin login first, fall back to localStorage
+    if (import.meta.env.VITE_SUPABASE_URL) {
+      const { token, error: err } = await adminLogin(password);
+      if (token) {
+        navigate('/orders');
+        return;
+      }
+      setError(err || t('admin.login.error'));
+      return;
+    }
     const ok = await authService.login(account, password);
     if (ok) {
       navigate('/orders');

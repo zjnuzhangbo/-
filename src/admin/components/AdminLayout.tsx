@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { authService } from '../../shared/services';
+import { clearAdminToken } from '../../shared/services/supabase/adminApi';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation();
@@ -8,6 +9,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = () => {
     authService.logout();
+    clearAdminToken();
     navigate('/login');
   };
 

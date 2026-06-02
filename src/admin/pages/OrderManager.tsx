@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { orderService } from '../../shared/services';
+import { adminOrderService as orderService } from '../../shared/services/supabase/adminService';
 import type { Order, OrderItem } from '../../shared/types';
 import { useToast } from '../../shared/components/ui/Toast';
 import * as XLSX from 'xlsx';
