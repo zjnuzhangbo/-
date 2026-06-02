@@ -1,4 +1,8 @@
 {
+  "app": {
+    "name": "Tricycle Parts Sales",
+    "companyName": "Ruisheng Trading Co., Ltd."
+  },
   "nav": { "home": "Home", "history": "History", "cart": "Cart" },
   "home": {
     "title": "Tricycle Parts Wholesale",
@@ -109,6 +113,6 @@
     },
     "navbar": { "orders": "Orders", "products": "Products", "logout": "Logout" }
   },
-  "footer": { "copyright": "© 2026 TricycleParts. All rights reserved." },
+  "footer": { "copyright": "© 2026 Ruisheng Trading Co., Ltd. All rights reserved." },
   "common": { "confirm": "Confirm", "cancel": "Cancel", "close": "Close" }
 }

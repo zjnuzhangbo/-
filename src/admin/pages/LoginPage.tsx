@@ -24,7 +24,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg border border-slate-200 p-10 w-full max-w-sm shadow-sm">
         <div className="text-center mb-8">
-          <div className="font-display text-2xl text-slate-800 font-bold mb-1">TricycleParts</div>
+          <div className="font-display text-2xl text-slate-800 font-bold mb-1">{t('app.name')}</div>
           <div className="text-xs text-slate-400">{t('admin.login.title')}</div>
         </div>
 

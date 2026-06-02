@@ -15,7 +15,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="min-h-screen flex flex-col">
       <header className="bg-slate-800 px-6 h-14 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-6">
-          <span className="font-display text-lg text-white font-bold">后台管理</span>
+          <span className="font-display text-lg text-white font-bold">{t('admin.login.title')}</span>
           <span className="text-slate-600 text-xs">|</span>
           <NavLink to="/orders" className={({ isActive }) => `text-sm font-medium transition-colors ${isActive ? 'text-white' : 'text-slate-400 hover:text-white'}`}>
             {t('admin.navbar.orders')}

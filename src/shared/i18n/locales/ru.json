@@ -1,4 +1,8 @@
 {
+  "app": {
+    "name": "Запчасти для трициклов",
+    "companyName": "Ruisheng Trading Co., Ltd."
+  },
   "nav": { "home": "Главная", "history": "История", "cart": "Корзина" },
   "home": {
     "title": "Запчасти для трициклов",
@@ -109,6 +113,6 @@
     },
     "navbar": { "orders": "Заказы", "products": "Товары", "logout": "Выход" }
   },
-  "footer": { "copyright": "© 2026 TricycleParts. Все права защищены." },
+  "footer": { "copyright": "© 2026 Ruisheng Trading Co., Ltd. Все права защищены." },
   "common": { "confirm": "Подтвердить", "cancel": "Отмена", "close": "Закрыть" }
 }
