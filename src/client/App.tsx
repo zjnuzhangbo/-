@@ -14,7 +14,7 @@ import LoginPage from './pages/LoginPage';
 export default function App() {
   useEffect(() => {
     if (!import.meta.env.VITE_SUPABASE_URL) {
-      import('../../shared/services/seed').then(m => m.seedIfEmpty());
+      import('../shared/services/seed').then(m => m.seedIfEmpty());
     }
   }, []);
 
