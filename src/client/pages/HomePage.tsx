@@ -174,49 +174,54 @@ export default function HomePage() {
               return (
                 <div
                   key={product.id}
-                  className={`bg-white rounded-lg border-2 overflow-hidden transition-all cursor-pointer
-                    ${isChecked ? 'border-primary-500 shadow-md ring-1 ring-primary-200' : 'border-slate-200 hover:border-slate-300 hover:shadow-sm'}`}
                   onClick={() => toggleCheck(product.id)}
+                  className={`group bg-white rounded-xl border-2 overflow-hidden transition-all duration-200 cursor-pointer
+                    hover:-translate-y-1 hover:shadow-lg
+                    ${isChecked ? 'border-primary-500 shadow-md ring-2 ring-primary-200 bg-primary-50/50' : 'border-slate-200 shadow-sm hover:border-slate-300'}`}
                 >
-                  <div className="h-32 bg-slate-100 flex items-center justify-center text-2xl relative">
+                  {/* Image area */}
+                  <div className="aspect-[4/3] bg-slate-100 flex items-center justify-center relative overflow-hidden">
                     {product.images[0] ? (
-                    <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-slate-400 font-semibold text-sm select-none">
-                      {localName(product.name, lang).slice(0, 2)}
-                    </span>
-                  )}
-                    <div className={`absolute top-2 right-2 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors
-                      ${isChecked ? 'bg-primary-600 border-primary-600' : 'bg-white/80 border-slate-300'}`}>
-                      {isChecked && <span className="text-white text-xs">✓</span>}
+                      <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    ) : (
+                      <span className="text-4xl text-slate-300 font-display select-none">
+                        {localName(product.name, lang).slice(0, 2)}
+                      </span>
+                    )}
+                    {/* Checkbox */}
+                    <div className={`absolute top-3 right-3 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors shadow-sm
+                      ${isChecked ? 'bg-primary-600 border-primary-600' : 'bg-white/90 border-slate-300 group-hover:border-primary-400'}`}>
+                      {isChecked && <span className="text-white text-xs font-bold">✓</span>}
                     </div>
                   </div>
-                  <div className="p-2.5">
-                    <span className="text-[10px] text-primary-600 font-semibold bg-primary-50 px-1.5 py-0.5 rounded-pill">
+
+                  {/* Info area */}
+                  <div className="p-4">
+                    <span className="inline-block text-[10px] text-primary-600 font-semibold bg-primary-50 px-2 py-0.5 rounded-pill mb-2">
                       {catName}
                     </span>
-                    <h3 className="font-semibold text-slate-800 mt-1.5 text-xs leading-tight">{localName(product.name, lang)}</h3>
+                    <h3 className="font-semibold text-slate-800 text-sm leading-snug mb-2">{localName(product.name, lang)}</h3>
 
                     {hasMultipleVariants ? (
                       <select
-                        className="w-full mt-1.5 px-1.5 py-1 border border-slate-200 rounded-md text-[11px] outline-none focus:border-primary-400"
+                        className="w-full mb-2 px-2 py-1.5 border border-slate-200 rounded-lg text-xs outline-none focus:border-primary-400 bg-slate-50"
                         value={currentVariant}
                         onClick={e => e.stopPropagation()}
                         onChange={e => setSelectedVariants(prev => ({ ...prev, [product.id]: e.target.value }))}
                       >
                         {product.variants.map(v => (
-                          <option key={v.id} value={v.id}>{v.model} {v.size}·{v.weight}</option>
+                          <option key={v.id} value={v.id}>{v.model} · {v.size} · {v.weight}</option>
                         ))}
                       </select>
                     ) : product.variants[0] ? (
-                      <p className="text-[11px] text-slate-400 mt-1">
-                        {product.variants[0].model} {product.variants[0].size}·{product.variants[0].weight}
+                      <p className="text-xs text-slate-400 mb-2">
+                        {product.variants[0].model} · {product.variants[0].size} · {product.variants[0].weight}
                       </p>
                     ) : null}
 
                     <button
                       onClick={e => { e.stopPropagation(); quickOrder(product); }}
-                      className="mt-2 w-full py-1.5 bg-primary-600 text-white text-[11px] font-semibold rounded-md hover:bg-primary-700 transition-colors"
+                      className="w-full py-2 bg-primary-600 text-white text-xs font-semibold rounded-lg hover:bg-primary-700 active:bg-primary-800 transition-colors"
                     >
                       {t('home.quickOrder')}
                     </button>
@@ -229,14 +234,14 @@ export default function HomePage() {
       </div>
 
       {checked.size > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-primary-200 shadow-lg z-30 px-4 py-3">
+        <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 shadow-xl z-30 px-4 py-3">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <span className="text-sm font-semibold text-slate-700">
               已选 <span className="text-primary-600">{checked.size}</span> 件商品
             </span>
             <button
               onClick={submitChecked}
-              className="px-6 py-2.5 bg-primary-600 text-white text-sm font-bold rounded-md hover:bg-primary-700 transition-colors"
+              className="px-8 py-2.5 bg-primary-600 text-white text-sm font-bold rounded-xl hover:bg-primary-700 active:bg-primary-800 transition-all shadow-lg shadow-primary-200"
             >
               提交订单 →
             </button>
