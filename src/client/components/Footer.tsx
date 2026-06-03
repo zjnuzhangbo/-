@@ -7,6 +7,7 @@ export default function Footer() {
     <footer className="bg-slate-800 text-slate-400 py-8 mt-auto">
       <div className="max-w-7xl mx-auto px-4 text-center text-sm">
         <p className="font-display text-white text-base mb-1">{t('app.companyName')}</p>
+        <p className="text-slate-400 text-sm mb-1">{t('footer.contactPhone')}</p>
         <p>{t('footer.copyright')}</p>
       </div>
     </footer>

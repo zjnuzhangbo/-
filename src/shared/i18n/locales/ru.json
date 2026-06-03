@@ -136,6 +136,6 @@
     },
     "navbar": { "orders": "Заказы", "products": "Товары", "logout": "Выход" }
   },
-  "footer": { "copyright": "© 2026 Ruisheng Trading Co., Ltd. Все права защищены." },
+  "footer": { "contactPhone": "Тел: 13582756519", "copyright": "© 2026 Ruisheng Trading Co., Ltd. Все права защищены." },
   "common": { "confirm": "Подтвердить", "cancel": "Отмена", "close": "Закрыть" }
 }

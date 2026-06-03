@@ -136,6 +136,6 @@
     },
     "navbar": { "orders": "Orders", "products": "Products", "logout": "Logout" }
   },
-  "footer": { "copyright": "© 2026 Ruisheng Trading Co., Ltd. All rights reserved." },
+  "footer": { "contactPhone": "Tel: 13582756519", "copyright": "© 2026 Ruisheng Trading Co., Ltd. All rights reserved." },
   "common": { "confirm": "Confirm", "cancel": "Cancel", "close": "Close" }
 }

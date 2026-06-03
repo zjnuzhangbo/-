@@ -136,6 +136,6 @@
     },
     "navbar": { "orders": "订单管理", "products": "商品管理", "logout": "退出登录" }
   },
-  "footer": { "copyright": "© 2026 瑞盛商贸有限公司 版权所有" },
+  "footer": { "contactPhone": "联系电话：13582756519", "copyright": "© 2026 瑞盛商贸有限公司 版权所有" },
   "common": { "confirm": "确定", "cancel": "取消", "close": "关闭" }
 }
