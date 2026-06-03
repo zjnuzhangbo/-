@@ -11,28 +11,24 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const useSupabase = !!import.meta.env.VITE_SUPABASE_URL;
+
   useEffect(() => {
-    if (authService.isLoggedIn() || hasAdminToken()) navigate('/orders', { replace: true });
+    const authed = useSupabase ? hasAdminToken() : authService.isLoggedIn();
+    if (authed) navigate('/orders', { replace: true });
   }, []);
 
   const handleLogin = async () => {
     setError('');
-    // Try Supabase admin login first, fall back to localStorage
-    if (import.meta.env.VITE_SUPABASE_URL) {
+    if (useSupabase) {
       const { token, error: err } = await adminLogin(password);
-      if (token) {
-        navigate('/orders');
-        return;
-      }
+      if (token) { navigate('/orders'); return; }
       setError(err || t('admin.login.error'));
       return;
     }
     const ok = await authService.login(account, password);
-    if (ok) {
-      navigate('/orders');
-    } else {
-      setError(t('admin.login.error'));
-    }
+    if (ok) { navigate('/orders'); }
+    else { setError(t('admin.login.error')); }
   };
 
   return (
@@ -44,16 +40,18 @@ export default function LoginPage() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div>
-            <label className="text-xs font-semibold text-slate-500">{t('admin.login.account')}</label>
-            <input
-              className="input-field mt-1"
-              placeholder={t('admin.login.accountPlaceholder')}
-              value={account}
-              onChange={e => setAccount(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleLogin()}
-            />
-          </div>
+          {!useSupabase && (
+            <div>
+              <label className="text-xs font-semibold text-slate-500">{t('admin.login.account')}</label>
+              <input
+                className="input-field mt-1"
+                placeholder={t('admin.login.accountPlaceholder')}
+                value={account}
+                onChange={e => setAccount(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleLogin()}
+              />
+            </div>
+          )}
           <div>
             <label className="text-xs font-semibold text-slate-500">{t('admin.login.password')}</label>
             <input

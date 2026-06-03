@@ -10,8 +10,11 @@ import LoginPage from './pages/LoginPage';
 import ProductManager from './pages/ProductManager';
 import OrderManager from './pages/OrderManager';
 
+const useSupabase = !!import.meta.env.VITE_SUPABASE_URL;
+
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  if (!authService.isLoggedIn() && !hasAdminToken()) return <Navigate to="/login" replace />;
+  const authed = useSupabase ? hasAdminToken() : authService.isLoggedIn();
+  if (!authed) return <Navigate to="/login" replace />;
   return <>{children}</>;
 }
 

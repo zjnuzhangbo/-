@@ -16,7 +16,7 @@ interface HeaderProps {
 export default function Header({ cartCount = 0 }: HeaderProps) {
   const { t, i18n } = useTranslation();
   const location = useLocation();
-  const [user, setUser] = useState<{ email?: string } | null>(null);
+  const [user, setUser] = useState<{ email?: string; phone?: string } | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -27,6 +27,8 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
     });
     return () => data.subscription.unsubscribe();
   }, []);
+
+  const userLabel = user?.email || user?.phone || '';
 
   const linkClass = (path: string) =>
     `text-sm font-medium transition-colors ${
@@ -58,7 +60,7 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           <Link to="/history" className={linkClass('/history')}>{t('nav.history')}</Link>
           {user ? (
             <div className="flex items-center gap-3">
-              <span className="text-xs text-slate-400 hidden sm:inline">{t('auth.loggedInAs', { email: user.email })}</span>
+              <span className="text-xs text-slate-400 hidden sm:inline">{t('auth.loggedInAs', { email: userLabel })}</span>
               <button onClick={() => supabase.auth.signOut()} className="text-xs text-slate-400 hover:text-red-500">{t('auth.logout')}</button>
             </div>
           ) : (
