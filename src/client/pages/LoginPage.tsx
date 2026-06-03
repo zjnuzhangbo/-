@@ -46,19 +46,17 @@ export default function LoginPage() {
     if (password.length < 6) { setError(t('auth.passwordShort')); return; }
     setLoading(true);
     const fakeEmail = `${phone.trim()}@phone.tricycle`;
-    // Try login first
-    let { error: err } = await supabase.auth.signInWithPassword({ email: fakeEmail, password });
-    // If account doesn't exist, auto-register
-    if (err && err.message.includes('Invalid login credentials')) {
-      const { error: signupErr } = await supabase.auth.signUp({ email: fakeEmail, password });
+    // Try login, auto-register on failure
+    let { data, error: err } = await supabase.auth.signInWithPassword({ email: fakeEmail, password });
+    if (err) {
+      const { data: signupData, error: signupErr } = await supabase.auth.signUp({ email: fakeEmail, password });
       if (signupErr) { setLoading(false); setError(signupErr.message); return; }
-      // Login again after signup
-      const { error: loginErr } = await supabase.auth.signInWithPassword({ email: fakeEmail, password });
-      err = loginErr;
+      if (signupData.session) { setLoading(false); navigate(returnTo, { replace: true }); return; }
+      data = signupData;
     }
     setLoading(false);
-    if (err) { setError(err.message); return; }
-    navigate(returnTo, { replace: true });
+    if (data?.session) { navigate(returnTo, { replace: true }); }
+    else if (err) { setError(err.message); }
   };
 
   const handleRegister = async () => {
