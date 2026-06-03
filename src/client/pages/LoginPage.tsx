@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { supabase } from '../../shared/services/supabase/client';
+import { supabase as supabaseClient } from '../../shared/services/supabase/client';
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -10,7 +10,11 @@ export default function LoginPage() {
   const returnTo = searchParams.get('return') || '/';
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    if (!supabaseClient) {
+      navigate(returnTo, { replace: true });
+      return;
+    }
+    supabaseClient.auth.getSession().then(({ data }) => {
       if (data.session) navigate(returnTo, { replace: true });
     });
   }, []);
@@ -24,10 +28,11 @@ export default function LoginPage() {
   const [message, setMessage] = useState('');
 
   const handleEmailLogin = async () => {
+    if (!supabaseClient) return;
     setError('');
     if (!email.trim() || !password.trim()) { setError(t('auth.fillAll')); return; }
     setLoading(true);
-    const { error: err } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+    const { error: err } = await supabaseClient.auth.signInWithPassword({ email: email.trim(), password });
     setLoading(false);
     if (err) {
       if (err.message.includes('Invalid login credentials')) {
@@ -41,15 +46,15 @@ export default function LoginPage() {
   };
 
   const handlePhoneLogin = async () => {
+    if (!supabaseClient) return;
     setError('');
     if (!phone.trim() || !password.trim()) { setError(t('auth.fillAll')); return; }
     if (password.length < 6) { setError(t('auth.passwordShort')); return; }
     setLoading(true);
     const fakeEmail = `${phone.trim()}@phone.tricycle`;
-    // Try login, auto-register on failure
-    let { data, error: err } = await supabase.auth.signInWithPassword({ email: fakeEmail, password });
+    let { data, error: err } = await supabaseClient.auth.signInWithPassword({ email: fakeEmail, password });
     if (err) {
-      const { data: signupData, error: signupErr } = await supabase.auth.signUp({ email: fakeEmail, password });
+      const { data: signupData, error: signupErr } = await supabaseClient.auth.signUp({ email: fakeEmail, password });
       if (signupErr) { setLoading(false); setError(signupErr.message); return; }
       if (signupData.session) { setLoading(false); navigate(returnTo, { replace: true }); return; }
       data = signupData;
@@ -60,12 +65,13 @@ export default function LoginPage() {
   };
 
   const handleRegister = async () => {
+    if (!supabaseClient) return;
     setError('');
     setMessage('');
     if (!email.trim() || !password.trim()) { setError(t('auth.fillAll')); return; }
     if (password.length < 6) { setError(t('auth.passwordShort')); return; }
     setLoading(true);
-    const { error: err } = await supabase.auth.signUp({
+    const { error: err } = await supabaseClient.auth.signUp({
       email: email.trim(),
       password,
       options: { emailRedirectTo: window.location.origin + '/#/login' },

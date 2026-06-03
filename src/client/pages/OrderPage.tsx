@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useToast } from '../../shared/components/ui/Toast';
 import { orderService } from '../../shared/services';
 import { getShippingMemory, setShippingMemory } from '../../shared/services/localStorage';
-import { supabase } from '../../shared/services/supabase/client';
+import { supabase as supabaseClient } from '../../shared/services/supabase/client';
 import type { OrderItem } from '../../shared/types';
 import ProductPickerModal from '../components/ProductPickerModal';
 
@@ -56,11 +56,13 @@ export default function OrderPage() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      toast(t('auth.required'), 'error');
-      navigate('/login?return=/order');
-      return;
+    if (supabaseClient) {
+      const { data: { user } } = await supabaseClient.auth.getUser();
+      if (!user) {
+        toast(t('auth.required'), 'error');
+        navigate('/login?return=/order');
+        return;
+      }
     }
 
     setShippingMemory({ name, phone, address });
