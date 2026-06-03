@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../../shared/services/supabase/client';
@@ -8,6 +8,12 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const returnTo = searchParams.get('return') || '/';
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) navigate(returnTo, { replace: true });
+    });
+  }, []);
 
   const [mode, setMode] = useState<'email' | 'phone' | 'register'>('email');
   const [email, setEmail] = useState('');
@@ -51,7 +57,7 @@ export default function LoginPage() {
     setLoading(false);
     if (err) { setError(err.message); return; }
     setMessage(t('auth.registerSuccess'));
-    setMode('email');
+    setTimeout(() => navigate(returnTo, { replace: true }), 500);
   };
 
   const tabs = [
