@@ -27,19 +27,10 @@ export default function HomePage() {
   });
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
-  const [viewMode, setViewMode] = useState<'grid' | 'table'>(() => {
-    try { return (localStorage.getItem('tricycle_view_mode') as 'grid' | 'table') || 'grid'; }
-    catch { return 'grid'; }
-  });
-
   useEffect(() => {
     productService.getAll().then(setProducts);
     categoryService.getAll().then(setCategories);
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('tricycle_view_mode', viewMode);
-  }, [viewMode]);
 
   useEffect(() => {
     return () => {
@@ -130,38 +121,23 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-gradient-to-b from-slate-800 to-slate-700 text-white py-16 px-4 text-center">
-        <h1 className="font-display text-3xl md:text-4xl mb-2">{t('home.title')}</h1>
-        <p className="text-slate-300 text-sm">{t('home.subtitle')}</p>
+      <div className="bg-slate-800 text-white py-3 px-4 text-center">
+        <h1 className="font-display text-sm md:text-base tracking-wide">{t('home.title')} · {t('app.companyName')}</h1>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 flex-1 pb-20">
-        <div className="flex flex-col sm:flex-row gap-3 mb-4">
-          <input
-            className="input-field flex-1"
-            placeholder={t('home.search')}
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
-        </div>
-
-        <div className="flex items-center gap-2 mb-4 flex-wrap">
-          <div className="flex rounded-md overflow-hidden border border-slate-200 mr-2">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`px-3 py-1.5 text-xs font-semibold transition-colors ${viewMode === 'grid' ? 'bg-primary-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
-            >
-              {t('home.gridView')}
-            </button>
-            <button
-              onClick={() => setViewMode('table')}
-              className={`px-3 py-1.5 text-xs font-semibold transition-colors ${viewMode === 'table' ? 'bg-primary-600 text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
-            >
-              {t('home.tableView')}
-            </button>
+      {/* Sticky filter bar */}
+      <div className="sticky top-[56px] z-30 bg-white border-b border-slate-200 shadow-sm">
+        <div className="px-4 py-3">
+          <div className="flex items-center gap-3">
+            <input
+              className="input-field flex-1 max-w-md"
+              placeholder={t('home.search')}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
           </div>
           {categories.length > 0 && (
-            <div className="flex gap-2 overflow-x-auto flex-1">
+            <div className="flex gap-2 mt-3 overflow-x-auto pb-0.5">
               {categories.map(cat => (
                 <button
                   key={cat.id}
@@ -176,101 +152,19 @@ export default function HomePage() {
               ))}
             </div>
           )}
-          {filtered.length > 0 && (
-            <button onClick={selectAll} className="shrink-0 text-xs text-primary-600 font-semibold hover:text-primary-700">
-              {checked.size === filtered.length ? t('home.deselectAll') : t('home.selectAll')}
-            </button>
-          )}
         </div>
+      </div>
 
+      {/* Product grid */}
+      <div className="px-4 md:px-6 py-6 flex-1 pb-20">
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-slate-400">
             <span className="text-4xl block mb-3">🔧</span>
             <p>{t('home.noProducts')}</p>
           </div>
-        ) : viewMode === 'table' ? (
-          /* ---- Table View ---- */
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-200 text-left text-xs text-slate-400">
-                  <th className="py-2 px-1 w-8"></th>
-                  <th className="py-2 px-2 w-12"></th>
-                  <th className="py-2 px-2">{t('home.productName')}</th>
-                  <th className="py-2 px-2">{t('home.spec')}</th>
-                  <th className="py-2 px-2">{t('home.category')}</th>
-                  <th className="py-2 px-2 w-24"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map(product => {
-                  const hasMultipleVariants = product.variants.length > 1;
-                  const currentVariant = selectedVariants[product.id] || product.variants[0]?.id || '';
-                  const isChecked = checked.has(product.id);
-                  const catName = localName(categories.find(c => c.id === product.categoryId)?.name || { zh: '', en: '', ru: '' }, lang);
-
-                  return (
-                    <tr
-                      key={product.id}
-                      className={`border-b border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors ${isChecked ? 'bg-primary-50' : ''}`}
-                      onClick={() => toggleCheck(product.id)}
-                    >
-                      <td className="py-2 px-1">
-                        <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors
-                          ${isChecked ? 'bg-primary-600 border-primary-600' : 'border-slate-300'}`}>
-                          {isChecked && <span className="text-white text-xs">✓</span>}
-                        </div>
-                      </td>
-                      <td className="py-2 px-2">
-                        {product.images[0] ? (
-                          <img src={product.images[0]} alt={localName(product.name, lang)} className="w-10 h-10 rounded object-cover" />
-                        ) : (
-                          <div className="w-10 h-10 rounded bg-slate-100 flex items-center justify-center">
-                            <span className="text-slate-400 font-semibold text-[10px] select-none">
-                              {localName(product.name, lang).slice(0, 2)}
-                            </span>
-                          </div>
-                        )}
-                      </td>
-                      <td className="py-2 px-2">
-                        <span className="font-semibold text-slate-800 text-xs">{localName(product.name, lang)}</span>
-                      </td>
-                      <td className="py-2 px-2">
-                        {hasMultipleVariants ? (
-                          <select
-                            className="px-1.5 py-1 border border-slate-200 rounded text-[11px] outline-none focus:border-primary-400"
-                            value={currentVariant}
-                            onClick={e => e.stopPropagation()}
-                            onChange={e => setSelectedVariants(prev => ({ ...prev, [product.id]: e.target.value }))}
-                          >
-                            {product.variants.map(v => (
-                              <option key={v.id} value={v.id}>{v.model} {v.size}·{v.weight}</option>
-                            ))}
-                          </select>
-                        ) : product.variants[0] ? (
-                          <span className="text-[11px] text-slate-500">{product.variants[0].model} {product.variants[0].size}·{product.variants[0].weight}</span>
-                        ) : <span className="text-[11px] text-slate-400">-</span>}
-                      </td>
-                      <td className="py-2 px-2">
-                        <span className="text-[10px] text-primary-600 font-semibold bg-primary-50 px-1.5 py-0.5 rounded-pill">{catName}</span>
-                      </td>
-                      <td className="py-2 px-2">
-                        <button
-                          onClick={e => { e.stopPropagation(); quickOrder(product); }}
-                          className="px-3 py-1 bg-primary-600 text-white text-[11px] font-semibold rounded hover:bg-primary-700 transition-colors"
-                        >
-                          {t('home.quickOrder')}
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
         ) : (
           /* ---- Grid View ---- */
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,220px))] gap-3">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
             {filtered.map(product => {
               const hasMultipleVariants = product.variants.length > 1;
               const currentVariant = selectedVariants[product.id] || product.variants[0]?.id || '';
@@ -286,12 +180,12 @@ export default function HomePage() {
                 >
                   <div className="h-32 bg-slate-100 flex items-center justify-center text-2xl relative">
                     {product.images[0] ? (
-    <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover" />
-  ) : (
-    <span className="text-slate-400 font-semibold text-sm select-none">
-      {localName(product.name, lang).slice(0, 2)}
-    </span>
-  )}
+                    <img src={product.images[0]} alt={localName(product.name, lang)} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-slate-400 font-semibold text-sm select-none">
+                      {localName(product.name, lang).slice(0, 2)}
+                    </span>
+                  )}
                     <div className={`absolute top-2 right-2 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors
                       ${isChecked ? 'bg-primary-600 border-primary-600' : 'bg-white/80 border-slate-300'}`}>
                       {isChecked && <span className="text-white text-xs">✓</span>}
