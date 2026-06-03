@@ -68,6 +68,18 @@ export default function OrderManager() {
     setExpandedId(null);
   };
 
+  const deleteOrder = async (id: string) => {
+    if (!confirm(t('history.deleteConfirm'))) return;
+    try {
+      await orderService.remove(id);
+      toast('订单已删除');
+      if (expandedId === id) setExpandedId(null);
+      load();
+    } catch {
+      toast('删除失败');
+    }
+  };
+
   const exportSingle = (order: Order) => {
     const data = order.items.map(item => ({
       '商品': item.productName,
@@ -220,6 +232,9 @@ export default function OrderManager() {
                   </button>
                   <button onClick={() => exportSingle(order)} className="px-4 py-2 text-xs font-semibold text-white bg-cyan-600 rounded-md hover:bg-cyan-700 transition-colors">
                     {t('admin.orders.exportSingle')}
+                  </button>
+                  <button onClick={() => deleteOrder(order.id)} className="px-4 py-2 text-xs font-semibold text-red-500 border border-red-200 rounded-md hover:bg-red-50 transition-colors">
+                    {t('history.delete')}
                   </button>
                 </div>
               </div>
