@@ -62,6 +62,7 @@ export class SupabaseOrderService implements OrderService {
         spec: item.spec,
         quantity: item.quantity,
         unit_price: item.unitPrice ?? null,
+        image_url: item.imageUrl || null,
       }));
       const { error: iError } = await supabase.from('order_items').insert(itemRows);
       if (iError) throw iError;
@@ -91,6 +92,7 @@ export class SupabaseOrderService implements OrderService {
           spec: item.spec,
           quantity: item.quantity,
           unit_price: item.unitPrice ?? null,
+          image_url: item.imageUrl || null,
         }));
         const { error: iError } = await supabase.from('order_items').insert(itemRows);
         if (iError) throw iError;
@@ -124,6 +126,7 @@ function rowToOrder(row: Record<string, unknown>, items: unknown[]): Order {
         spec: (ri.spec as string) || '',
         quantity: (ri.quantity as number) || 1,
         unitPrice: ri.unit_price as number | undefined,
+        imageUrl: ri.image_url as string | undefined,
       };
     }),
   };

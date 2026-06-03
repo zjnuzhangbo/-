@@ -52,7 +52,7 @@ export default function OrderManager() {
 
   const getPriceInputValue = (item: OrderItem, idx: number): string => {
     if (pricingInputs[idx] !== undefined) return pricingInputs[idx];
-    return item.unitPrice !== undefined ? String(item.unitPrice) : '';
+    return item.unitPrice != null ? String(item.unitPrice) : '';
   };
 
   const savePricing = async () => {
@@ -170,6 +170,7 @@ export default function OrderManager() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b-2 border-slate-200">
+                      <th className="text-left px-2 py-2 text-xs text-slate-400 font-semibold w-14"></th>
                       <th className="text-left px-2 py-2 text-xs text-slate-400 font-semibold">{t('admin.orders.product')}</th>
                       <th className="text-left px-2 py-2 text-xs text-slate-400 font-semibold">{t('admin.orders.specs')}</th>
                       <th className="text-center px-2 py-2 text-xs text-slate-400 font-semibold">{t('admin.orders.quantity')}</th>
@@ -185,6 +186,11 @@ export default function OrderManager() {
                       const isUnpriced = !inputVal && item.unitPrice === undefined;
                       return (
                         <tr key={idx} className="border-b border-slate-100 last:border-0">
+                          <td className="px-2 py-2.5">
+                            <div className="w-10 h-10 rounded bg-slate-100 overflow-hidden flex-shrink-0">
+                              {item.imageUrl ? <img src={item.imageUrl} alt="" className="w-full h-full object-cover" /> : <span className="text-slate-300 flex items-center justify-center w-full h-full text-xs">--</span>}
+                            </div>
+                          </td>
                           <td className="px-2 py-2.5 font-semibold text-slate-800">{item.productName}</td>
                           <td className="px-2 py-2.5 text-xs text-slate-500">{item.spec}</td>
                           <td className="px-2 py-2.5 text-center font-semibold">{item.quantity}</td>
@@ -202,7 +208,7 @@ export default function OrderManager() {
                       );
                     })}
                     <tr>
-                      <td colSpan={3}></td>
+                      <td colSpan={4}></td>
                       <td className="px-2 py-3 text-right font-bold text-sm">{t('admin.orders.total')}</td>
                       <td className="px-2 py-3 text-right font-extrabold text-base text-primary-600">¥ {orderTotal(order.items).toFixed(2)}</td>
                     </tr>

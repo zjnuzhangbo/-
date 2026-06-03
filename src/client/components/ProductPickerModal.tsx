@@ -12,6 +12,7 @@ interface CartItem {
   model: string;
   spec: string;
   quantity: number;
+  imageUrl?: string;
 }
 
 interface ProductPickerModalProps {
@@ -59,6 +60,7 @@ export default function ProductPickerModal({ open, onClose, onAdd }: ProductPick
       model: v?.model || '',
       spec: v ? `${v.size} · ${v.weight}` : '',
       quantity: 1,
+      imageUrl: product.images[0] || undefined,
     });
   };
 

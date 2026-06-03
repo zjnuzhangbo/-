@@ -1,0 +1,192 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "TricycleParts" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - navigation [ref=e7]:
+        - generic [ref=e8]:
+          - button "中文" [ref=e9] [cursor=pointer]
+          - button "EN" [ref=e10] [cursor=pointer]
+          - button "RU" [ref=e11] [cursor=pointer]
+        - link "首页" [ref=e12] [cursor=pointer]:
+          - /url: "#/"
+        - link "历史订单" [ref=e13] [cursor=pointer]:
+          - /url: "#/history"
+        - link "🛒" [ref=e14] [cursor=pointer]:
+          - /url: "#/order"
+  - main [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - heading "三轮车配件批发" [level=1] [ref=e18]
+        - paragraph [ref=e19]: 优质配件，一站式采购
+      - generic [ref=e20]:
+        - textbox "搜索配件名称..." [ref=e22]
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - button "车架/车斗" [ref=e25] [cursor=pointer]
+            - button "车架/车斗" [ref=e26] [cursor=pointer]
+            - button "车轮/轮胎" [ref=e27] [cursor=pointer]
+            - button "车轮/轮胎" [ref=e28] [cursor=pointer]
+            - button "刹车系统" [ref=e29] [cursor=pointer]
+            - button "刹车系统" [ref=e30] [cursor=pointer]
+            - button "传动系统" [ref=e31] [cursor=pointer]
+            - button "传动系统" [ref=e32] [cursor=pointer]
+            - button "电气系统" [ref=e33] [cursor=pointer]
+            - button "电气系统" [ref=e34] [cursor=pointer]
+            - button "车架/车斗" [ref=e35] [cursor=pointer]
+          - button "全选" [ref=e36] [cursor=pointer]
+        - generic [ref=e37]:
+          - generic [ref=e38] [cursor=pointer]:
+            - generic [ref=e39]: 🔧
+            - generic [ref=e41]:
+              - text: 车架/车斗
+              - heading "前叉总成" [level=3] [ref=e42]
+              - combobox [ref=e43]:
+                - option "标准型 32mm·2.4kg" [selected]
+                - option "加粗型 36mm·2.8kg"
+                - option "轻量型 28mm·1.9kg"
+              - button "立即订购" [ref=e44]
+          - generic [ref=e45] [cursor=pointer]:
+            - generic [ref=e46]: 🔧
+            - generic [ref=e48]:
+              - text: 车架/车斗
+              - heading "前叉总成" [level=3] [ref=e49]
+              - combobox [ref=e50]:
+                - option "标准型 32mm·2.4kg" [selected]
+                - option "加粗型 36mm·2.8kg"
+                - option "轻量型 28mm·1.9kg"
+              - button "立即订购" [ref=e51]
+          - generic [ref=e52] [cursor=pointer]:
+            - generic [ref=e53]: 🔧
+            - generic [ref=e55]:
+              - text: 车轮/轮胎
+              - heading "后轮毂总成" [level=3] [ref=e56]
+              - combobox [ref=e57]:
+                - option "标准型 16寸·3.1kg" [selected]
+                - option "重型 18寸·4.0kg"
+              - button "立即订购" [ref=e58]
+          - generic [ref=e59] [cursor=pointer]:
+            - generic [ref=e60]: 🔧
+            - generic [ref=e62]:
+              - text: 车轮/轮胎
+              - heading "后轮毂总成" [level=3] [ref=e63]
+              - combobox [ref=e64]:
+                - option "标准型 16寸·3.1kg" [selected]
+                - option "重型 18寸·4.0kg"
+              - button "立即订购" [ref=e65]
+          - generic [ref=e66] [cursor=pointer]:
+            - generic [ref=e67]: 🔧
+            - generic [ref=e69]:
+              - text: 刹车系统
+              - heading "刹车蹄总成" [level=3] [ref=e70]
+              - combobox [ref=e71]:
+                - option "标准型 130mm·0.8kg" [selected]
+                - option "高性能 150mm·1.0kg"
+              - button "立即订购" [ref=e72]
+          - generic [ref=e73] [cursor=pointer]:
+            - generic [ref=e74]: 🔧
+            - generic [ref=e76]:
+              - text: 刹车系统
+              - heading "刹车蹄总成" [level=3] [ref=e77]
+              - combobox [ref=e78]:
+                - option "标准型 130mm·0.8kg" [selected]
+                - option "高性能 150mm·1.0kg"
+              - button "立即订购" [ref=e79]
+          - generic [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]: 🔧
+            - generic [ref=e83]:
+              - text: 传动系统
+              - heading "差速器总成" [level=3] [ref=e84]
+              - combobox [ref=e85]:
+                - option "18齿 标准·4.2kg" [selected]
+                - option "20齿 标准·4.5kg"
+                - option "16齿 小型·3.6kg"
+              - button "立即订购" [ref=e86]
+          - generic [ref=e87] [cursor=pointer]:
+            - generic [ref=e88]: 🔧
+            - generic [ref=e90]:
+              - text: 传动系统
+              - heading "差速器总成" [level=3] [ref=e91]
+              - combobox [ref=e92]:
+                - option "18齿 标准·4.2kg" [selected]
+                - option "20齿 标准·4.5kg"
+                - option "16齿 小型·3.6kg"
+              - button "立即订购" [ref=e93]
+          - generic [ref=e94] [cursor=pointer]:
+            - generic [ref=e95]: 🔧
+            - generic [ref=e97]:
+              - text: 电气系统
+              - heading "LED大灯总成" [level=3] [ref=e98]
+              - combobox [ref=e99]:
+                - option "12V 7寸·0.6kg" [selected]
+                - option "24V 9寸·0.9kg"
+              - button "立即订购" [ref=e100]
+          - generic [ref=e101] [cursor=pointer]:
+            - generic [ref=e102]: 🔧
+            - generic [ref=e104]:
+              - text: 电气系统
+              - heading "LED大灯总成" [level=3] [ref=e105]
+              - combobox [ref=e106]:
+                - option "12V 7寸·0.6kg" [selected]
+                - option "24V 9寸·0.9kg"
+              - button "立即订购" [ref=e107]
+          - generic [ref=e108] [cursor=pointer]:
+            - generic [ref=e109]: 🔧
+            - generic [ref=e111]:
+              - text: 车架/车斗
+              - heading "车架主梁" [level=3] [ref=e112]
+              - combobox [ref=e113]:
+                - option "加厚型 2.5m·15.0kg" [selected]
+                - option "标准型 2.5m·12.0kg"
+              - button "立即订购" [ref=e114]
+          - generic [ref=e115] [cursor=pointer]:
+            - generic [ref=e116]: 🔧
+            - generic [ref=e118]:
+              - text: 车架/车斗
+              - heading "车架主梁" [level=3] [ref=e119]
+              - combobox [ref=e120]:
+                - option "加厚型 2.5m·15.0kg" [selected]
+                - option "标准型 2.5m·12.0kg"
+              - button "立即订购" [ref=e121]
+          - generic [ref=e122] [cursor=pointer]:
+            - generic [ref=e123]: 🔧
+            - generic [ref=e125]:
+              - text: 车轮/轮胎
+              - heading "轮胎内胎" [level=3] [ref=e126]
+              - combobox [ref=e127]:
+                - option "标准型 3.00-12·0.5kg" [selected]
+                - option "标准型 3.50-12·0.6kg"
+                - option "标准型 4.00-12·0.7kg"
+              - button "立即订购" [ref=e128]
+          - generic [ref=e129] [cursor=pointer]:
+            - generic [ref=e130]: 🔧
+            - generic [ref=e132]:
+              - text: 车轮/轮胎
+              - heading "轮胎内胎" [level=3] [ref=e133]
+              - combobox [ref=e134]:
+                - option "标准型 3.00-12·0.5kg" [selected]
+                - option "标准型 3.50-12·0.6kg"
+                - option "标准型 4.00-12·0.7kg"
+              - button "立即订购" [ref=e135]
+          - generic [ref=e136] [cursor=pointer]:
+            - generic [ref=e137]: 🔧
+            - generic [ref=e139]:
+              - text: 传动系统
+              - heading "离合器片" [level=3] [ref=e140]
+              - combobox [ref=e141]:
+                - option "标准型 150mm·1.2kg" [selected]
+                - option "加强型 160mm·1.5kg"
+              - button "立即订购" [ref=e142]
+          - generic [ref=e143] [cursor=pointer]:
+            - generic [ref=e144]: 🔧
+            - generic [ref=e146]:
+              - text: 传动系统
+              - heading "离合器片" [level=3] [ref=e147]
+              - combobox [ref=e148]:
+                - option "标准型 150mm·1.2kg" [selected]
+                - option "加强型 160mm·1.5kg"
+              - button "立即订购" [ref=e149]
+  - contentinfo [ref=e150]:
+    - generic [ref=e151]:
+      - paragraph [ref=e152]: TricycleParts
+      - paragraph [ref=e153]: © 2026 TricycleParts. All rights reserved.

@@ -1,0 +1,35 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "三轮车配件销售" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - navigation [ref=e7]:
+        - generic [ref=e8]:
+          - button "中文" [ref=e9] [cursor=pointer]
+          - button "EN" [ref=e10] [cursor=pointer]
+          - button "RU" [ref=e11] [cursor=pointer]
+        - link "首页" [ref=e12] [cursor=pointer]:
+          - /url: "#/"
+        - link "历史订单" [ref=e13] [cursor=pointer]:
+          - /url: "#/history"
+        - link "登录" [ref=e14] [cursor=pointer]:
+          - /url: "#/login"
+        - link "🛒" [ref=e15] [cursor=pointer]:
+          - /url: "#/order"
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - heading "三轮车配件批发" [level=1] [ref=e19]
+        - paragraph [ref=e20]: 优质配件，一站式采购
+      - generic [ref=e21]:
+        - textbox "搜索配件名称..." [ref=e23]
+        - generic [ref=e25]:
+          - button "▦ 卡片" [ref=e26] [cursor=pointer]
+          - button "☰ 列表" [ref=e27] [cursor=pointer]
+        - generic [ref=e28]:
+          - generic [ref=e29]: 🔧
+          - paragraph [ref=e30]: 暂无商品
+  - contentinfo [ref=e31]:
+    - generic [ref=e32]:
+      - paragraph [ref=e33]: 瑞盛商贸有限公司
+      - paragraph [ref=e34]: © 2026 瑞盛商贸有限公司 版权所有

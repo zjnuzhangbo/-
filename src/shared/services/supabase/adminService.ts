@@ -46,7 +46,7 @@ function dbToOrder(row: Record<string, unknown>): Order {
     createdAt: (row.created_at as string) || '',
     items: items.map(item => {
       const ri = item as Record<string, unknown>;
-      return { id: ri.id as string, productId: '', variantId: '', productName: (ri.product_name as string) || '', model: (ri.model as string) || '', spec: (ri.spec as string) || '', quantity: (ri.quantity as number) || 1, unitPrice: ri.unit_price as number | undefined };
+      return { id: ri.id as string, productId: '', variantId: '', productName: (ri.product_name as string) || '', model: (ri.model as string) || '', spec: (ri.spec as string) || '', quantity: (ri.quantity as number) || 1, unitPrice: ri.unit_price as number | undefined, imageUrl: ri.image_url as string | undefined };
     }),
   };
 }

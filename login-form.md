@@ -1,0 +1,41 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "三轮车配件销售" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - navigation [ref=e7]:
+        - generic [ref=e8]:
+          - button "中文" [ref=e9] [cursor=pointer]
+          - button "EN" [ref=e10] [cursor=pointer]
+          - button "RU" [ref=e11] [cursor=pointer]
+        - link "首页" [ref=e12] [cursor=pointer]:
+          - /url: "#/"
+        - link "历史订单" [ref=e13] [cursor=pointer]:
+          - /url: "#/history"
+        - link "登录" [ref=e14] [cursor=pointer]:
+          - /url: "#/login"
+        - link "🛒" [ref=e15] [cursor=pointer]:
+          - /url: "#/order"
+  - main [ref=e16]:
+    - generic [ref=e18]:
+      - heading "登录" [level=1] [ref=e19]
+      - generic [ref=e20]:
+        - button "邮箱登录" [ref=e21] [cursor=pointer]
+        - button "手机登录" [ref=e22] [cursor=pointer]
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - text: 邮箱地址
+          - textbox "请输入邮箱" [ref=e25]: 3177795394@qq.com
+        - generic [ref=e26]:
+          - text: 密码
+          - textbox "请输入密码" [ref=e27]: "123456789"
+        - button "登录" [ref=e28] [cursor=pointer]
+        - paragraph [ref=e29]:
+          - text: 没有账号？
+          - button "注册" [ref=e30] [cursor=pointer]
+      - paragraph [ref=e36]: Invalid login credentials
+      - button "← ← 返回首页" [ref=e31] [cursor=pointer]
+  - contentinfo [ref=e32]:
+    - generic [ref=e33]:
+      - paragraph [ref=e34]: 瑞盛商贸有限公司
+      - paragraph [ref=e35]: © 2026 瑞盛商贸有限公司 版权所有

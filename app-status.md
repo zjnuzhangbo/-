@@ -1,0 +1,14 @@
+- generic [ref=e3]:
+  - generic [ref=e4]: "[plugin:vite:import-analysis] Failed to resolve import \"../../shared/services/seed\" from \"src/client/App.tsx\". Does the file exist?"
+  - generic [ref=e5]: C:/Users/31777/Desktop/网站/src/client/App.tsx:17:13
+  - generic [ref=e6]: "18 | useEffect(() => { 19 | if (!import.meta.env.VITE_SUPABASE_URL) { 20 | import(\"../../shared/services/seed\").then((m) => m.seedIfEmpty()); | ^ 21 | } 22 | }, []);"
+  - generic [ref=e7]: at TransformPluginContext._formatLog (file:///C:/Users/31777/Desktop/%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/node.js:30488:39) at TransformPluginContext.error (file:///C:/Users/31777/Desktop/%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/node.js:30485:14) at normalizeUrl (file:///C:/Users/31777/Desktop/%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/node.js:27728:18) at async file:///C:/Users/31777/Desktop/%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/node.js:27791:30 at async Promise.all (index 14) at async TransformPluginContext.transform (file:///C:/Users/31777/Desktop/%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/node.js:27759:4) at async EnvironmentPluginContainer.transform (file:///C:/Users/31777/Desktop/%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/node.js:30273:14) at async loadAndTransform (file:///C:/Users/31777/Desktop/%E7%BD%91%E7%AB%99/node_modules/vite/dist/node/chunks/node.js:24532:26)
+  - generic [ref=e8]:
+    - text: Click outside, press Esc key, or fix the code to dismiss.
+    - text: You can also disable this overlay by setting
+    - code [ref=e9]: server.hmr.overlay
+    - text: to
+    - code [ref=e10]: "false"
+    - text: in
+    - code [ref=e11]: vite.config.ts
+    - text: .

@@ -38,6 +38,7 @@ export interface OrderItem {
   spec: string;
   quantity: number;
   unitPrice?: number;
+  imageUrl?: string;
 }
 
 export interface Order {

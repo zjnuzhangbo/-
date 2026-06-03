@@ -1,0 +1,294 @@
+- generic [ref=e1]:
+  - generic [ref=e153]:
+    - banner [ref=e155]:
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - link "Supabase" [ref=e158] [cursor=pointer]:
+            - /url: /dashboard/org/dhzoiizstmvmuxccptih
+            - img "Supabase" [ref=e159]
+          - generic [ref=e160]:
+            - img [ref=e162]
+            - generic [ref=e164]:
+              - link "zjnuzhangbo's Org Free" [ref=e165] [cursor=pointer]:
+                - /url: /dashboard/org/dhzoiizstmvmuxccptih
+                - img [ref=e166]
+                - generic [ref=e176]: zjnuzhangbo's Org
+                - generic [ref=e177]: Free
+              - button [ref=e178] [cursor=pointer]:
+                - img [ref=e180]
+            - generic [ref=e183]:
+              - img [ref=e185]
+              - generic [ref=e187]:
+                - link "zjnuzhangbo's Project1" [ref=e188] [cursor=pointer]:
+                  - /url: /dashboard/project/ajtinleekfraxqhukyrx
+                  - img [ref=e189]
+                  - generic "zjnuzhangbo's Project1" [ref=e192]
+                - button [ref=e193] [cursor=pointer]:
+                  - img [ref=e195]
+              - img [ref=e199]
+              - generic [ref=e201]:
+                - link "main Production" [ref=e202] [cursor=pointer]:
+                  - /url: /dashboard/project/ajtinleekfraxqhukyrx
+                  - generic "main" [ref=e203]
+                  - generic [ref=e204]: Production
+                - button [ref=e205] [cursor=pointer]:
+                  - img [ref=e207]
+          - button "Connect" [ref=e211] [cursor=pointer]:
+            - img [ref=e213]
+            - generic [ref=e215]: Connect
+        - generic [ref=e216]:
+          - generic [ref=e218] [cursor=pointer]: Feedback
+          - generic [ref=e219]:
+            - button "Search..." [ref=e220]:
+              - generic [ref=e221]:
+                - img [ref=e222]
+                - paragraph [ref=e225]: Search...
+              - generic [ref=e227]: Ctrl K
+            - button "Help" [ref=e228] [cursor=pointer]:
+              - generic [ref=e229]:
+                - img [ref=e230]
+                - generic [ref=e233]: Help
+            - button "Advisor Center" [ref=e235] [cursor=pointer]:
+              - generic [ref=e236]:
+                - img [ref=e237]
+                - generic [ref=e239]: Advisor Center
+            - button "SQL Editor" [ref=e240] [cursor=pointer]:
+              - generic [ref=e241]:
+                - img [ref=e242]
+                - generic [ref=e244]: SQL Editor
+            - button "AI Assistant" [ref=e245] [cursor=pointer]:
+              - generic [ref=e246]:
+                - img [ref=e249]
+                - generic [ref=e252]: AI Assistant
+          - button "zjnuzhangbo" [ref=e253] [cursor=pointer]:
+            - img "zjnuzhangbo" [ref=e255]
+    - generic [ref=e256]:
+      - generic [ref=e260]:
+        - list [ref=e263]:
+          - generic [ref=e264]:
+            - listitem [ref=e265]:
+              - link "Project Overview" [ref=e266] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx
+                - img [ref=e267]
+                - generic: Project Overview
+            - listitem [ref=e269]:
+              - link "Table Editor" [ref=e270] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/editor
+                - img [ref=e271]
+                - generic: Table Editor
+            - listitem [ref=e273]:
+              - link "SQL Editor" [ref=e274] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/sql
+                - img [ref=e275]
+                - generic: SQL Editor
+          - generic [ref=e277]:
+            - listitem [ref=e278]:
+              - link "Database" [ref=e279] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/database/schemas
+                - img [ref=e280]
+                - generic: Database
+            - listitem [ref=e284]:
+              - link "Authentication" [ref=e285] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/auth/users
+                - img [ref=e286]
+                - generic: Authentication
+            - listitem [ref=e288]:
+              - link "Storage" [ref=e289] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/storage/files
+                - img [ref=e290]
+                - generic: Storage
+            - listitem [ref=e292]:
+              - link "Edge Functions" [ref=e293] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions
+                - img [ref=e294]
+                - generic: Edge Functions
+            - listitem [ref=e299]:
+              - link "Realtime" [ref=e300] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/realtime/inspector
+                - img [ref=e301]
+                - generic: Realtime
+          - generic [ref=e303]:
+            - listitem [ref=e305]:
+              - link "Advisors" [ref=e306] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/advisors/security
+                - img [ref=e307]
+                - generic: Advisors
+            - listitem [ref=e309]:
+              - link "Observability" [ref=e310] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/observability
+                - img [ref=e311]
+                - generic: Observability
+            - listitem [ref=e319]:
+              - link "Logs" [ref=e320] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/logs/explorer
+                - img [ref=e321]
+                - generic: Logs
+            - listitem [ref=e322]:
+              - link "Integrations" [ref=e323] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/integrations
+                - img [ref=e324]
+                - generic: Integrations
+          - listitem [ref=e328]:
+            - link "Project Settings" [ref=e329] [cursor=pointer]:
+              - /url: /dashboard/project/ajtinleekfraxqhukyrx/settings/general
+              - img [ref=e330]
+              - generic: Project Settings
+        - button "Sidebar control" [ref=e335] [cursor=pointer]:
+          - img [ref=e337]
+      - generic [ref=e344]:
+        - generic [ref=e348]:
+          - heading "Edge Functions" [level=4] [ref=e350]
+          - menu "Sidebar" [disabled] [ref=e353]:
+            - list [ref=e354]:
+              - generic [ref=e357]:
+                - generic [ref=e361]: Manage
+                - generic [ref=e362]:
+                  - link "Functions" [disabled] [ref=e363] [cursor=pointer]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions
+                    - menuitem "Functions" [disabled] [ref=e364]:
+                      - generic [ref=e368]: Functions
+                  - link "Secrets" [disabled] [ref=e369] [cursor=pointer]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/secrets
+                    - menuitem "Secrets" [disabled] [ref=e370]:
+                      - generic [ref=e374]: Secrets
+        - separator [disabled] [ref=e375]:
+          - img [ref=e377]
+        - main [ref=e386]:
+          - generic [ref=e387]:
+            - generic [ref=e390]:
+              - generic [ref=e391]:
+                - heading "Edge Functions" [level=1] [ref=e392]
+                - generic [ref=e393]: Run server-side logic close to your users
+              - generic [ref=e394]:
+                - link "Docs" [ref=e395] [cursor=pointer]:
+                  - /url: https://supabase.com/docs/guides/functions
+                  - img [ref=e397]
+                  - generic [ref=e400]: Docs
+                - link "Examples" [ref=e401] [cursor=pointer]:
+                  - /url: https://github.com/supabase/supabase/tree/master/examples/edge-functions/supabase/functions
+                  - img [ref=e403]
+                  - generic [ref=e407]: Examples
+                - button "Deploy a new function" [expanded] [ref=e408] [cursor=pointer]:
+                  - generic [ref=e409]: Deploy a new function
+                  - img [ref=e411]
+            - generic [ref=e416]:
+              - generic [ref=e417]:
+                - heading "Deploy your first edge function" [level=3] [ref=e419]
+                - generic [ref=e420]:
+                  - generic [ref=e421]:
+                    - generic [ref=e422]:
+                      - img [ref=e423]
+                      - heading "Via Editor" [level=4] [ref=e426]
+                    - paragraph [ref=e427]: Create and edit functions directly in the browser. Download to local at any time.
+                    - button "Open Editor" [ref=e428] [cursor=pointer]:
+                      - generic [ref=e429]: Open Editor
+                  - generic [ref=e430]:
+                    - generic [ref=e431]:
+                      - img [ref=e434]
+                      - heading "AI Assistant" [level=4] [ref=e437]
+                    - paragraph [ref=e438]: Let our AI assistant help you create functions. Perfect for kickstarting a function.
+                    - button "Open Assistant" [ref=e439] [cursor=pointer]:
+                      - generic [ref=e440]: Open Assistant
+                  - generic [ref=e441]:
+                    - generic [ref=e442]:
+                      - img [ref=e443]
+                      - heading "Via CLI" [level=4] [ref=e445]
+                    - paragraph [ref=e446]: Create and deploy functions using the Supabase CLI. Ideal for local development and version control.
+                    - button "View CLI Instructions" [ref=e447] [cursor=pointer]:
+                      - generic [ref=e448]: View CLI Instructions
+              - heading "Start with a template" [level=3] [ref=e449]
+              - generic [ref=e450]:
+                - button "Simple Hello World Basic function that returns a JSON response" [ref=e451] [cursor=pointer]:
+                  - img [ref=e453]
+                  - link "Simple Hello World Basic function that returns a JSON response" [ref=e457]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=hello-world
+                    - paragraph [ref=e458]: Simple Hello World
+                    - paragraph [ref=e459]: Basic function that returns a JSON response
+                  - img [ref=e460]
+                - button "Supabase Database Access Example using Supabase client to query your database" [ref=e462] [cursor=pointer]:
+                  - img [ref=e464]
+                  - link "Supabase Database Access Example using Supabase client to query your database" [ref=e468]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=database-access
+                    - paragraph [ref=e469]: Supabase Database Access
+                    - paragraph [ref=e470]: Example using Supabase client to query your database
+                  - img [ref=e471]
+                - button "Supabase Storage Upload Upload files to Supabase Storage" [ref=e473] [cursor=pointer]:
+                  - img [ref=e475]
+                  - link "Supabase Storage Upload Upload files to Supabase Storage" [ref=e479]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=storage-upload
+                    - paragraph [ref=e480]: Supabase Storage Upload
+                    - paragraph [ref=e481]: Upload files to Supabase Storage
+                  - img [ref=e482]
+                - button "Node Built-in API Example Example using Node.js built-in crypto and http modules" [ref=e484] [cursor=pointer]:
+                  - img [ref=e486]
+                  - link "Node Built-in API Example Example using Node.js built-in crypto and http modules" [ref=e490]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=node-api
+                    - paragraph [ref=e491]: Node Built-in API Example
+                    - paragraph [ref=e492]: Example using Node.js built-in crypto and http modules
+                  - img [ref=e493]
+                - button "Express Server Example using Express.js for routing" [ref=e495] [cursor=pointer]:
+                  - img [ref=e497]
+                  - link "Express Server Example using Express.js for routing" [ref=e501]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=express
+                    - paragraph [ref=e502]: Express Server
+                    - paragraph [ref=e503]: Example using Express.js for routing
+                  - img [ref=e504]
+                - button "Stream text with AI SDK Generate and stream text with Vercel AI SDK" [ref=e506] [cursor=pointer]:
+                  - img [ref=e508]
+                  - link "Stream text with AI SDK Generate and stream text with Vercel AI SDK" [ref=e512]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=stream-text-with-ai-sdk
+                    - paragraph [ref=e513]: Stream text with AI SDK
+                    - paragraph [ref=e514]: Generate and stream text with Vercel AI SDK
+                  - img [ref=e515]
+                - button "Generate recipes with AI SDK Generate structured cooking recipes with Vercel AI SDK" [ref=e517] [cursor=pointer]:
+                  - img [ref=e519]
+                  - link "Generate recipes with AI SDK Generate structured cooking recipes with Vercel AI SDK" [ref=e523]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=generate-recipes-with-ai-sdk
+                    - paragraph [ref=e524]: Generate recipes with AI SDK
+                    - paragraph [ref=e525]: Generate structured cooking recipes with Vercel AI SDK
+                  - img [ref=e526]
+                - button "Stripe Webhook Example Handle Stripe webhook events securely" [ref=e528] [cursor=pointer]:
+                  - img [ref=e530]
+                  - link "Stripe Webhook Example Handle Stripe webhook events securely" [ref=e534]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=stripe-webhook
+                    - paragraph [ref=e535]: Stripe Webhook Example
+                    - paragraph [ref=e536]: Handle Stripe webhook events securely
+                  - img [ref=e537]
+                - button "Send Emails Send emails using the Resend API" [ref=e539] [cursor=pointer]:
+                  - img [ref=e541]
+                  - link "Send Emails Send emails using the Resend API" [ref=e545]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=resend-email
+                    - paragraph [ref=e546]: Send Emails
+                    - paragraph [ref=e547]: Send emails using the Resend API
+                  - img [ref=e548]
+                - button "Image Transformation Transform images using ImageMagick WASM" [ref=e550] [cursor=pointer]:
+                  - img [ref=e552]
+                  - link "Image Transformation Transform images using ImageMagick WASM" [ref=e556]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=image-transform
+                    - paragraph [ref=e557]: Image Transformation
+                    - paragraph [ref=e558]: Transform images using ImageMagick WASM
+                  - img [ref=e559]
+                - button "WebSocket Server Example Create a real-time WebSocket server" [ref=e561] [cursor=pointer]:
+                  - img [ref=e563]
+                  - link "WebSocket Server Example Create a real-time WebSocket server" [ref=e567]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions/new?template=websocket-server
+                    - paragraph [ref=e568]: WebSocket Server Example
+                    - paragraph [ref=e569]: Create a real-time WebSocket server
+                  - img [ref=e570]
+  - alert [ref=e152]: Edge Functions | Supabase
+  - menu "Deploy a new function" [active] [ref=e573]:
+    - menuitem "Via Editor Write and deploy in the browser" [ref=e574]:
+      - img [ref=e575]
+      - generic [ref=e578]:
+        - text: Via Editor
+        - paragraph [ref=e579]: Write and deploy in the browser
+    - menuitem "Via CLI Write locally, deploy with the CLI" [ref=e580]:
+      - img [ref=e581]
+      - generic [ref=e583]:
+        - text: Via CLI
+        - paragraph [ref=e584]: Write locally, deploy with the CLI
+    - menuitem "Via AI Assistant Let the Assistant write and deploy for you" [ref=e585]:
+      - img [ref=e588]
+      - generic [ref=e591]:
+        - text: Via AI Assistant
+        - paragraph [ref=e592]: Let the Assistant write and deploy for you

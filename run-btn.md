@@ -1,0 +1,297 @@
+- generic [ref=e1]:
+  - generic [ref=e96]:
+    - banner [ref=e98]:
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - link "Supabase" [ref=e101] [cursor=pointer]:
+            - /url: /dashboard/org/dhzoiizstmvmuxccptih
+            - img "Supabase" [ref=e102]
+          - generic [ref=e103]:
+            - img [ref=e105]
+            - generic [ref=e107]:
+              - link "zjnuzhangbo's Org Free" [ref=e108] [cursor=pointer]:
+                - /url: /dashboard/org/dhzoiizstmvmuxccptih
+                - img [ref=e109]
+                - generic [ref=e119]: zjnuzhangbo's Org
+                - generic [ref=e120]: Free
+              - button [ref=e121] [cursor=pointer]:
+                - img [ref=e123]
+            - generic [ref=e126]:
+              - img [ref=e128]
+              - generic [ref=e130]:
+                - link "zjnuzhangbo's Project1" [ref=e131] [cursor=pointer]:
+                  - /url: /dashboard/project/ajtinleekfraxqhukyrx
+                  - img [ref=e132]
+                  - generic "zjnuzhangbo's Project1" [ref=e135]
+                - button [ref=e136] [cursor=pointer]:
+                  - img [ref=e138]
+              - img [ref=e142]
+              - generic [ref=e144]:
+                - link "main Production" [ref=e145] [cursor=pointer]:
+                  - /url: /dashboard/project/ajtinleekfraxqhukyrx
+                  - generic "main" [ref=e146]
+                  - generic [ref=e147]: Production
+                - button [ref=e148] [cursor=pointer]:
+                  - img [ref=e150]
+          - button "Connect" [ref=e154] [cursor=pointer]:
+            - img [ref=e156]
+            - generic [ref=e158]: Connect
+        - generic [ref=e159]:
+          - generic [ref=e161] [cursor=pointer]: Feedback
+          - generic [ref=e162]:
+            - button "Search..." [ref=e163]:
+              - generic [ref=e164]:
+                - img [ref=e165]
+                - paragraph [ref=e168]: Search...
+              - generic [ref=e170]: Ctrl K
+            - button "Help" [ref=e171] [cursor=pointer]:
+              - generic [ref=e172]:
+                - img [ref=e173]
+                - generic [ref=e176]: Help
+            - button "Advisor Center" [ref=e178] [cursor=pointer]:
+              - generic [ref=e179]:
+                - img [ref=e180]
+                - generic [ref=e182]: Advisor Center
+            - button "SQL Editor" [ref=e183] [cursor=pointer]:
+              - generic [ref=e184]:
+                - img [ref=e185]
+                - generic [ref=e187]: SQL Editor
+            - button "AI Assistant" [ref=e188] [cursor=pointer]:
+              - generic [ref=e189]:
+                - img [ref=e192]
+                - generic [ref=e195]: AI Assistant
+          - button "zjnuzhangbo" [ref=e196] [cursor=pointer]:
+            - img "zjnuzhangbo" [ref=e198]
+    - generic [ref=e199]:
+      - generic [ref=e203]:
+        - list [ref=e206]:
+          - generic [ref=e207]:
+            - listitem [ref=e208]:
+              - link "Project Overview" [ref=e209] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx
+                - img [ref=e210]
+                - generic: Project Overview
+            - listitem [ref=e212]:
+              - link "Table Editor" [ref=e213] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/editor
+                - img [ref=e214]
+                - generic: Table Editor
+            - listitem [ref=e216]:
+              - link "SQL Editor" [ref=e217] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/sql
+                - img [ref=e218]
+                - generic: SQL Editor
+          - generic [ref=e220]:
+            - listitem [ref=e221]:
+              - link "Database" [ref=e222] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/database/schemas
+                - img [ref=e223]
+                - generic: Database
+            - listitem [ref=e227]:
+              - link "Authentication" [ref=e228] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/auth/users
+                - img [ref=e229]
+                - generic: Authentication
+            - listitem [ref=e231]:
+              - link "Storage" [ref=e232] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/storage/files
+                - img [ref=e233]
+                - generic: Storage
+            - listitem [ref=e235]:
+              - link "Edge Functions" [ref=e236] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/functions
+                - img [ref=e237]
+                - generic: Edge Functions
+            - listitem [ref=e242]:
+              - link "Realtime" [ref=e243] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/realtime/inspector
+                - img [ref=e244]
+                - generic: Realtime
+          - generic [ref=e246]:
+            - listitem [ref=e248]:
+              - link "Advisors" [ref=e249] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/advisors/security
+                - img [ref=e250]
+                - generic: Advisors
+            - listitem [ref=e252]:
+              - link "Observability" [ref=e253] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/observability
+                - img [ref=e254]
+                - generic: Observability
+            - listitem [ref=e262]:
+              - link "Logs" [ref=e263] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/logs/explorer
+                - img [ref=e264]
+                - generic: Logs
+            - listitem [ref=e265]:
+              - link "Integrations" [ref=e266] [cursor=pointer]:
+                - /url: /dashboard/project/ajtinleekfraxqhukyrx/integrations
+                - img [ref=e267]
+                - generic: Integrations
+          - listitem [ref=e271]:
+            - link "Project Settings" [ref=e272] [cursor=pointer]:
+              - /url: /dashboard/project/ajtinleekfraxqhukyrx/settings/general
+              - img [ref=e273]
+              - generic: Project Settings
+        - button "Sidebar control" [ref=e278] [cursor=pointer]:
+          - img [ref=e280]
+      - generic [ref=e287]:
+        - generic [ref=e291]:
+          - heading "SQL Editor" [level=4] [ref=e293]
+          - generic [ref=e295]:
+            - generic [ref=e296]:
+              - generic [ref=e297]:
+                - generic [ref=e299]:
+                  - generic [ref=e300]: Search queries
+                  - textbox "Search queries..." [ref=e301]
+                  - button [ref=e302]:
+                    - img [ref=e303]
+                  - img [ref=e306]
+                - button [ref=e309] [cursor=pointer]:
+                  - img [ref=e311]
+              - button "Shared" [ref=e314]:
+                - img [ref=e315]
+                - generic [ref=e317]: Shared
+              - button "Favorites" [ref=e320]:
+                - img [ref=e321]
+                - generic [ref=e323]: Favorites
+              - generic [ref=e325]:
+                - button "PRIVATE (1)" [expanded] [ref=e459]:
+                  - img [ref=e327]
+                  - generic [ref=e329]: PRIVATE (1)
+                - tree "private-snippets" [ref=e460]:
+                  - generic "Untitled query" [ref=e461] [cursor=pointer]:
+                    - generic [ref=e462]:
+                      - img [ref=e463]
+                      - generic [ref=e469]: Untitled query
+              - generic [ref=e336]:
+                - button "Reference" [expanded] [ref=e337]:
+                  - img [ref=e338]
+                  - generic [ref=e340]: Reference
+                - generic [ref=e341]:
+                  - link "templates" [ref=e342] [cursor=pointer]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/sql/templates
+                    - img [ref=e343]
+                    - text: templates
+                  - link "examples" [ref=e345] [cursor=pointer]:
+                    - /url: /dashboard/project/ajtinleekfraxqhukyrx/sql/examples
+                    - img [ref=e346]
+                    - text: examples
+            - button "View running queries" [ref=e350] [cursor=pointer]:
+              - generic [ref=e351]: View running queries
+        - separator [ref=e352]:
+          - img [ref=e354]
+        - main [ref=e363]:
+          - generic [ref=e364]:
+            - generic [ref=e365]:
+              - generic [ref=e366]:
+                - button "Collapse sidebar" [ref=e367]:
+                  - img [ref=e368]
+                  - generic [ref=e371]: Collapse sidebar
+                - tablist [ref=e372]:
+                  - button "Untitled query" [ref=e471]:
+                    - tab "Untitled query" [selected] [ref=e472]:
+                      - img [ref=e473]
+                      - generic [ref=e480]: Untitled query
+                      - button [ref=e481] [cursor=pointer]:
+                        - img [ref=e482]
+                    - separator [ref=e486]
+                  - button [ref=e487]:
+                    - img [ref=e488]
+              - status [ref=e383]
+            - generic [ref=e386]:
+              - code [ref=e393]:
+                - generic [ref=e394]:
+                  - generic [ref=e396]:
+                    - generic [ref=e491]: "1"
+                    - generic [ref=e492]:
+                      - generic [ref=e493] [cursor=pointer]: 
+                      - generic [ref=e494]: "2"
+                    - generic [ref=e496]: "3"
+                    - generic [ref=e498]: "4"
+                    - generic [ref=e500]: "5"
+                    - generic [ref=e502]: "6"
+                    - generic [ref=e504]: "7"
+                    - generic [ref=e506]: "8"
+                    - generic [ref=e508]: "9"
+                    - generic [ref=e510]: "10"
+                    - generic [ref=e511]:
+                      - generic [ref=e512] [cursor=pointer]: 
+                      - generic [ref=e513]: "11"
+                    - generic [ref=e515]: "12"
+                    - generic [ref=e517]: "13"
+                    - generic [ref=e519]: "14"
+                    - generic [ref=e521]: "15"
+                    - generic [ref=e523]: "16"
+                    - generic [ref=e525]: "17"
+                    - generic [ref=e527]: "18"
+                    - generic [ref=e529]: "19"
+                    - generic [ref=e531]: "20"
+                    - generic [ref=e533]: "21"
+                    - generic [ref=e534]:
+                      - generic [ref=e535] [cursor=pointer]: 
+                      - generic [ref=e536]: "22"
+                    - generic [ref=e538]: "23"
+                    - generic [ref=e540]: "24"
+                  - generic [ref=e403]:
+                    - generic [ref=e583]: "-- Create tables"
+                    - generic [ref=e585]: CREATE TABLE categories (
+                    - generic [ref=e587]: id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                    - generic [ref=e589]: name_zh TEXT NOT NULL,
+                    - generic [ref=e591]: name_en TEXT NOT NULL,
+                    - generic [ref=e593]: name_ru TEXT NOT NULL,
+                    - generic [ref=e595]: icon TEXT DEFAULT '',
+                    - generic [ref=e597]: sort_order INT DEFAULT 0
+                    - generic [ref=e599]: );
+                    - generic [ref=e602]: CREATE TABLE products (
+                    - generic [ref=e604]: id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                    - generic [ref=e606]: name_zh TEXT NOT NULL,
+                    - generic [ref=e608]: name_en TEXT NOT NULL,
+                    - generic [ref=e610]: name_ru TEXT NOT NULL,
+                    - generic [ref=e612]: category_id UUID REFERENCES categories(id),
+                    - generic [ref=e614]: "images TEXT[] DEFAULT '{}',"
+                    - generic [ref=e616]: active BOOLEAN DEFAULT true,
+                    - generic [ref=e618]: created_at TIMESTAMPTZ DEFAULT now()
+                    - generic [ref=e620]: );
+                    - generic [ref=e623]: CREATE TABLE variants (
+                    - generic [ref=e625]: id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                    - generic [ref=e627]: product_id UUID REFERENCES products(id) ON DELETE CASCADE,
+                  - textbox "Editor content" [active] [ref=e406]: "-- Create tables CREATE TABLE categories ( id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name_zh TEXT NOT NULL, name_en TEXT NOT NULL, name_ru TEXT NOT NULL, icon TEXT DEFAULT '', sort_order INT DEFAULT 0 );"
+              - separator [ref=e407]:
+                - img [ref=e409]
+              - generic [ref=e418]:
+                - tablist [ref=e419]:
+                  - generic [ref=e420]:
+                    - tab "Results" [selected] [ref=e421]:
+                      - generic [ref=e422]: Results
+                    - tab "Explain" [ref=e423]:
+                      - generic [ref=e424]: Explain
+                    - tab "Chart" [ref=e425]:
+                      - generic [ref=e426]: Chart
+                  - generic [ref=e427]:
+                    - button [ref=e630]:
+                      - img [ref=e631]
+                    - button [ref=e428] [cursor=pointer]:
+                      - img [ref=e430]
+                    - generic [ref=e435]:
+                      - generic [ref=e436] [cursor=pointer]:
+                        - generic [ref=e437]: Source
+                        - button "Primary database" [ref=e438]:
+                          - generic [ref=e439]: Primary database
+                          - img [ref=e441]
+                      - button "Role postgres" [ref=e443] [cursor=pointer]:
+                        - generic [ref=e445]:
+                          - generic [ref=e446]: Role
+                          - generic [ref=e447]: postgres
+                          - img [ref=e448]
+                      - button "Run Ctrl ↵" [ref=e450] [cursor=pointer]:
+                        - generic [ref=e451]: Run
+                        - generic [ref=e453]: Ctrl ↵
+                - paragraph [ref=e455]:
+                  - text: Click
+                  - code [ref=e456]: Run
+                  - text: to execute your query
+  - alert [ref=e95]: SQL Editor | zjnuzhangbo's Project1 | zjnuzhangbo's Org | Supabase
+  - generic [ref=e458]:
+    - alert
+    - alert
