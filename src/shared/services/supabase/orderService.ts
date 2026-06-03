@@ -116,6 +116,7 @@ function rowToOrder(row: Record<string, unknown>, items: unknown[]): Order {
     items: items.map(item => {
       const ri = item as Record<string, unknown>;
       return {
+        id: ri.id as string,
         productId: '',
         variantId: '',
         productName: (ri.product_name as string) || '',

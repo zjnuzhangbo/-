@@ -30,6 +30,7 @@ export interface Category {
 }
 
 export interface OrderItem {
+  id?: string;
   productId: string;
   variantId: string;
   productName: string;
