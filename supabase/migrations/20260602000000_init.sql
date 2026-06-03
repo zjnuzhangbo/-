@@ -99,17 +99,14 @@ CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION handle_new_user();
 
--- Seed data: 5 categories
-INSERT INTO categories (id, name_zh, name_en, name_ru, icon, sort_order) VALUES
-  ('cat-1', '车架/车斗', 'Frame/Body', 'Рама/Кузов', '', 1),
-  ('cat-2', '车轮/轮胎', 'Wheels/Tires', 'Колеса/Шины', '', 2),
-  ('cat-3', '刹车系统', 'Brake System', 'Тормозная система', '', 3),
-  ('cat-4', '传动系统', 'Drivetrain', 'Трансмиссия', '', 4),
-  ('cat-5', '电气系统', 'Electrical', 'Электрика', '', 5);
-
--- Seed data: 8 products with variants
+-- Seed data with generated UUIDs
 DO $$
 DECLARE
+  cat1 UUID := gen_random_uuid();
+  cat2 UUID := gen_random_uuid();
+  cat3 UUID := gen_random_uuid();
+  cat4 UUID := gen_random_uuid();
+  cat5 UUID := gen_random_uuid();
   p1 UUID := gen_random_uuid();
   p2 UUID := gen_random_uuid();
   p3 UUID := gen_random_uuid();
@@ -119,15 +116,22 @@ DECLARE
   p7 UUID := gen_random_uuid();
   p8 UUID := gen_random_uuid();
 BEGIN
+  INSERT INTO categories (id, name_zh, name_en, name_ru, icon, sort_order) VALUES
+    (cat1, '车架/车斗', 'Frame/Body', 'Рама/Кузов', '', 1),
+    (cat2, '车轮/轮胎', 'Wheels/Tires', 'Колеса/Шины', '', 2),
+    (cat3, '刹车系统', 'Brake System', 'Тормозная система', '', 3),
+    (cat4, '传动系统', 'Drivetrain', 'Трансмиссия', '', 4),
+    (cat5, '电气系统', 'Electrical', 'Электрика', '', 5);
+
   INSERT INTO products (id, name_zh, name_en, name_ru, category_id, active) VALUES
-    (p1, '前叉总成', 'Front Fork Assembly', 'Вилка в сборе', 'cat-1', true),
-    (p2, '后轮毂总成', 'Rear Hub Assembly', 'Задняя ступица', 'cat-2', true),
-    (p3, '刹车蹄总成', 'Brake Shoe Assembly', 'Тормозные колодки', 'cat-3', true),
-    (p4, '差速器总成', 'Differential Assembly', 'Дифференциал', 'cat-4', true),
-    (p5, 'LED大灯总成', 'LED Headlight', 'Светодиодная фара', 'cat-5', true),
-    (p6, '车架主梁', 'Main Frame Beam', 'Главная балка рамы', 'cat-1', true),
-    (p7, '轮胎内胎', 'Inner Tube', 'Камера', 'cat-2', true),
-    (p8, '离合器片', 'Clutch Plate', 'Диск сцепления', 'cat-4', true);
+    (p1, '前叉总成', 'Front Fork Assembly', 'Вилка в сборе', cat1, true),
+    (p2, '后轮毂总成', 'Rear Hub Assembly', 'Задняя ступица', cat2, true),
+    (p3, '刹车蹄总成', 'Brake Shoe Assembly', 'Тормозные колодки', cat3, true),
+    (p4, '差速器总成', 'Differential Assembly', 'Дифференциал', cat4, true),
+    (p5, 'LED大灯总成', 'LED Headlight', 'Светодиодная фара', cat5, true),
+    (p6, '车架主梁', 'Main Frame Beam', 'Главная балка рамы', cat1, true),
+    (p7, '轮胎内胎', 'Inner Tube', 'Камера', cat2, true),
+    (p8, '离合器片', 'Clutch Plate', 'Диск сцепления', cat4, true);
 
   INSERT INTO variants (product_id, model, size, weight) VALUES
     (p1, '标准型', '32mm', '2.4kg'),

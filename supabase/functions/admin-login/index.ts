@@ -1,12 +1,7 @@
-import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { create, getNumericDate } from 'https://deno.land/x/djwt@v2.8/mod.ts';
-
-const JWT_SECRET = Deno.env.get('ADMIN_JWT_SECRET') || 'change-me-to-a-random-string';
-const ADMIN_PASSWORD = Deno.env.get('ADMIN_PASSWORD') || 'admin123';
-
-serve(async (req) => {
+Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, {
+      status: 204,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'authorization, content-type',
@@ -17,6 +12,8 @@ serve(async (req) => {
 
   try {
     const { password } = await req.json();
+    const ADMIN_PASSWORD = Deno.env.get('ADMIN_PASSWORD') || 'admin888';
+
     if (password !== ADMIN_PASSWORD) {
       return new Response(JSON.stringify({ error: 'invalid password' }), {
         status: 401,
@@ -24,12 +21,7 @@ serve(async (req) => {
       });
     }
 
-    const token = await create(
-      { alg: 'HS256', typ: 'JWT' },
-      { role: 'admin', exp: getNumericDate(60 * 60 * 24) },
-      new TextEncoder().encode(JWT_SECRET),
-    );
-
+    const token = btoa('admin:' + Date.now().toString());
     return new Response(JSON.stringify({ token }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
     });

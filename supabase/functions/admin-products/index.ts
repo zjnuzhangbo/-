@@ -1,9 +1,9 @@
-import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'npm:@supabase/supabase-js@2';
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, {
+      status: 204,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'authorization, content-type',
@@ -42,7 +42,7 @@ serve(async (req) => {
 
       case 'create': {
         const { variants: vArr, ...prod } = product;
-        const dbProduct: Record<string, unknown> = { ...prod as Record<string, unknown> };
+        const dbProduct = { ...prod };
         if (prod.name) {
           dbProduct.name_zh = prod.name.zh;
           dbProduct.name_en = prod.name.en;
@@ -62,7 +62,7 @@ serve(async (req) => {
 
       case 'update': {
         const { variants: vArr, ...prod } = updates;
-        const dbUpdates: Record<string, unknown> = { ...prod as Record<string, unknown> };
+        const dbUpdates = { ...prod };
         if (prod.name) {
           dbUpdates.name_zh = prod.name.zh;
           dbUpdates.name_en = prod.name.en;
@@ -95,7 +95,7 @@ serve(async (req) => {
 
       case 'uploadImage': {
         const buf = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-        const filename = `${crypto.randomUUID()}.png`;
+        const filename = crypto.randomUUID() + '.png';
         const { error } = await supabase.storage
           .from('product-images').upload(filename, buf, { contentType: 'image/png', upsert: false });
         if (error) throw new Error(error.message);
