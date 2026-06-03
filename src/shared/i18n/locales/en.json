@@ -15,6 +15,7 @@
     "spec": "Spec",
     "category": "Category",
     "quickOrder": "Quick Order",
+    "quantity": "Qty",
     "gridView": "▦ Grid",
     "tableView": "☰ List",
     "selectAll": "Select All",

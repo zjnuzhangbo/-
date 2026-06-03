@@ -26,6 +26,7 @@ export default function HomePage() {
     return new Set();
   });
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
   useEffect(() => {
     productService.getAll().then(setProducts);
@@ -96,7 +97,7 @@ export default function HomePage() {
         productName: localName(product.name, lang),
         model: variant?.model || '',
         spec: variant ? `${variant.size} · ${variant.weight}` : '',
-        quantity: 1,
+        quantity: quantities[product.id] || 1,
       });
     }
     localStorage.setItem('tricycle_cart', JSON.stringify(existing));
@@ -113,7 +114,7 @@ export default function HomePage() {
       productName: localName(product.name, lang),
       model: variant?.model || '',
       spec: variant ? `${variant.size} · ${variant.weight}` : '',
-      quantity: 1,
+      quantity: quantities[product.id] || 1,
     });
     localStorage.setItem('tricycle_cart', JSON.stringify(existing));
     navigate('/order');
@@ -219,6 +220,17 @@ export default function HomePage() {
                       </p>
                     ) : null}
 
+                    {/* Quantity */}
+                    <div className="flex items-center gap-2 mb-2" onClick={e => e.stopPropagation()}>
+                      <span className="text-xs text-slate-500">{t('home.quantity')}</span>
+                      <input
+                        type="number"
+                        min="1"
+                        value={quantities[product.id] || 1}
+                        onChange={e => setQuantities(prev => ({ ...prev, [product.id]: Math.max(1, parseInt(e.target.value) || 1) }))}
+                        className="flex-1 w-16 px-2 py-1.5 border border-slate-200 rounded-lg text-xs text-center outline-none focus:border-primary-400"
+                      />
+                    </div>
                     <button
                       onClick={e => { e.stopPropagation(); quickOrder(product); }}
                       className="w-full py-2 bg-primary-600 text-white text-xs font-semibold rounded-lg hover:bg-primary-700 active:bg-primary-800 transition-colors"

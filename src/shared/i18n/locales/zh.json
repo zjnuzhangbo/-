@@ -15,6 +15,7 @@
     "spec": "型号/规格",
     "category": "分类",
     "quickOrder": "立即订购",
+    "quantity": "数量",
     "gridView": "▦ 卡片",
     "tableView": "☰ 列表",
     "selectAll": "全选",
