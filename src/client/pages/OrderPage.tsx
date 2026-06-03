@@ -86,7 +86,7 @@ export default function OrderPage() {
   if (submitted) {
     return (
       <div className="flex-1 flex items-center justify-center p-6">
-        <div className="text-center max-w-md">
+        <div className="text-center max-w-md bg-white rounded-2xl shadow-sm border border-slate-200 p-10">
           <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">✓</span>
           </div>
@@ -107,14 +107,19 @@ export default function OrderPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6 flex-1">
-      <Link to="/" className="text-sm text-slate-500 hover:text-primary-600 transition-colors">{t('order.back')}</Link>
+    <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 flex-1">
+      <Link to="/" className="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-primary-600 transition-colors mb-2">
+  <span>←</span> {t('order.back')}
+</Link>
       <h1 className="font-display text-2xl text-slate-800 mt-2 mb-6">{t('order.title')}</h1>
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Shipping info */}
-        <div className="bg-white rounded-lg border border-slate-200 p-5">
-          <h2 className="font-display text-lg text-slate-800 mb-4">{t('order.shippingInfo')}</h2>
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h2 className="font-display text-lg text-slate-800 mb-5 flex items-center gap-2">
+            <span className="w-1 h-5 bg-primary-500 rounded-full"></span>
+            {t('order.shippingInfo')}
+          </h2>
           <div className="flex flex-col gap-4">
             <div>
               <label className="text-xs font-semibold text-slate-500">{t('order.name')}</label>
@@ -135,11 +140,14 @@ export default function OrderPage() {
         </div>
 
         {/* Product list */}
-        <div className="bg-white rounded-lg border border-slate-200 p-5">
-          <h2 className="font-display text-lg text-slate-800 mb-4">{t('order.productList')}</h2>
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h2 className="font-display text-lg text-slate-800 mb-5 flex items-center gap-2">
+            <span className="w-1 h-5 bg-primary-500 rounded-full"></span>
+            {t('order.productList')}
+          </h2>
           {errors.empty && <span className="text-xs text-red-500">{errors.empty}</span>}
           {items.length === 0 ? (
-            <p className="text-slate-400 text-sm py-6 text-center">暂无已选商品</p>
+            <p className="text-slate-400 text-sm py-8 text-center bg-slate-50 rounded-lg">暂无已选商品</p>
           ) : (
             <div className="flex flex-col gap-3">
               {items.map((item, idx) => (
@@ -158,13 +166,13 @@ export default function OrderPage() {
               ))}
             </div>
           )}
-          <button onClick={() => setPickerOpen(true)} className="mt-4 text-sm text-primary-600 font-semibold hover:text-primary-700">
+          <button onClick={() => setPickerOpen(true)} className="mt-5 w-full py-2.5 border-2 border-dashed border-slate-300 text-sm text-slate-500 font-semibold rounded-xl hover:border-primary-400 hover:text-primary-600 hover:bg-primary-50/50 transition-colors">
             {t('order.addProduct')}
           </button>
         </div>
       </div>
 
-      <button onClick={handleSubmit} className="w-full mt-6 py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition-colors text-sm">
+      <button onClick={handleSubmit} className="w-full mt-6 py-4 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 active:bg-primary-800 transition-all shadow-lg shadow-primary-200 text-base">
         {t('order.submit')}
       </button>
 

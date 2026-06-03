@@ -82,12 +82,12 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
-      <div className="bg-white rounded-lg border border-slate-200 p-8 w-full max-w-sm shadow-sm">
-        <h1 className="font-display text-xl text-slate-800 text-center mb-1">{t('auth.title')}</h1>
+    <div className="min-h-[80vh] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl border border-slate-200 p-8 w-full max-w-sm shadow-xl">
+        <h1 className="font-display text-2xl text-slate-800 text-center mb-6">{t('auth.title')}</h1>
 
         {mode !== 'register' && (
-          <div className="flex rounded-md overflow-hidden border border-slate-200 mt-4 mb-5">
+          <div className="flex rounded-lg overflow-hidden border border-slate-200 mb-5">
             {tabs.map(tab => (
               <button
                 key={tab.key}
@@ -114,7 +114,7 @@ export default function LoginPage() {
                 onKeyDown={e => e.key === 'Enter' && handleEmailLogin()} />
             </div>
             <button onClick={handleEmailLogin} disabled={loading}
-              className="w-full py-2.5 bg-primary-600 text-white font-semibold rounded-md hover:bg-primary-700 disabled:opacity-50 text-sm">
+              className="w-full py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 disabled:opacity-50 text-sm transition-all shadow-lg shadow-primary-200 mt-1">
               {t('auth.login')}
             </button>
             <p className="text-center text-xs text-slate-400">
@@ -140,7 +140,7 @@ export default function LoginPage() {
                 onKeyDown={e => e.key === 'Enter' && handlePhoneLogin()} />
             </div>
             <button onClick={handlePhoneLogin} disabled={loading}
-              className="w-full py-2.5 bg-primary-600 text-white font-semibold rounded-md hover:bg-primary-700 disabled:opacity-50 text-sm">
+              className="w-full py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 disabled:opacity-50 text-sm transition-all shadow-lg shadow-primary-200 mt-1">
               {t('auth.login')}
             </button>
             <p className="text-center text-xs text-slate-400">
@@ -163,7 +163,7 @@ export default function LoginPage() {
                 onKeyDown={e => e.key === 'Enter' && handleRegister()} />
             </div>
             <button onClick={handleRegister} disabled={loading}
-              className="w-full py-2.5 bg-emerald-600 text-white font-semibold rounded-md hover:bg-emerald-700 disabled:opacity-50 text-sm">
+              className="w-full py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 disabled:opacity-50 text-sm transition-all shadow-lg shadow-emerald-200 mt-1">
               {t('auth.register')}
             </button>
             <p className="text-center text-xs text-slate-400">
@@ -175,10 +175,18 @@ export default function LoginPage() {
           </div>
         )}
 
-        {error && <p className="text-xs text-red-500 mt-3 text-center">{error}</p>}
-        {message && <p className="text-xs text-emerald-600 mt-3 text-center">{message}</p>}
+        {error && (
+          <div className="mt-4 p-3 bg-red-50 border border-red-100 rounded-xl">
+            <p className="text-xs text-red-600 text-center">{error}</p>
+          </div>
+        )}
+        {message && (
+          <div className="mt-4 p-3 bg-emerald-50 border border-emerald-100 rounded-xl">
+            <p className="text-xs text-emerald-600 text-center">{message}</p>
+          </div>
+        )}
 
-        <button onClick={() => navigate(-1)} className="w-full mt-4 text-xs text-slate-400 hover:text-slate-600">
+        <button onClick={() => navigate(-1)} className="w-full mt-5 text-xs text-slate-400 hover:text-slate-600 transition-colors">
           ← {t('order.back')}
         </button>
       </div>

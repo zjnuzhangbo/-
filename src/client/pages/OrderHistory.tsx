@@ -47,11 +47,11 @@ export default function OrderHistory() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-6 flex-1">
+    <div className="max-w-5xl mx-auto px-4 md:px-6 py-6 flex-1">
       <h1 className="font-display text-2xl text-slate-800 mb-1">{t('history.title')}</h1>
-      <p className="text-xs text-slate-400 mb-4">{t('history.count', { count: orders.length })}</p>
+      <p className="text-sm text-slate-400 mb-5">{t('history.count', { count: orders.length })}</p>
 
-      <div className="flex gap-2 mb-5">
+      <div className="sticky top-[56px] z-20 bg-slate-50 pt-2 pb-3 -mx-4 px-4 md:-mx-6 md:px-6 flex gap-2">
         {(['all', 'pending', 'priced'] as const).map(s => (
           <button
             key={s}
@@ -71,30 +71,44 @@ export default function OrderHistory() {
           <p className="text-slate-400 text-sm mt-1">{t('history.emptyHint')}</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {filtered.map(order => {
             const locked = isLocked(order);
             return (
-              <div key={order.id} className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-                <div className="flex justify-between items-center px-5 py-3 border-b border-slate-100">
-                  <div>
-                    <span className="font-bold text-slate-800">订单 #{order.orderNumber}</span>
-                    <span className="text-xs text-slate-400 ml-3">{new Date(order.createdAt).toLocaleString('zh-CN')}</span>
+              <div key={order.id} className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-shadow hover:shadow-md">
+                {/* Header */}
+                <div className="flex justify-between items-center px-5 py-3.5 bg-slate-50 border-b border-slate-100">
+                  <div className="flex items-center gap-3">
+                    <span className="font-bold text-slate-800 text-sm">#{order.orderNumber}</span>
+                    <span className="text-xs text-slate-400">{new Date(order.createdAt).toLocaleString('zh-CN')}</span>
                   </div>
-                  <span className={`inline-block px-2.5 py-0.5 rounded-pill text-xs font-semibold border
-                    ${order.status === 'pending' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>
+                  <span className={`inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-semibold
+                    ${order.status === 'pending'
+                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                      : 'bg-emerald-50 text-emerald-700 border border-emerald-200'}`}>
+                    {order.status === 'pending' ? '○ ' : '● '}
                     {order.status === 'pending' ? t('history.pending') : t('history.priced')}
                   </span>
                 </div>
 
+                {/* Body */}
                 <div className="px-5 py-3">
                   {order.items.map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center py-2">
-                      <div>
-                        <span className="font-semibold text-slate-800 text-sm">{item.productName}</span>
-                        <span className="text-xs text-slate-400 ml-2">{item.spec}</span>
+                    <div key={idx} className="flex justify-between items-center py-2.5 border-b border-slate-50 last:border-0">
+                      <div className="flex items-center gap-3 min-w-0">
+                        {item.imageUrl ? (
+                          <img src={item.imageUrl} className="w-9 h-9 rounded-lg object-cover flex-shrink-0" />
+                        ) : (
+                          <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
+                            <span className="text-xs text-slate-400 font-semibold">{item.productName.slice(0,1)}</span>
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <span className="font-semibold text-slate-800 text-sm block truncate">{item.productName}</span>
+                          <span className="text-xs text-slate-400">{item.spec}</span>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-2 flex-shrink-0">
                         <span className="text-xs text-slate-400">×</span>
                         {locked ? (
                           <span className="font-semibold text-sm w-8 text-center">{item.quantity}</span>
@@ -104,25 +118,29 @@ export default function OrderHistory() {
                             min={1}
                             defaultValue={item.quantity}
                             onChange={e => saveQuantity(order, idx, parseInt(e.target.value) || 1)}
-                            className="w-12 px-1 py-1 text-center border border-slate-200 rounded-md text-sm font-semibold outline-none focus:border-primary-400"
+                            className="w-14 px-2 py-1.5 text-center border border-slate-200 rounded-lg text-sm font-semibold outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100"
                           />
                         )}
                       </div>
                     </div>
                   ))}
-                  <div className="bg-slate-50 rounded-md px-3 py-2 mt-2 text-xs text-slate-500 flex gap-4">
+                  {/* Shipping info */}
+                  <div className="bg-slate-50 rounded-lg px-4 py-2.5 mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-500">
                     <span>📦 {order.customerName}</span>
                     <span>📞 {order.customerPhone}</span>
                     <span className="truncate">📍 {order.customerAddress}</span>
                   </div>
                 </div>
 
-                <div className="px-5 py-3 border-t border-slate-100 flex justify-end gap-2">
+                {/* Footer */}
+                <div className="px-5 py-3 border-t border-slate-100 flex justify-end">
                   {locked ? (
-                    <div className="bg-yellow-50 rounded-md px-3 py-1.5 text-xs text-yellow-700">🔒 {t('history.locked')}</div>
+                    <span className="inline-flex items-center gap-1 text-xs text-amber-600 font-medium bg-amber-50 px-3 py-1.5 rounded-lg">
+                      🔒 {t('history.locked')}
+                    </span>
                   ) : (
                     <button onClick={() => setDeleteId(order.id)}
-                      className="text-xs font-semibold text-red-500 hover:text-red-700 px-3 py-1.5 border border-red-200 rounded-md hover:bg-red-50 transition-colors">
+                      className="text-xs font-semibold text-red-500 hover:text-red-700 hover:bg-red-50 px-4 py-2 rounded-lg transition-colors">
                       {t('history.delete')}
                     </button>
                   )}
