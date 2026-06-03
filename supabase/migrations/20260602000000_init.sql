@@ -54,7 +54,8 @@ CREATE TABLE order_items (
   model TEXT NOT NULL DEFAULT '',
   spec TEXT NOT NULL DEFAULT '',
   quantity INT NOT NULL DEFAULT 1,
-  unit_price NUMERIC(10,2)
+  unit_price NUMERIC(10,2),
+  image_url TEXT
 );
 
 -- RLS: enable on all tables
@@ -75,12 +76,16 @@ CREATE POLICY "orders_select_own" ON orders FOR SELECT
   USING (auth.uid() = customer_id);
 CREATE POLICY "orders_insert_own" ON orders FOR INSERT
   WITH CHECK (auth.uid() = customer_id);
+CREATE POLICY "orders_delete_own" ON orders FOR DELETE
+  USING (auth.uid() = customer_id);
 
 -- Customers: items via owned orders
 CREATE POLICY "items_select_own" ON order_items FOR SELECT
   USING (EXISTS (SELECT 1 FROM orders WHERE id = order_id AND customer_id = auth.uid()));
 CREATE POLICY "items_insert_own" ON order_items FOR INSERT
   WITH CHECK (EXISTS (SELECT 1 FROM orders WHERE id = order_id AND customer_id = auth.uid()));
+CREATE POLICY "items_delete_own" ON order_items FOR DELETE
+  USING (EXISTS (SELECT 1 FROM orders WHERE id = order_id AND customer_id = auth.uid()));
 
 -- Customers: own profile
 CREATE POLICY "profiles_own" ON profiles FOR ALL
