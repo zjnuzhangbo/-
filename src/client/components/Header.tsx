@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { supabase as supabaseClient } from '../../shared/services/supabase/client';
+import { supabase } from '../../shared/services/supabase/client';
 
 const langs = [
   { code: 'zh', label: '中文' },
@@ -19,11 +19,10 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
   const [user, setUser] = useState<{ email?: string; phone?: string } | null>(null);
 
   useEffect(() => {
-    if (!supabaseClient) return;
-    supabaseClient.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(({ data }) => {
       setUser(data.session?.user ?? null);
     });
-    const { data } = supabaseClient.auth.onAuthStateChange((_event, session) => {
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
     return () => data.subscription.unsubscribe();
@@ -62,7 +61,7 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           {user ? (
             <div className="flex items-center gap-3">
               <span className="text-xs text-slate-400 hidden sm:inline">{t('auth.loggedInAs', { email: userLabel })}</span>
-              <button onClick={() => supabaseClient?.auth.signOut()} className="text-xs text-slate-400 hover:text-red-500">{t('auth.logout')}</button>
+              <button onClick={() => supabase.auth.signOut()} className="text-xs text-slate-400 hover:text-red-500">{t('auth.logout')}</button>
             </div>
           ) : (
             <Link to="/login" className="text-sm font-medium text-primary-600 hover:text-primary-700">登录</Link>

@@ -9,11 +9,6 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const [authed, setAuthed] = useState(false);
 
   useEffect(() => {
-    if (!supabase) {
-      setAuthed(true);
-      setChecking(false);
-      return;
-    }
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) {
         setAuthed(true);
