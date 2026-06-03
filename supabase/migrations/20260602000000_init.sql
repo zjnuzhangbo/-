@@ -78,6 +78,8 @@ CREATE POLICY "orders_insert_own" ON orders FOR INSERT
   WITH CHECK (auth.uid() = customer_id);
 CREATE POLICY "orders_delete_own" ON orders FOR DELETE
   USING (auth.uid() = customer_id);
+CREATE POLICY "orders_update_own" ON orders FOR UPDATE
+  USING (auth.uid() = customer_id) WITH CHECK (auth.uid() = customer_id);
 
 -- Customers: items via owned orders
 CREATE POLICY "items_select_own" ON order_items FOR SELECT
@@ -86,6 +88,9 @@ CREATE POLICY "items_insert_own" ON order_items FOR INSERT
   WITH CHECK (EXISTS (SELECT 1 FROM orders WHERE id = order_id AND customer_id = auth.uid()));
 CREATE POLICY "items_delete_own" ON order_items FOR DELETE
   USING (EXISTS (SELECT 1 FROM orders WHERE id = order_id AND customer_id = auth.uid()));
+CREATE POLICY "items_update_own" ON order_items FOR UPDATE
+  USING (EXISTS (SELECT 1 FROM orders WHERE id = order_id AND customer_id = auth.uid()))
+  WITH CHECK (EXISTS (SELECT 1 FROM orders WHERE id = order_id AND customer_id = auth.uid()));
 
 -- Customers: own profile
 CREATE POLICY "profiles_own" ON profiles FOR ALL

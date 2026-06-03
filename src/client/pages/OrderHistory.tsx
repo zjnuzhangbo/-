@@ -36,10 +36,14 @@ export default function OrderHistory() {
 
   const deleteOrder = async () => {
     if (!deleteId) return;
-    await orderService.remove(deleteId);
+    try {
+      await orderService.remove(deleteId);
+      toast('订单已删除');
+      load();
+    } catch {
+      toast('删除失败，请重试');
+    }
     setDeleteId(null);
-    toast('订单已删除');
-    load();
   };
 
   return (
