@@ -40,6 +40,7 @@
     "fillAll": "请填写所有字段",
     "logout": "退出登录",
     "loggedInAs": "已登录: {{email}}",
+    "wrongCredentials": "邮箱或密码错误，如果没有账号请先注册",
     "required": "登录后才能下单"
   },
   "order": {

@@ -40,6 +40,7 @@
     "fillAll": "Please fill in all fields",
     "logout": "Sign Out",
     "loggedInAs": "Signed in: {{email}}",
+    "wrongCredentials": "Wrong email or password. Register first if you don't have an account.",
     "required": "Sign in to place orders"
   },
   "order": {

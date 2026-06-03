@@ -29,15 +29,33 @@ export default function LoginPage() {
     setLoading(true);
     const { error: err } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     setLoading(false);
-    if (err) { setError(err.message); return; }
+    if (err) {
+      if (err.message.includes('Invalid login credentials')) {
+        setError(t('auth.wrongCredentials'));
+      } else {
+        setError(err.message);
+      }
+      return;
+    }
     navigate(returnTo, { replace: true });
   };
 
   const handlePhoneLogin = async () => {
     setError('');
     if (!phone.trim() || !password.trim()) { setError(t('auth.fillAll')); return; }
+    if (password.length < 6) { setError(t('auth.passwordShort')); return; }
     setLoading(true);
-    const { error: err } = await supabase.auth.signInWithPassword({ email: `${phone.trim()}@phone.tricycle`, password });
+    const fakeEmail = `${phone.trim()}@phone.tricycle`;
+    // Try login first
+    let { error: err } = await supabase.auth.signInWithPassword({ email: fakeEmail, password });
+    // If account doesn't exist, auto-register
+    if (err && err.message.includes('Invalid login credentials')) {
+      const { error: signupErr } = await supabase.auth.signUp({ email: fakeEmail, password });
+      if (signupErr) { setLoading(false); setError(signupErr.message); return; }
+      // Login again after signup
+      const { error: loginErr } = await supabase.auth.signInWithPassword({ email: fakeEmail, password });
+      err = loginErr;
+    }
     setLoading(false);
     if (err) { setError(err.message); return; }
     navigate(returnTo, { replace: true });
