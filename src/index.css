@@ -36,3 +36,9 @@
            transition-colors duration-150;
   }
 }
+
+@media (max-width: 640px) {
+  .grid {
+    gap: 0.75rem;
+  }
+}
